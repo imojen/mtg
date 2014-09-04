@@ -1,0 +1,9 @@
+Récupération de toutes les cards data : http://mtgjson.com/
+
+
+Les images des cartes :
+
+http://mtgimage.com/
+http://mtgimage.com/card/<nom de la carte>.jpg
+Exemple d'accès à une image : http://mtgimage.com/card/Serra_Angel.jpg
+Le nom de la carte est celui présent dans les json des cartes
