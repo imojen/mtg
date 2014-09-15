@@ -58,3 +58,10 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
+app.set('port', 1337);
+var debug = require('debug')('mtg');
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
