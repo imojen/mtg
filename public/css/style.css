@@ -1,0 +1,121 @@
+html {
+	margin:0;
+	padding:0;
+	background: url(../images/tpl/textures/00.jpg) no-repeat center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family: 'Open Sans', sans-serif;
+}
+body {
+	min-width: 990px;
+	min-height: 740px;
+}
+#htmlWrapper {
+	position: absolute !important;
+	width: 100%;
+	height: 100%;
+	min-width: 990px;
+	min-height: 740px !important;	
+	left: 0px;
+	top: 0px;
+	overflow: hidden;
+}
+
+
+
+/** Left Menu **/
+#leftMenu {
+	position: absolute !important;
+	top: 0px;
+	right: 0px;
+	width: 150px;
+	height: 100%;
+}
+#leftMenu li {
+	width: 150px;
+	height: 10px;
+	background: #fff;
+	text-align: center;
+	background: url(../images/tpl/textures/00.png);
+	border-left: 1px solid #3a3e43;
+	border-bottom: 1px solid #3a3e43;
+	color: #b5b5b5;
+	overflow: hidden;
+	line-height: 200px;
+	margin-left: 150px;
+	text-shadow: -1px 1px 0px rgba(0, 0, 0, 1);
+}
+#leftMenu li:hover {
+	background: url(../images/tpl/textures/01.png);
+	background-size: 100% 100%;
+	cursor: pointer;
+	color: #fff;
+}
+#leftMenu li span {
+	text-transform: uppercase;
+}
+
+
+
+/** Body **/
+#bodyWrapper {
+	position: absolute !important;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+
+#body_onglets {
+	height: 50px;
+	border-bottom: 1px solid #3a3e43;
+	overflow: hidden;
+	display: none;
+}
+#body_onglets ul {
+	width: 90%;
+	height: 50px;
+}
+#body_onglets ul li {
+	float: left;
+	height: 50px;
+	padding: 0 15px;
+	line-height: 50px;
+	color: #b5b5b5;
+	background: url(../images/tpl/textures/00.png);
+	text-align:center;
+	border-right: 1px solid #3a3e43;
+	margin-top: 50px;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+#body_onglets ul li:hover,
+#body_onglets ul li.selected {
+	color: #fff;
+	text-shadow: -1px 1px 0px rgba(0, 0, 0, 1);
+	cursor: pointer;
+	background: url(../images/tpl/textures/02.png);
+}
+
+
+#bodyContentWrapper {
+	position: absolute !important;
+	top: 50px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+#bodyContentWrapper .bodyContent {
+	position: absolute !important;
+	width: 100%;
+	height: 0;
+	left: 0px;
+	top: 0px;
+	background: url(../images/tpl/textures/00.png);
+	border-bottom: 1px solid #3a3e43;
+	display: none;
+	color: #fff;
+}
