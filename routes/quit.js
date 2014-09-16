@@ -3,7 +3,8 @@ var router = express.Router();
 
 /* Stop server */
 router.get('/', function(req, res) {
-  process.exit(1);
+	res.send('Stopping node server...');
+	process.exit(1);
 });
 
 module.exports = router;
