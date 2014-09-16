@@ -29,6 +29,10 @@ app.get('/', function(req, res) {
   res.sendfile(__dirname + '/public/index.html');
 });
 
+// Restart server
+var quit = require('./routes/quit');
+app.use('/quit', quit);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
