@@ -1,54 +1,33 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" >
 	<head>
 		<title>MTG</title>
 		<meta charset="UTF-8"/>
 
 		<link rel="stylesheet" href="css/reset.css" />
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">		
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>		
+		<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+
+
 		<link rel="stylesheet" href="css/style.css" />
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+		
 		<script src="lib/angular.min.js"></script>
-
-		<script src="lib/style.js"></script>
-
+		<script src="lib/mtgApp.js"></script>
+		<script src="lib/mtgAppLogin.js"></script>
+		<script src="lib/mtgAppHome.js"></script>
 
 	</head>
-	<body>
-		<div id="htmlWrapper">
+	<body ng-app="mtgApp">
+		<div id="htmlWrapper" ng-controller="mtgAppController">
+
+
+			<frame-login ng-show="!isLogged" isLogged="isLogged"></frame-login>
+			<frame-home ng-show="isLogged" isLogged="isLogged"></frame-home>
+
 		
-			<div id="leftMenu">
-				<ul>
-					<li id="menu_home"><span>Home</span></li>
-					<li id="menu_library"><span>Library</span></li>
-					<li id="menu_arena"><span>Arena</span></li>
-					<li id="menu_community"><span>Community</span></li>
-					<li id="menu_profile"><span>Profile</span></li>
-					<li id="menu_settings"><span>Settings</span></li>
-				</ul>
-			</div>
-
-			<div id="bodyWrapper">
-
-				<div id="body_onglets">
-					<ul>
-						<li class="menu_home"><span>Home</span></li>
-					</ul>
-				</div>
-
-				<div id="bodyContentWrapper">
-					<page id="page_menu_home" class="page_visible">
-						<div class="bodyContent">
-								<br/><br/><br/><br/><br/>
-								<center>Contenu de la page Home...</center>
-						</div>
-					</page>
-				</div>
-
-			</div>
 
 		</div>
 	</body>
