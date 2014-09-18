@@ -18,3 +18,68 @@ body {
 	top: 0px;
 	overflow: hidden;
 }
+
+
+/** LOGIN **/
+.login-box {
+	position: absolute;
+	width: 600px;
+	height: 200px;
+	top: 60%;
+	left: 50%;
+	margin-left: -300px;
+	background: #13171d;
+	box-shadow: 0 3px 6px 2px #08090c;
+}
+.login-box a {
+	color: #fff;
+}
+.login-box .form-group {
+	margin-bottom: 5px;
+}
+.login-box-container {
+	width: 600px;
+	height: 180px;
+	margin: 10px 0;
+}
+.login-box-left {
+	width: 289px;
+	height: 180px;
+	border-right: 1px solid #666;
+	float: left;
+}
+.login-box-right {
+	width: 290px;
+	height: 180px;
+	float: right;
+}
+
+.login-box-left .input-group {
+	margin-left: auto;
+	margin-right: auto;
+}
+.input-group-label {
+	width: 60px;
+	background: #0c0e11;
+	color: #fff;
+	border-color: #1c212a;
+}
+.login-box-input {
+	border-color: #1c212a;
+	background: #1c212a;	
+	color: #fff;
+}
+.login-box h1 {
+	text-align: center;
+	color: #fff;
+	margin: 5px 0 15px 0;
+	font-size: 25px;
+}
+.login-box-left span.glyphicon-fire {
+	margin-right: 10px;
+	color: orange;
+}
+.login-box-left span.glyphicon-retweet {
+	margin-right: 10px;
+	color: lightgreen;
+}

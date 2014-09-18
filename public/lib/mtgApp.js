@@ -3,5 +3,10 @@ angular.module('mtgApp', [ "mtgAppLogin", "mtgAppHome" ])
 
 	$scope.isLogged = false;
 
+	$scope.loginConnect = function() {
+		alert(1);
+		$scope.isLogged = true;
+	}
+
 
 });
