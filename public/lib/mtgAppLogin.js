@@ -7,7 +7,7 @@ angular.module("mtgAppLogin", [] )
 			loginConnect : "&",
 			showAlert : "&",
 		},		
-		controller : function($scope) {
+		controller : function($scope, $http) {
 
 			$scope.loginInfos = [{ "login" : null, "pass" : null }];
 
@@ -25,7 +25,36 @@ angular.module("mtgAppLogin", [] )
 				}
 
 				// Connexion
-				$scope.loginConnect();
+				if( $scope.httpLogin() )
+					$scope.loginConnect();
+			}
+
+			$scope.httpLogin = function() {
+				var method = 'POST';
+				var inserturl = 'http://localhost:1337/login';
+				var nodeDatas = {
+				      'login' : $scope.loginInfos.login,
+				      'pass' : $scope.loginInfos.pass,
+				    };
+
+				$http({
+				    method: method,
+				    url: inserturl,
+				    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+				    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					if( response.data.success )
+						alert("YOUHOU !!!");
+					else
+						alert("Bouh...");
+					return true;
+				}).
+				error(function(response) {
+			        $scope.codeStatus = response || "Request failed";
+					alert($scope.codeStatus);
+					return false;
+				});				
 			}
 
 

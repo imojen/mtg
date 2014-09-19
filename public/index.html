@@ -20,14 +20,9 @@
 	</head>
 	<body ng-app="mtgApp">
 		<div id="htmlWrapper" ng-controller="mtgAppController">
-
-
 			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect()" show-alert="showAlert(msg)"></frame-login>
-			<frame-home ng-show="isLogged" isLogged="isLogged"></frame-home>
 			<frame-alert ng-show="alertShow" alert-show="alertShow" alert-msg="alertMsg"></frame-alert>
-
-		
-
+			<frame-home ng-show="isLogged" isLogged="isLogged"></frame-home>
 		</div>
 	</body>
 </html>
