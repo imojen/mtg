@@ -6,18 +6,18 @@
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon  input-group-label">Login</div>
-						<input class="form-control login-box-input" type="text" name="userLogin">
+						<input class="form-control login-box-input" type="text" ng-model="loginInfos.login" id="loginBox">
 					</div>
 				</div>				
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon input-group-label">Pass</div>
-						<input class="form-control login-box-input" type="text" name="userPass">
+						<input class="form-control login-box-input" type="password" ng-model="loginInfos.pass" id="passBox">
 					</div>
 				</div>
 				<div class="text-center">
 					<br/>
-					<span class="glyphicon glyphicon-fire"></span> <a href="#" ng-click="tryConnect();">Connect</a>
+					<span class="glyphicon glyphicon-fire"></span> <a ng-click="tryConnect();">Connect</a>
 				</div>
 			</form>
 		</div>

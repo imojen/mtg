@@ -18,6 +18,9 @@ body {
 	top: 0px;
 	overflow: hidden;
 }
+a {
+	cursor: pointer;
+}
 
 
 /** LOGIN **/
@@ -82,4 +85,50 @@ body {
 .login-box-left span.glyphicon-retweet {
 	margin-right: 10px;
 	color: lightgreen;
+}
+
+
+
+
+
+
+/** Modal Box **/
+.modal-layer {
+	position: fixed !important;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: url(../images/tpl/textures/00.png);
+	overflow: hidden;
+}
+.modal-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 80px;
+	margin-top: -40px;
+	min-width : 400px;
+	margin-left: -200px;
+	background: #13171d;
+	box-shadow: 0 3px 6px 2px #08090c;
+}
+.modal-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: #fff;
+}
+.modal-button span:hover {
+	cursor: pointer;
+	color: orange;
+}
+.modal-text {
+	margin: 30px auto 20px auto;
+	width: 90%;
+	text-align:center;
+	color: #fff;
+	line-height: 25px;
+	font-size: 12px;
 }

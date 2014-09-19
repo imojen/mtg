@@ -15,14 +15,16 @@
 		<script src="lib/mtgApp.js"></script>
 		<script src="lib/mtgAppLogin.js"></script>
 		<script src="lib/mtgAppHome.js"></script>
+		<script src="lib/mtgAppAlert.js"></script>
 
 	</head>
 	<body ng-app="mtgApp">
 		<div id="htmlWrapper" ng-controller="mtgAppController">
 
 
-			<frame-login ng-show="isLogged == false" isLogged="isLogged"></frame-login>
-			<frame-home ng-show="isLogged == true" isLogged="isLogged"></frame-home>
+			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect()" show-alert="showAlert(msg)"></frame-login>
+			<frame-home ng-show="isLogged" isLogged="isLogged"></frame-home>
+			<frame-alert ng-show="alertShow" alert-show="alertShow" alert-msg="alertMsg"></frame-alert>
 
 		
 
