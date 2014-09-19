@@ -21,6 +21,75 @@ body {
 a {
 	cursor: pointer;
 }
+.closeSpan {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #fff;
+	font-size: 16px;	
+}
+.closeSpan:hover {
+	cursor: pointer;
+	color: orange;
+}
+
+.spacer {
+	margin: 20px 0;
+}
+
+
+
+
+
+
+
+
+/** MODAL BOX **/
+.modal-layer {
+	position: fixed !important;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: url(../images/tpl/textures/00.png);
+	overflow: hidden;
+	z-index: 9999;
+}
+.modal-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 80px;
+	margin-top: -40px;
+	min-width : 400px;
+	margin-left: -200px;
+	background: #13171d;
+	box-shadow: 0 3px 6px 2px #08090c;
+}
+.modal-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: #fff;
+}
+.modal-button span:hover {
+	cursor: pointer;
+	color: orange;
+}
+.modal-text {
+	margin: 30px auto 20px auto;
+	width: 90%;
+	text-align:center;
+	color: #fff;
+	line-height: 25px;
+	font-size: 12px;
+}
+
+
+
+
+
 
 
 /** LOGIN **/
@@ -86,49 +155,78 @@ a {
 	margin-right: 10px;
 	color: lightgreen;
 }
-
-
-
-
-
-
-/** Modal Box **/
-.modal-layer {
-	position: fixed !important;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	background: url(../images/tpl/textures/00.png);
-	overflow: hidden;
-}
-.modal-container {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	height: 80px;
-	margin-top: -40px;
-	min-width : 400px;
-	margin-left: -200px;
-	background: #13171d;
-	box-shadow: 0 3px 6px 2px #08090c;
-}
-.modal-button {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	color: #fff;
-}
-.modal-button span:hover {
-	cursor: pointer;
-	color: orange;
-}
-.modal-text {
-	margin: 30px auto 20px auto;
-	width: 90%;
+.login-box-right p {
 	text-align:center;
+	margin-top: 25px;
 	color: #fff;
 	line-height: 25px;
-	font-size: 12px;
+}
+.login-box-right p span {
+	margin-right: 5px;
+	color: orange;
+}
+.login-box-right p a {
+	color: orange;
+}
+
+
+/** SUBSCRIBE BOX **/
+.subscribe-box {
+	position: absolute;
+	width: 600px;
+	height: 600px;
+	top: 50%;
+	left: 50%;
+	margin-left: -300px;
+	margin-top: -300px;
+	background: #13171d;
+	box-shadow: 0 3px 6px 2px #08090c;	
+}
+.subscribe-box h1 {
+	text-align: center;
+	color: #fff;
+	margin: 15px 0 15px 0;
+	font-size: 35px;
+}
+.sign-up-container {
+	width: 90%;
+	margin: 20px auto;
+}
+.sign-up-group .input-group {
+	width: 100%;
+}
+.sign-up-box-input {
+	border-color: #1c212a;
+	background: #1c212a;	
+	color: #fff;
+}
+.sign-up-input-group-label1 {
+	width: 160px;
+	background: #0c0e11;
+	color: #fff;
+	border-color: #1c212a;
+}
+.sign-up-input-group-label2 {
+	width: 160px;
+	background: #0c0e11;
+	color: #fff;
+	border-color: #1c212a;
+}
+.sign-up-validation-box {
+	line-height: 25px;
+	color: #fff;
+	text-shadow: 0 0 0 transparent;
+}
+input.sign-up-input-checkbox {
+	display: inline;
+	margin-right: 8px;
+	vertical-align: baseline;
+}
+.sign-up-validation-box span {
+	margin-right: 5px;
+	color: orange;
+}
+.sign-up-validation-box a {
+	cursor: pointer;
+	color: #fff;
 }

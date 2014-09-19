@@ -1,4 +1,4 @@
-<div class="login-box">
+<div class="login-box" ng-show="!isLogged && !subscribe" >
 	<div class="login-box-container">
 		<div class="login-box-left">
 			<h1>Login</h1>
@@ -23,6 +23,65 @@
 		</div>
 		<div class="login-box-right">
 			<h1>Guest</h1>
+
+			<p>
+				<a ng-click="signUp();">Sign up for free !</a>
+				<br/>
+				or<br/>
+				<a ng-click="loginGuest();">Login as guest</a>
+			</p>
+
 		</div>
 	</div>
+</div>
+
+
+<div class="subscribe-box" ng-show="!isLogged && subscribe" >
+	<h1>Sign Up</h1>
+	<span class="glyphicon glyphicon-remove-sign closeSpan" ng-click="closeSignUp();"></span>
+
+	<div class="spacer">&nbsp;</div>
+
+	<div class="sign-up-container">
+		<form id="form-sign-up">
+			<h2>Account informations</h2>
+			<div class="form-group sign-up-group">
+				<div class="input-group">
+					<div class="input-group-addon  sign-up-input-group-label1">Login</div>
+					<input class="form-control sign-up-box-input" type="text" ng-model="signUpInfos.login" id="sign-up-login">
+				</div>
+			</div>				
+			<div class="form-group sign-up-group">
+				<div class="input-group">
+					<div class="input-group-addon sign-up-input-group-label1">Mail</div>
+					<input class="form-control sign-up-box-input" type="text" ng-model="signUpInfos.mail" id="sign-up-mail">
+				</div>
+			</div>	
+
+			<div class="spacer">&nbsp;</div>
+
+			<h2>Account password</h2>
+			<div class="form-group sign-up-group">
+				<div class="input-group">
+					<div class="input-group-addon sign-up-input-group-label2">Password</div>
+					<input class="form-control sign-up-box-input" type="password" ng-model="signUpInfos.pass" id="sign-up-pass">
+				</div>
+			</div>
+			<div class="form-group sign-up-group">
+				<div class="input-group">
+					<div class="input-group-addon sign-up-input-group-label2">Password Confirm</div>
+					<input class="form-control sign-up-box-input" type="password" ng-model="signUpInfos.pass2" id="sign-up-pass2">
+				</div>
+			</div>	
+
+			<div class="spacer">&nbsp;</div>	
+
+			<div class="text-center sign-up-validation-box">
+				<input type="checkbox" class="sign-up-input-checkbox" checked> Notify me for update &amp; awesome news<br/>
+				<br/>					
+				<span class="glyphicon glyphicon-fire"></span> <a ng-click="trySignUp();">Sign up</a>
+			</div>
+		</form>	
+	</div>
+
 </div>
