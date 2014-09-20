@@ -1,0 +1,18 @@
+{
+	"mtgcard" : {
+		"properties" : {
+			"name" : {
+				"type" : "string",
+				"analyzer" : "default"
+			},
+			"type" : {
+				"type" : "string",
+				"analyzer" : "default"
+			},
+			"text" : {
+				"type" : "string",
+				"analyzer" : "default"
+			}
+		}
+	}
+}

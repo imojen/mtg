@@ -1,0 +1,71 @@
+{
+	"settings" : {
+		"index" : {
+			"number_of_shards" : 5,
+			"number_of_replicas" : 1
+		},
+		"analysis" : {
+			"analyzer" : {
+				"default" : {
+					"type" : "custom",
+					"tokenizer" : "standard",
+					"filter" : ["lowercase", "en_synonyms_file", "en_lemmatization", "en_stopwords", "asciifolding", "en_elision"]
+				},
+				"exact" : {
+					"tokenizer" : "keyword",
+					"filter" : ["lowercase","asciifolding"]
+				}
+			},
+			"filter" : {
+				"fr_stopwords" : {
+					"type" : "stop",
+					"stopwords" : ["_french_"]
+				},
+				"fr_lemmatization" : {
+					"type" : "snowball",
+					"name" : "french"
+				},
+				"fr_elision" : {
+					"type" : "elision",
+					"articles" : ["l", "m", "t", "qu", "n", "s", "j", "d"]
+				},
+				"fr_lemmatization_file" : {
+					"type" : "stemmer_override",
+					"rules_path" : "analysis/lemmatisation_fr.txt"
+				},
+				"fr_synonyms_file" : {
+					"type" : "synonym",
+					"synonyms_path" : "analysis/synonymes_fr.txt"
+				},
+				"fr_stopwords_file" : {
+					"type" : "stop",
+					"stopwords_path" : "analysis/stopwords_fr.txt"
+				},
+				"en_stopwords" : {
+					"type" : "stop",
+					"stopwords" : ["_english_"]
+				},
+				"en_lemmatization" : {
+					"type" : "snowball",
+					"name" : "english"
+				},
+				"en_elision" : {
+					"type" : "elision",
+					"articles" : ["l", "m", "t", "qu", "n", "s", "j", "d", "the"]
+				},
+				"en_lemmatization_file" : {
+					"type" : "stemmer_override",
+					"rules_path" : "analysis/lemmatisation_en.txt"
+				},
+				"en_synonyms_file" : {
+					"type" : "synonym",
+					"synonyms_path" : "analysis/synonymes_en.txt"
+				},
+				"en_stopwords_file" : {
+					"type" : "stop",
+					"stopwords_path" : "analysis/stopwords_en.txt"
+				}
+			}
+		}
+	}
+}
