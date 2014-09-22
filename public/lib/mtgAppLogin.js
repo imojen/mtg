@@ -47,7 +47,7 @@ angular.module("mtgAppLogin", [] )
 					if(response.success)
 						$scope.loginConnect();
 					else {
-						$scope.errorLogin();
+						$scope.showAlert({ msg : "Wrong login or password"});
 						return false;
 					}
 						
@@ -62,9 +62,8 @@ angular.module("mtgAppLogin", [] )
 
 			// Login guest
 			$scope.loginGuest = function() {
-
-				// Connexion
-				$scope.loginConnect();
+				$scope.showAlert({ msg : "Not developped yet..."});
+				return false;
 			}
 
 
@@ -98,8 +97,43 @@ angular.module("mtgAppLogin", [] )
 
 
 				// Sign up ok, connexion
-				$scope.loginConnect();
+				$scope.signUpNode();
 			}
+
+			$scope.signUpNode = function() {
+				var method = 'POST';
+				var inserturl = 'http://localhost:1337/login/signup';
+				var nodeDatas = {
+				      'login' : $scope.signUpInfos.login,
+				      'mail' : $scope.signUpInfos.mail,
+				      'pass' : $scope.signUpInfos.pass,
+				    };
+
+				$http({
+				    method: method,
+				    url: inserturl,
+				    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+				    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				}).
+				success(function(response) {
+					if(response.success) {
+						$scope.showAlert({ msg : response.successMsg });
+						$scope.loginConnect();
+					}
+					else {
+						$scope.showAlert({ msg : response.errMsg });
+						return false;
+					}
+						
+				}).
+				error(function(response) {
+			        $scope.codeStatus = response || "Request failed";
+			        $scope.showAlert({ msg : $scope.codeStatus });
+					return false;
+				});				
+			}
+
+
 
 		}
 	}
