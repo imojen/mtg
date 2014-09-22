@@ -73,7 +73,7 @@ router.post('/signup', function(req, res) {
 			  } 
 			  else {
 			  	// Mise en session
-
+			  	
 			  	// Réponse
 				res.write('{"success" : true, "successMsg" : "Account created !"}');	  	  	
 				res.end();
