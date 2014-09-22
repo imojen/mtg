@@ -44,11 +44,13 @@ angular.module("mtgAppLogin", [] )
 				    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				}).
 				success(function(response) {
-					if( response.data.success )
-						alert("YOUHOU !!!");
-					else
-						alert("Bouh...");
-					return true;
+					if(response.success)
+						$scope.loginConnect();
+					else {
+						$scope.errorLogin();
+						return false;
+					}
+						
 				}).
 				error(function(response) {
 			        $scope.codeStatus = response || "Request failed";

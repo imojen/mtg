@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
+
 /* Login **/
 router.post('/', function(req, res) {
 	// Tests...
@@ -11,6 +12,7 @@ router.post('/', function(req, res) {
 	// Connexion Ok
 	res.write('{"success" : true}');
 	console.log(nodeDatas);
+	res.end();
 });
 
 
