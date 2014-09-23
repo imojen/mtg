@@ -32,8 +32,9 @@ router.post('/', function(req, res) {
 		res.end();
 	  }
 	  else {
-	  	// Mise en sessions # TODO
-
+	  	// Mise en session # TODO
+	  	req.session.isConnected = true;
+	  	req.session.login = login;
 	  	// Réponse
 		res.write('{"success" : true }');	  	
 		res.end();
@@ -73,6 +74,8 @@ router.post('/signup', function(req, res) {
 			  } 
 			  else {
 			  	// Mise en session
+			  	req.session.isConnected = true;
+			  	req.session.login = nodeDatas.login;
 			  	
 			  	// Réponse
 				res.write('{"success" : true, "successMsg" : "Account created !"}');	  	  	
@@ -84,11 +87,26 @@ router.post('/signup', function(req, res) {
 
 	  //console.log('The solution is: ', rows[0].solution);
 	});	
-
-	
-
-
 });
 
+
+// isConnected ?
+router.post('/isConnected', function(req,res) {
+	if( req.session && req.session.isConnected && req.session.isConnected === true ) {
+		res.write('{"success" : true }');	  	  	
+		res.end();
+	}
+	else {
+		res.write('{"success" : false }');	  	  	
+		res.end();		
+	}
+});
+
+
+// disconnect
+router.get('/disconnect', function(req,res) {
+	req.session.isConnected	= false;  	  	
+	res.end();		
+});
 
 module.exports = router;

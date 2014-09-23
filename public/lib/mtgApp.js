@@ -1,5 +1,28 @@
 angular.module('mtgApp', [ "mtgAppLogin", "mtgAppHome", "mtgAppAlert" ])
-.controller("mtgAppController",function( $scope ) {
+.controller("mtgAppController",function( $scope, $http ) {
+
+	/** Is connected user ? **/
+	$scope.isConnecteduser = function() {
+		var method = 'POST';
+		var inserturl = 'http://localhost:1337/login/isConnected';
+		$http({
+		    method: method,
+		    url: inserturl,
+		    data:  'nodeDatas=0',
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success)
+				$scope.isLogged = true;				
+		}).
+		error(function(response) {
+	        $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
+			return false;
+		});				
+	}
+	$scope.isConnecteduser();
+
 
 	/* Login */
 	$scope.isLogged = false;

@@ -2,9 +2,9 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+var express = require('express')
+var session = require('express-session')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,17 +25,11 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    genid: function(req) {
-        return genuuid(); // use UUIDs for session IDs
-    },
-    secret: 'mtg c plutot cool',
-    cookie: { secure: true, maxAge: 600000 },
-    saveUninitialized : false,
-    resave : true,
-}));
+
+// Session | store a cookie exemple : res.cookie(name, value, { expire : new Date() + 3600, maxAge : 3600 } );
+app.use(session({ secret : 'bebert noob', resave : true, saveUninitialized : true }));
+
 
 // Routes
 app.use('/login', login);
