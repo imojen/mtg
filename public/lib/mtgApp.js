@@ -27,7 +27,6 @@ angular.module('mtgApp', [ "mtgAppLogin", "mtgAppHome", "mtgAppAlert" ])
 	/* Login */
 	$scope.isLogged = false;
 	$scope.loginConnect = function() {
-		alert("Connected => Go to home");
 		$scope.isLogged = true;
 	}
 

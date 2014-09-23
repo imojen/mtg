@@ -6,13 +6,13 @@
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon  input-group-label">Login</div>
-						<input class="form-control login-box-input" type="text" ng-model="loginInfos.login" id="loginBox">
+						<input class="form-control login-box-input" type="text" ng-model="loginInfos.login" id="loginBox" ng-keyup="checkEnterLogin($event)">
 					</div>
 				</div>				
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon input-group-label">Pass</div>
-						<input class="form-control login-box-input" type="password" ng-model="loginInfos.pass" id="passBox">
+						<input class="form-control login-box-input" type="password" ng-model="loginInfos.pass" id="passBox" ng-keyup="checkEnterLogin($event)">
 					</div>
 				</div>
 				<div class="text-center">

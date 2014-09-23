@@ -11,6 +11,14 @@ angular.module("mtgAppLogin", [] )
 
 			$scope.loginInfos = [{ "login" : null, "pass" : null }];
 
+
+			$scope.checkEnterLogin = function( e ) {
+				if( e.keyCode == 13 ) {
+					e.preventDefault();
+					$scope.tryConnect();
+				}
+			}
+
 			// Login
 			$scope.tryConnect = function() {
 				// Tests de connexion
