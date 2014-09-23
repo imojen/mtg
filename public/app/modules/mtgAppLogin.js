@@ -52,8 +52,11 @@ angular.module("mtgAppLogin", [] )
 				    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				}).
 				success(function(response) {
-					if(response.success)
+					if(response.success) {
+						$scope.loginInfos.login = "";
+						$scope.loginInfos.pass = "";
 						$scope.loginConnect();
+					}
 					else {
 						$scope.showAlert({ msg : "Wrong login or password"});
 						return false;
@@ -126,6 +129,11 @@ angular.module("mtgAppLogin", [] )
 				success(function(response) {
 					if(response.success) {
 						$scope.showAlert({ msg : response.successMsg });
+						$scope.signUpInfos.login = "";
+						$scope.signUpInfos.mail = "";
+						$scope.signUpInfos.pass = "";
+						$scope.signUpInfos.pass2 = "";
+						$scope.subscribe = false;
 						$scope.loginConnect();
 					}
 					else {

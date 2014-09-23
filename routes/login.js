@@ -104,7 +104,7 @@ router.post('/isConnected', function(req,res) {
 
 
 // disconnect
-router.get('/disconnect', function(req,res) {
+router.post('/disconnect', function(req,res) {
 	req.session.isConnected	= false;  	  	
 	res.end();		
 });

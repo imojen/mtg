@@ -13,17 +13,17 @@
 
 		<script src="lib/vendor/angular.min.js"></script>
 		<script src="lib/vendor/require.min.js"></script>
-		<script src="lib/mtgApp.js"></script>
-		<script src="lib/mtgAppLogin.js"></script>
-		<script src="lib/mtgAppHome.js"></script>
-		<script src="lib/mtgAppAlert.js"></script>
+		<script src="app/mtgApp.js"></script>
+		<script src="app/modules/mtgAppLogin.js"></script>
+		<script src="app/modules/mtgAppAlert.js"></script>
+		<script src="app/directives/directive_Home.js"></script>
 
 	</head>
 	<body ng-app="mtgApp">
 		<div id="htmlWrapper" ng-controller="mtgAppController">
 			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect()" show-alert="showAlert(msg)"></frame-login>
 			<frame-alert ng-show="alertShow" alert-show="alertShow" alert-msg="alertMsg"></frame-alert>
-			<frame-home ng-show="isLogged" isLogged="isLogged"></frame-home>
+			<frame-home ng-show="isLogged" isLogged="isLogged" login-disconnect="loginDisconnect()"></frame-home>
 		</div>
 	</body>
 </html>

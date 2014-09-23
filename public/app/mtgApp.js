@@ -1,4 +1,4 @@
-angular.module('mtgApp', [ "mtgAppLogin", "mtgAppHome", "mtgAppAlert" ])
+var mtgApp = angular.module('mtgApp', [ "mtgAppLogin", "mtgAppAlert" ])
 .controller("mtgAppController",function( $scope, $http ) {
 
 	/** Is connected user ? **/
@@ -28,6 +28,9 @@ angular.module('mtgApp', [ "mtgAppLogin", "mtgAppHome", "mtgAppAlert" ])
 	$scope.isLogged = false;
 	$scope.loginConnect = function() {
 		$scope.isLogged = true;
+	}
+	$scope.loginDisconnect = function() {
+		$scope.isLogged = false;
 	}
 
 	/* Alert */
