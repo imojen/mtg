@@ -1,4 +1,3 @@
-var events = require('events');
 var directives = {};
 
 directives.frameHome = function() {
@@ -11,7 +10,7 @@ directives.frameHome = function() {
 		controller : function($scope, $http) {
 
 			$scope.page = 'home';
-			$scope.$on('changePage', page )
+			
 
 			$scope.disconnect = function() {
 				if( !confirm("Disconnect ?") ) return false;
@@ -37,6 +36,8 @@ directives.frameHome = function() {
 				var h = $(window).height(),
 					w = $(window).width(),
 					b = $("#main-body");
+				if( h < 750 ) h = 750;
+				if( w < 990 ) w = 990;
 				b.css({
 					'width' : w - 40,
 					'height' : h -80,
