@@ -1,6 +1,6 @@
 body {
 	min-width: 990px;
-	min-height: 740px;
+	min-height: 750px;
 	background: url(../images/tpl/textures/00.jpg) no-repeat center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -13,7 +13,7 @@ body {
 	width: 100%;
 	height: 100%;
 	min-width: 990px;
-	min-height: 740px !important;	
+	min-height: 750px !important;	
 	left: 0px;
 	top: 0px;
 	overflow: hidden;
@@ -230,3 +230,84 @@ input.sign-up-input-checkbox {
 	cursor: pointer;
 	color: #fff;
 }
+
+
+
+
+
+/** Right Menu **/
+#top-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height : 40px;
+	background: #13171d;
+	box-shadow: 0 0px 3px #000;
+	z-index: 50;
+}
+#top-menu ul {
+
+}
+#top-menu ul li {
+	float : left;
+	color: #fff;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	font-size: 16px;
+	position: relative;
+}
+#top-menu ul li.action:hover,
+#top-menu ul li.active {
+	background: #1f252e;
+	cursor: pointer;
+}
+#top-menu ul li.login-welcome {
+	color: orange;
+	font-size: 13px;
+}
+#top-menu ul li.right {
+	float: right;
+}
+
+
+#top-menu ul li ul.sub-menu {
+	position: absolute;
+	right: 0px;
+	top: 100%;
+	width: 130px;
+	background: #13171d;
+	text-align: right;
+	display: none;
+}
+#top-menu ul li ul.sub-menu li {
+	white-space: nowrap;
+	padding: 0;
+	padding: 0 20px;
+	float: right;
+	width: 100%;
+}
+#top-menu ul li:hover ul.sub-menu {
+	display: block;
+}
+#top-menu ul li span.glyphicon {
+	font-size: 12px;
+	color: orange;
+	margin-right: 10px;
+}
+
+
+/** Main body **/
+
+#main-body {
+	position: absolute;
+	top: 60px;
+	left: 20px;
+	width: 100%;
+	height: 100%;
+	background: url(../images/tpl/textures/blue.png);
+	box-shadow: 0 0px 3px #000;
+	color: #fff;
+}
+

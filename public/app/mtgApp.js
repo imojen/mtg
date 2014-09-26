@@ -1,5 +1,8 @@
-var mtgApp = angular.module('mtgApp', [ "mtgAppLogin", "mtgAppAlert" ])
-.controller("mtgAppController",function( $scope, $http ) {
+var mtgApp = angular.module('mtgApp', [ "ngSanitize", "mtgAppLogin", "mtgAppAlert" ]);
+
+
+// Main Controller
+mtgApp.controller("mtgAppController",function( $scope, $http ) {
 
 	/** Is connected user ? **/
 	$scope.isConnecteduser = function() {
@@ -12,8 +15,9 @@ var mtgApp = angular.module('mtgApp', [ "mtgAppLogin", "mtgAppAlert" ])
 		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		}).
 		success(function(response) {
-			if(response.success)
+			if(response.success) {
 				$scope.isLogged = true;				
+			}
 		}).
 		error(function(response) {
 	        $scope.codeStatus = response || "Request failed";
@@ -40,7 +44,9 @@ var mtgApp = angular.module('mtgApp', [ "mtgAppLogin", "mtgAppAlert" ])
 		$scope.alertMsg = msg;
 		$scope.alertShow = true;
 	}
-
+	$scope.$on('showAlert', function(event, args) {
+		$scope.showAlert( args );
+	});
 
 
 });

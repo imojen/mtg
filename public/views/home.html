@@ -1,7 +1,35 @@
 <div id="wrapperApp">
 	
+	<nav id="top-menu" ng-controller="topMenuCtrl">
+		<ul>
+			<li class="login-welcome">Welcome, Pseudo</li>
+			<li class="action active" ng-click="topMenuAction( 'home' )">Home</li>
+			<li class="action" ng-click="topMenuAction( 'library' )">Library</li>
+			<li class="action" ng-click="topMenuAction( 'arena' )">Arena</li>
+			<li class="action" ng-click="topMenuAction( 'community' )">Community</li>
+			<li class="action right">
+				<span class="glyphicon glyphicon-user"></span> Profile
+				<ul class="sub-menu">
+					<li class="action">Edit my profile</li>
+					<li class="action" ng-click="disconnect()">Disconnect</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
 
-	<a id="" ng-click="disconnect()">Disconnect</a>
+	<div id="main-body">
+
+		<frame-home-page page="page" ></frame-home-page>
+		<frame-library-page page="page" ></frame-library-page>
+
+
+
+
+
+	</div>
+
+
+
 </div>
 
 

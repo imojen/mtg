@@ -8,6 +8,7 @@ var session = require('express-session')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var pages = require('./routes/pages');
 var login = require('./routes/login');
 var quit = require('./routes/quit');
 
@@ -34,9 +35,10 @@ app.use(session({ secret : 'bebert noob', resave : true, saveUninitialized : tru
 // Routes
 app.use('/login', login);
 app.use('/users', users);
+app.use('/pages', pages);
 app.use('/quit', quit);
 app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 
@@ -46,7 +48,7 @@ app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
-	res.sendfile(__dirname + '/public/lib/error_pages/404.html');
+	res.sendFile(__dirname + '/public/lib/error_pages/404.html');
 });
 
 // error handlers
