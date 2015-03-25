@@ -9,7 +9,7 @@ directives.frameHome = function() {
 		templateUrl : 'views/home.html',
 		controller : function($scope, $http) {
 
-			$scope.page = 'home';
+			$scope.page = 'library';
 			
 
 			$scope.disconnect = function() {
@@ -61,6 +61,20 @@ directives.frameLibraryPage = function() {
 		restrict : "E",
 		scope : { page : '&' },
 		templateUrl : 'views/libraryPage.html',
+	}
+}
+directives.frameArenaPage = function() {
+	return {
+		restrict : "E",
+		scope : { page : '&' },
+		templateUrl : 'views/arenaPage.html',
+	}
+}
+directives.frameCommunityPage = function() {
+	return {
+		restrict : "E",
+		scope : { page : '&' },
+		templateUrl : 'views/communityPage.html',
 	}
 }
 

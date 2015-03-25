@@ -30,8 +30,13 @@ mtgApp.controller("mtgAppController",function( $scope, $http ) {
 
 	/* Login */
 	$scope.isLogged = false;
-	$scope.loginConnect = function() {
+	$scope.login = false;
+	$scope.pseudo = false;
+	$scope.loginConnect = function( login, pseudo ) {
 		$scope.isLogged = true;
+		$scope.login = login;
+		$scope.pseudo = pseudo;
+		$scope.showAlert( login );
 	}
 	$scope.loginDisconnect = function() {
 		$scope.isLogged = false;

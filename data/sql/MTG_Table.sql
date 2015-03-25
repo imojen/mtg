@@ -75,6 +75,7 @@ DROP TABLE IF EXISTS `mtgusers`;
 CREATE TABLE `mtgusers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `login` varchar(45) DEFAULT NULL,
+  `pseudo` varchar(30) DEFAULT NULL,
   `mail` varchar(80) DEFAULT NULL,
   `pass` varchar(50) DEFAULT NULL,
   `ip` varchar(30) DEFAULT NULL,

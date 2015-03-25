@@ -55,7 +55,7 @@ angular.module("mtgAppLogin", [] )
 					if(response.success) {
 						$scope.loginInfos.login = "";
 						$scope.loginInfos.pass = "";
-						$scope.loginConnect();
+						$scope.loginConnect({login : response.login, pseudo : response.pseudo});
 					}
 					else {
 						$scope.showAlert({ msg : "Wrong login or password"});

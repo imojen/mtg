@@ -36,6 +36,9 @@ a {
 .spacer {
 	margin: 20px 0;
 }
+.center {
+	text-align: center;
+}
 
 
 
@@ -309,5 +312,355 @@ input.sign-up-input-checkbox {
 	background: url(../images/tpl/textures/blue.png);
 	box-shadow: 0 0px 3px #000;
 	color: #fff;
+	overflow: auto;
+}
+#main-body div.page-header {
+	margin-top: 0px;
+}
+#main-body div.page-header h1 {
+	padding-left: 20px;
+}
+#main-body div.container-padding {
+	padding: 0 20px 0 20px;
 }
 
+#main-body div.mainColumn {
+	min-height: 500px;
+	border-right: 1px solid #0c0e11;
+	border-left: 1px solid #1c212a;
+}
+#main-body div.mainColumn:first-child {
+	border-left: 0 none;
+}
+#main-body div.mainColumn:last-child {
+	border-right: 0 none;
+}
+
+#main-body div.searchBar {
+	width: 100%;
+	line-height: 50px;
+}
+#main-body div.searchBar div.searchModule {
+	display: inline-block;
+	width: 350px;
+	vertical-align: middle;
+}
+#main-body div.searchBar div.input-group {
+	width: 350px;
+}
+#main-body div.searchBar a {
+	display: inline-block;
+	color: orange;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+
+#main-body .input-group-addon,
+#main-body .btn {
+	width: 60px;
+	background: #0c0e11;
+	color: #fff;
+	border-color: #1c212a;
+}
+#main-body input.form-control {
+	border-color: #1c212a;
+	background: #1c212a;	
+	color: #fff;
+}
+#main-body div.tableResultsWrapper {
+	margin: 15px 0;
+}
+#main-body div.tableResultsWrapper table#tableResults {
+	width: 100%;
+
+}
+#main-body div.tableResultsWrapper table#tableResults thead {
+	background: #0c0e11;
+}
+#main-body div.tableResultsWrapper table#tableResults thead th {
+	line-height: 30px;
+	font-size: 14px;
+	padding-left: 10px;
+}
+#main-body div.tableResultsWrapper table#tableResults tbody tr {
+	background: #1c212a;
+}
+#main-body div.tableResultsWrapper table#tableResults tbody tr:hover,
+#main-body div.tableResultsWrapper table#tableResults tbody tr.selected {
+	cursor: pointer;
+	background: orange;
+}
+#main-body div.tableResultsWrapper table#tableResults tbody tr td {
+	padding-left: 5px;
+	line-height: 28px;
+	font-size: 12px;
+}
+#main-body div.imgPreviewWrapper {
+	padding: 3px;
+	background: #fff;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Symbols **/
+.symbol{
+	display:inline-block;
+	position:relative;
+	top:.2em;
+	height:1em;
+	width:1em;
+	background-image: url('../images/symbols.png');
+	background-size: 10em 7em;
+	background-repeat: no-repeat;
+	background-position: top left;
+	text-indent: -9999px;
+}
+.symbol_1{
+	background-position:-1em 0em;
+}
+.symbol_2{
+	background-position:-2em 0em;
+}
+.symbol_3{
+	background-position:-3em 0em;
+}
+.symbol_4{
+	background-position:-4em 0em;	
+}
+.symbol_4{
+	background-position:-4em 0em;	
+}
+.symbol_5{
+	background-position:-5em 0em;	
+}
+.symbol_6{
+	background-position:-6em 0em;	
+}
+.symbol_7{
+	background-position:-7em 0em;	
+}
+.symbol_8{
+	background-position:-8em 0em;	
+}
+.symbol_9{
+	background-position:-9em 0em;	
+}
+.symbol_10{
+	background-position:0em -1em; 
+}
+.symbol_11{
+	background-position:-1em -1em;
+}
+.symbol_12{
+	background-position:-2em -1em;
+}
+.symbol_13{
+	background-position:-3em -1em;
+}
+.symbol_14{
+	background-position:-4em -1em;	
+}
+.symbol_15{
+	background-position:-5em -1em;	
+}
+.symbol_16{
+	background-position:-6em -1em;	
+}
+.symbol_17{
+	background-position:-7em -1em;	 
+}
+.symbol_18{
+	background-position:-8em -1em;	
+}
+.symbol_19{
+	background-position:-9em -1em;	
+}
+.symbol_20{
+	background-position:0em -2em; 
+}
+.symbol_X,
+.symbol_Variable_Colorless{
+	background-position:-1em -2em; 
+}
+.symbol_Y{
+	background-position:-2em -2em;
+}
+.symbol_Z{
+	background-position:-3em -2em;
+}
+.symbol_W,
+.symbol_White{
+	background-position:-4em -2em;	
+}
+.symbol_U,
+.symbol_Blue{
+	background-position:-5em -2em;	
+}
+.symbol_B,
+.symbol_Black{
+	background-position:-6em -2em;	
+}
+.symbol_R,
+.symbol_Red{
+	background-position:-7em -2em;	
+}
+.symbol_G,
+.symbol_Green{
+	background-position:-8em -2em;	
+}
+.symbol_S,
+.symbol_Snow{
+	background-position:-9em -2em;	
+}
+.symbol_WU,
+.symbol_UW,
+.symbol_White_or_Blue{
+	background-position:0em -3em; 
+}
+.symbol_WB,
+.symbol_BW,
+.symbol_White_or_Black{
+	background-position:-1em -3em;
+}
+.symbol_UB,
+.symbol_BU,
+.symbol_Blue_or_Black{
+	background-position:-2em -3em;
+}
+.symbol_UR,
+.symbol_RU,
+.symbol_Blue_or_Red{
+	background-position:-3em -3em;
+}
+.symbol_BR,
+.symbol_RB,
+.symbol_Black_or_Red{
+	background-position:-4em -3em;	 
+}
+.symbol_BG,
+.symbol_GB,
+.symbol_Black_or_Green{
+	background-position:-5em -3em;	
+}
+.symbol_RW,
+.symbol_WR,
+.symbol_Red_or_White{
+	background-position:-6em -3em;	
+}
+.symbol_RG,
+.symbol_GR,
+.symbol_Red_or_Green{
+	background-position:-7em -3em;	
+}
+.symbol_GW,
+.symbol_WG,
+.symbol_Green_or_White{
+	background-position:-8em -3em;	
+}
+.symbol_GU,
+.symbol_UG,
+.symbol_Green_or_Blue{
+	background-position:-9em -3em; 
+}
+.symbol_2W,
+.symbol_Two_or_White{
+	background-position:0em -4em; 
+}
+.symbol_2U,
+.symbol_Two_or_Blue{
+	background-position:-1em -4em;;
+}
+.symbol_2B,
+.symbol_Two_or_Black{
+	background-position:-2em -4em;
+}
+.symbol_2R,
+.symbol_Two_or_Red{
+	background-position:-3em -4em;
+}
+.symbol_2G,
+.symbol_Two_or_Green{
+	background-position:-4em -4em;	
+}
+.symbol_WP,
+.symbol_Phyrexian_White{
+	background-position:-5em -4em;	
+}
+.symbol_UP,
+.symbol_Phyrexian_Blue{
+	background-position:-6em -4em;	
+}
+.symbol_BP,
+.symbol_Phyrexian_Black{
+	background-position:-7em -4em;	
+}
+.symbol_RP,
+.symbol_Phyrexian_Red{
+	background-position:-8em -4em;	
+}
+.symbol_GP,
+.symbol_Phyrexian_Green{
+	background-position:-9em -4em;	
+}
+.symbol_T,
+.symbol_Tap{
+	background-position:0em -5em; 
+}
+.symbol_UT,
+.symbol_Untap,
+.symbol_Q{
+	background-position:-1em -5em;
+}
+.symbol_Infinite{
+	background-position:-2em -5em; 
+}
+.symbol_Half{
+	background-position:-3em -5em;
+}
+.symbol_1000000,
+.symbol_Million{
+	width:4.9em;
+	background-position:0em -6em; 
+}
+.symbol_100,
+.symbol_HUNDRED{
+	width:1.85em;
+	background-position:-4.9em -6em;
+}
+.symbol_HW,
+.symbol_500{
+	border-radius: 0 3em 3em 0 !important;
+	width: 10px;
+	background-position: -7.96em -6em;
+}
+.symbol_HR{
+	border-radius: 0 3em 3em 0 !important;
+	width: 7px;
+	background-position: -8.5em -6em;
+}

@@ -32,11 +32,12 @@ router.post('/', function(req, res) {
 		res.end();
 	  }
 	  else {
-	  	// Mise en session # TODO
+	  	// Mise en session
 	  	req.session.isConnected = true;
 	  	req.session.login = login;
+	  	req.session.pseudo = rows[0].pseudo;
 	  	// Réponse
-		res.write('{"success" : true }');	  	
+		res.write('{"success" : true, "login" : "'+encodeURIComponent(login)+'", "pseudo" : "'+encodeURIComponent(rows[0].pseudo)+'" }');	  	
 		res.end();
 	  }
 	});
@@ -108,5 +109,9 @@ router.post('/disconnect', function(req,res) {
 	req.session.isConnected	= false;  	  	
 	res.end();		
 });
+
+
+
+
 
 module.exports = router;
