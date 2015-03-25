@@ -20,7 +20,7 @@
 							<div class="searchModule">
 								<div class="input-group">
 									<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-									<input type="text" class="form-control" aria-label="Search..." placeholder="Search by card name...">
+									<input type="text" ng-model="stringSearch" class="form-control" aria-label="Search..." placeholder="Search by card name..." ng-keyup="searchCard($event)">
 								</div>	
 							</div>
 
@@ -30,6 +30,8 @@
 							</a>
 							
 						</div>
+
+						<div class="resultsCount">{{resultsCount}} results for current search</div>
 
 						<div class="tableResultsWrapper">
 							<table id="tableResults">

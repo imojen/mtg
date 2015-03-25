@@ -326,14 +326,6 @@ input.sign-up-input-checkbox {
 
 #main-body div.mainColumn {
 	min-height: 500px;
-	border-right: 1px solid #0c0e11;
-	border-left: 1px solid #1c212a;
-}
-#main-body div.mainColumn:first-child {
-	border-left: 0 none;
-}
-#main-body div.mainColumn:last-child {
-	border-right: 0 none;
 }
 
 #main-body div.searchBar {
@@ -367,6 +359,15 @@ input.sign-up-input-checkbox {
 	background: #1c212a;	
 	color: #fff;
 }
+#main-body div.resultsCount {
+	margin: 5px 0;
+	text-align: center;
+	font-size: 12px;
+	color: #fff;
+	background: #0c0e11;
+	line-height: 25px;
+}
+
 #main-body div.tableResultsWrapper {
 	margin: 15px 0;
 }

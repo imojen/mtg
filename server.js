@@ -9,6 +9,7 @@ var session = require('express-session')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var pages = require('./routes/pages');
+var cards = require('./routes/cards');
 var login = require('./routes/login');
 var quit = require('./routes/quit');
 
@@ -36,6 +37,7 @@ app.use(session({ secret : 'bebert noob', resave : true, saveUninitialized : tru
 app.use('/login', login);
 app.use('/users', users);
 app.use('/pages', pages);
+app.use('/cards', cards);
 app.use('/quit', quit);
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
