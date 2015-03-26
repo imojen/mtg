@@ -5,7 +5,15 @@
 				"type" : "string",
 				"analyzer" : "default"
 			},
-			"type" : {
+			"types" : {
+				"type" : "string",
+				"analyzer" : "default"
+			},
+			"supertypes" : {
+				"type" : "string",
+				"analyzer" : "default"
+			},
+			"subtypes" : {
 				"type" : "string",
 				"analyzer" : "default"
 			},
