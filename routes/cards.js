@@ -6,6 +6,7 @@ var router = express.Router();
 
 
 /** Mysql **/
+//TODO REMOVE LOCALHOST !!!
 var mysqlHost = 'localhost',
     mysqlUser = 'mtg',
     mysqlPass = 'lolilol';
@@ -43,7 +44,7 @@ router.post('/search', function(req, res) {
 	  'Content-Type': 'application/json',
 	  'Content-Length': qESstring.length
 	};
-
+//TODO REMOVE LOCALHOST !!!
 	var options = {
 	  host: 'localhost',
 	  port: 9200,

@@ -4,6 +4,7 @@ var router = express.Router();
 
 
 /** Mysql **/
+//TODO REMOVE LOCALHOST !!!
 var mysqlHost = 'localhost',
     mysqlUser = 'mtg',
     mysqlPass = 'lolilol';
