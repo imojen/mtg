@@ -5,17 +5,21 @@
 				"type" : "string",
 				"analyzer" : "default"
 			},
-			"types" : {
+			"type" : {
 				"type" : "string",
 				"analyzer" : "default"
+			},
+			"types" : {
+				"type" : "string",
+				"analyzer" : "whitespace"
 			},
 			"supertypes" : {
 				"type" : "string",
-				"analyzer" : "default"
+				"analyzer" : "whitespace"
 			},
 			"subtypes" : {
 				"type" : "string",
-				"analyzer" : "default"
+				"analyzer" : "whitespace"
 			},
 			"text" : {
 				"type" : "string",
