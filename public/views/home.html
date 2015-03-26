@@ -1,1 +1,38 @@
-Accueil !
+<div id="wrapperApp"  ng-controller="topMenuCtrl">
+	
+	<nav id="top-menu">
+		<ul>
+			<li class="login-welcome">Welcome, {{login}}</li>
+			<li class="action" ng-click="topMenuAction( 'home' )" ng-class="{'active': page == 'home' }">Home</li>
+			<li class="action" ng-click="topMenuAction( 'library' )" ng-class="{'active': page == 'library' }">Library</li>
+			<li class="action" ng-click="topMenuAction( 'arena' )" ng-class="{'active': page == 'arena' }">Arena</li>
+			<li class="action" ng-click="topMenuAction( 'community' )" ng-class="{'active': page == 'community' }">Community</li>
+			<li class="action right">
+				<span class="glyphicon glyphicon-user"></span> Profile
+				<ul class="sub-menu">
+					<li class="action">Edit my profile</li>
+					<li class="action" ng-click="disconnect()">Disconnect</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+	<div id="main-body">
+		<frame-home-page page="page" ng-show="page == 'home'" ></frame-home-page>
+		<frame-library-page page="page" ng-show="page == 'library'" ></frame-library-page>
+		<frame-arena-page page="page" ng-show="page == 'arena'" ></frame-arena-page>
+		<frame-community-page page="page" ng-show="page == 'community'" ></frame-community-page>
+
+
+
+
+
+	</div>
+
+
+
+</div>
+
+
+
+

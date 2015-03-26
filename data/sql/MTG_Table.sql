@@ -64,3 +64,27 @@ CREATE TABLE IF NOT EXISTS `MTGEDITION` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mtgusers`
+--
+
+DROP TABLE IF EXISTS `mtgusers`;
+CREATE TABLE `mtgusers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `login` varchar(45) DEFAULT NULL,
+  `pseudo` varchar(30) DEFAULT NULL,
+  `mail` varchar(80) DEFAULT NULL,
+  `pass` varchar(50) DEFAULT NULL,
+  `ip` varchar(30) DEFAULT NULL,
+  `mail_valid` int(11) DEFAULT '0',
+  `ban` int(11) DEFAULT '0',
+  `date_creation` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login_UNIQUE` (`login`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+

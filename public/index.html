@@ -5,24 +5,30 @@
 		<meta charset="UTF-8"/>
 
 		<link rel="stylesheet" href="css/reset.css" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:300' />	
 		
 
-		<script src="lib/angular.min.js"></script>
-		<script src="lib/mtgApp.js"></script>
-		<script src="lib/mtgAppLogin.js"></script>
-		<script src="lib/mtgAppHome.js"></script>
-		<script src="lib/mtgAppAlert.js"></script>
+		<script src="lib/vendor/angular.min.js"></script>
+		<script src="lib/vendor/angular-sanitize.js"></script>
+		<script src="lib/vendor/require.min.js"></script>
+		<script src="lib/vendor/jquery-1.11.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+		<script src="app/mtgApp.js"></script>
+		<script src="app/modules/mtgAppLogin.js"></script>
+		<script src="app/modules/mtgAppAlert.js"></script>
+		<script src="app/directives/appDirectives.js"></script>
+		<script src="app/controllers/appCtrl.js"></script>
 
 	</head>
 	<body ng-app="mtgApp">
 		<div id="htmlWrapper" ng-controller="mtgAppController">
-			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect()" show-alert="showAlert(msg)"></frame-login>
+			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect(a,b)" show-alert="showAlert(msg)"></frame-login>
 			<frame-alert ng-show="alertShow" alert-show="alertShow" alert-msg="alertMsg"></frame-alert>
-			<frame-home ng-show="isLogged" isLogged="isLogged"></frame-home>
+			<frame-home ng-show="isLogged" isLogged="isLogged" login-disconnect="loginDisconnect()"></frame-home>
 		</div>
 	</body>
 </html>
