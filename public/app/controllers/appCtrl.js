@@ -73,7 +73,7 @@ controllers.libraryCtrl = function( $scope, $http ) {
 		}).
 		success(function(response) {
 			if( response.results )		
-				$scope.results = decodeURIComponent(response.results);
+				$scope.results = response.results;
 		}).
 		error(function(response) {
 	        $scope.codeStatus = response || "Request failed";
