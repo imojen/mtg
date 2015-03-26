@@ -15,11 +15,11 @@ USE `MTG`;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `MTGCARD`
+-- Structure de la table `mtgcard`
 --
 
-DROP TABLE IF EXISTS `MTGCARD`;
-CREATE TABLE IF NOT EXISTS `MTGCARD` (
+DROP TABLE IF EXISTS `mtgcard`;
+CREATE TABLE IF NOT EXISTS `mtgcard` (
   `id` int(11) NOT NULL,
   `multiverseid` int(11) DEFAULT NULL,
   `editionId` int(11) NOT NULL,
@@ -38,27 +38,27 @@ CREATE TABLE IF NOT EXISTS `MTGCARD` (
   `text` varchar(500) DEFAULT NULL,
   `flavor` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IX_MTGCARD_MULTIVERSEID` (`multiverseid`),
-  KEY `IX_MTGCARD_POWER` (`power`,`toughness`,`loyalty`),
-  KEY `IX_MTGCARD_MANACOST` (`cmc`,`manaCost`),
-  KEY `IX_MTGCARD_TYPE` (`type`,`types`(255),`subtypes`(255),`supertypes`(255)),
-  KEY `FK_MTGCARD_EDITIONID` (`editionId`),
-  KEY `IX_MTGCARD_RARITY` (`rarity`(255))
+  KEY `IX_mtgcard_MULTIVERSEID` (`multiverseid`),
+  KEY `IX_mtgcard_POWER` (`power`,`toughness`,`loyalty`),
+  KEY `IX_mtgcard_MANACOST` (`cmc`,`manaCost`),
+  KEY `IX_mtgcard_TYPE` (`type`,`types`(255),`subtypes`(255),`supertypes`(255)),
+  KEY `FK_mtgcard_EDITIONID` (`editionId`),
+  KEY `IX_mtgcard_RARITY` (`rarity`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `MTGEDITION`
+-- Structure de la table `mtgedition`
 --
 
-DROP TABLE IF EXISTS `MTGEDITION`;
-CREATE TABLE IF NOT EXISTS `MTGEDITION` (
+DROP TABLE IF EXISTS `mtgedition`;
+CREATE TABLE IF NOT EXISTS `mtgedition` (
   `id` int(11) NOT NULL,
   `name` varchar(500) DEFAULT NULL,
   `code` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IX_MTGEDITION_CODE` (`code`)
+  KEY `IX_mtgedition_CODE` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
