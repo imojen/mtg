@@ -76,7 +76,7 @@ router.post('/search', function(req, res) {
 	var options = {
 	  host: es.host,
 	  port: es.port,
-	  path: '/mtgcard/_search',
+	  path: '/mtgcard/_search?search_type=dfs_query_then_fetch',
 	  method: 'POST',
 	  headers: headers
 	};
