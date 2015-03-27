@@ -118,95 +118,50 @@
 
 
 
-	<!--
-	<div class="page-header">
-		<h1>Library <small>manage your decks</small></h1>
-	</div>	
+	<div class="popup-layer" ng-show="popup">
+		<div class="popup-wrapper" id="createDeckPopup" ng-show="creatingNewDeck">
+			<div class="popup-title">
+				<span class="title">New deck</span>
+				<span class="glyphicon glyphicon-remove" ng-click="quitCreatingDeck()"></span>
+			</div>
 
-	<div class="container-padding">
-		
+			<div class="popup-body">
+				<p>Fill the following fields in order to create a new deck.</p>
 
-
-
-
-
-
-
-
-
-
-		<div class="row">
-
-
-			<div class="col-md-5 mainColumn">
-				<div class="searchBoxWrapper">
-					
-					<div class="searchBox">
-						<h1>Search cards</h1>
-
-						<div class="searchBar">
-
-							<div class="searchModule">
-								<div class="input-group">
-									<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-									<input type="text" ng-model="stringSearch" class="form-control" aria-label="Search..." placeholder="Search by card name..." ng-keyup="searchCard($event)">
-								</div>	
-							</div>
-
-							<a href="javascript:;">
-								Advanced Search
-								<span class="caret"></span>
-							</a>
-							
+				<form id="formCreateDeck" name="form_create_deck" class="popup-form">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon  input-group-label">Deck name * </div>
+							<input class="form-control" type="text" id="deckName" ng-model="newDeck.deckname">
 						</div>
+					</div>				
+					<p>A comment about that deck :</p>
+					<textarea class="form-control" rows="3"  ng-model="newDeck.comment"></textarea>
+				</form>
 
-						<div class="resultsCount"></div>
+				<p class="right">
+					<button type="button" class="btn btn-default" ng-click="newDeckCreation()">Create</button>
+				</p>
 
-						<div class="tableResultsWrapper">
-							<table id="tableResults">
-								<thead>
-									<th style="width:40%">Name <span class="caret"></span></th>
-									<th style="width:20%" class="center">Mana Cost</th>
-									<th style="width:10%" class="center">P/T</th>
-									<th style="width:30%">Types</th>
-								</thead>
-								<tbody>
-									<tr ng-repeat="card in results" ng-class="{selected:cardSlected==card.id}" ng-click="cardSelect(card.id, card.mid)" >
-										<td>{{card.name}}</td>
-										<td class="center" ng-bind-html="getManaCost( card.mana );"></td>
-										<td class="center">{{card.pt}}</td>
-										<td>{{card.type}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						
-						
-					</div>
-
-				</div>
 			</div>
 
-			<div class="col-md-2 mainColumn" style="min-width: 269px;">
-				<div class="imgPreviewWrapper">
-					<a href="javascript:;" target="_blank">
-						<img src="{{previewUrl}}" id="imgPreview"/>
-					</a>
-				</div>
-			</div>
-
-			<div class="col-md-5 mainColumn">
-				<div class="deckBoxWrapper">
-					<h1>Decks</h1>
-
-				</div>							
-			</div>
-
-		</div>
-		
-
-
+		</div>		
 	</div>
-	-->
+
+
+
+
+
+
+
+
+
+
 
 </div>
+
+
+
+
+
+

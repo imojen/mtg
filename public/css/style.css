@@ -39,6 +39,9 @@ a {
 .center {
 	text-align: center;
 }
+.right {
+	text-align: right;
+}
 
 
 
@@ -88,6 +91,91 @@ a {
 	line-height: 25px;
 	font-size: 12px;
 }
+
+
+/** layer **/
+#main-body .popup-layer {
+	position: fixed !important;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: url(../images/tpl/textures/00.png);
+	overflow: hidden;
+	z-index: 9999;	
+}
+#main-body .popup-wrapper {
+	min-width: 500px;
+	min-height: 300px;
+	background: #0c0e11;
+	position: fixed !important;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -150px;
+	z-index: 10000;	
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+  	box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+}
+#main-body .popup-title {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 10px;
+	background: #2D384D;
+}
+#main-body .popup-title span.title {
+	color: #fff;
+	font-size: 22px;
+}
+#main-body .popup-title span.glyphicon {
+	float: right;
+	line-height: 40px;
+	font-size: 15px;
+	padding-left: 10px;	
+	cursor: pointer;
+}
+#main-body .popup-title span.glyphicon:hover {
+	color :orange;
+}
+#main-body .popup-body {
+	padding: 5px 0;
+	text-align: center;
+	font-size: 12px;
+}
+#main-body .popup-body p {
+	width: 95%;
+}
+#main-body .popup-form {
+	width: 95%;
+	margin: 5px auto;
+}
+#main-body .popup-form .input-group {
+	width: 100%;
+}
+#main-body .popup-form textarea {
+	background: #1c212a;
+	color: #fff;
+	border-color: #1c212a;	
+}
+#main-body .popup-body button.btn-default {
+	width: 150px;
+	margin-top: 10px;
+	background: #2D384D;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -349,7 +437,6 @@ input.sign-up-input-checkbox {
 	text-shadow: 0 0 transparent;
 	width: inherit;
 	outline: 0 none;
-
 }
 #main-body input.form-control {
 	border-color: #1c212a;

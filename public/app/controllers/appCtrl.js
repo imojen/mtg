@@ -110,8 +110,26 @@ controllers.libraryCtrl = function( $scope, $http ) {
 		return decodeURIComponent(str);
 	}
 
+	$scope.popup = false;
+	$scope.creatingNewDeck = false;
+	$scope.newDeck = { deckname : '', comment : ''};
 	$scope.newDeck = function() {
-
+		if( $scope.popup || $scope.creatingNewDeck )
+			return;
+		$scope.popup = true;
+		$scope.creatingNewDeck = true;
+		$scope.newDeck.deckname = '';
+		$scope.newDeck.comment = '';
+	}
+	$scope.quitCreatingDeck = function() {
+		$scope.popup = false;
+		$scope.creatingNewDeck = false;
+	}
+	$scope.newDeckCreation = function() {
+		if( $scope.newDeck.deckname.length < 4 ) {
+			//$scope.showAlert({ msg : "Deck name must contain at least 4 letters."});
+			return false;
+		}
 	}
 
 }
