@@ -8,7 +8,7 @@ mtgApp.controller("mtgAppController",function( $scope, $http ) {
 	$scope.isConnecteduser = function() {
 		var method = 'POST';
 		//TODO REMOVE LOCALHOST !!!
-		var inserturl = 'http://localhost:1337/login/isConnected';
+		var inserturl = './login/isConnected';
 		$http({
 		    method: method,
 		    url: inserturl,

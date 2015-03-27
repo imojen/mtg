@@ -40,7 +40,7 @@ angular.module("mtgAppLogin", [] )
 			$scope.httpLogin = function() {
 				var method = 'POST';
 				//TODO REMOVE LOCALHOST !!!
-				var inserturl = 'http://localhost:1337/login';
+				var inserturl = './login';
 				var nodeDatas = {
 				      'login' : $scope.loginInfos.login,
 				      'pass' : $scope.loginInfos.pass,
@@ -115,7 +115,7 @@ angular.module("mtgAppLogin", [] )
 			$scope.signUpNode = function() {
 				var method = 'POST';
 				//TODO REMOVE LOCALHOST !!!
-				var inserturl = 'http://localhost:1337/login/signup';
+				var inserturl = './login/signup';
 				var nodeDatas = {
 				      'login' : $scope.signUpInfos.login,
 				      'mail' : $scope.signUpInfos.mail,

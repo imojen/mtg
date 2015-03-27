@@ -81,7 +81,7 @@ controllers.libraryCtrl = function( $scope, $http ) {
 			return false;
 		var method = 'POST';
 		//TODO REMOVE LOCALHOST !!!
-		var inserturl = 'http://localhost:1337/cards/search';
+		var inserturl = './cards/search';
 		var nodeDatas = {
 		      'str' : $scope.stringSearch,
 		    };

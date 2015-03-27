@@ -2,12 +2,16 @@ var mysql      = require('mysql');
 var express = require('express');
 var router = express.Router();
 
+var config = require("../conf/config");
+db = config.database;
+es = config.elastic;
+
 
 /** Mysql **/
 //TODO REMOVE LOCALHOST !!!
-var mysqlHost = 'localhost',
-    mysqlUser = 'mtg',
-    mysqlPass = 'lolilol';
+var mysqlHost = db.host,
+    mysqlUser = db.user,
+    mysqlPass = db.password;
 var connection = mysql.createConnection({
   host     : mysqlHost,
   user     : mysqlUser,

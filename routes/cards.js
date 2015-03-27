@@ -3,13 +3,16 @@ var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
 var router = express.Router();
+var config = require("../conf/config");
+db = config.database;
+es = config.elastic;
 
 
 /** Mysql **/
 //TODO REMOVE LOCALHOST !!!
-var mysqlHost = 'localhost',
-    mysqlUser = 'mtg',
-    mysqlPass = 'lolilol';
+var mysqlHost = db.host,
+    mysqlUser = db.user,
+    mysqlPass = db.password;
 var connection = mysql.createConnection({
   host     : mysqlHost,
   user     : mysqlUser,
@@ -50,8 +53,8 @@ router.post('/search', function(req, res) {
 	};
 //TODO REMOVE LOCALHOST !!!
 	var options = {
-	  host: 'localhost',
-	  port: 9200,
+	  host: es.host,
+	  port: es.port,
 	  path: '/mtgcard/_search',
 	  method: 'POST',
 	  headers: headers

@@ -12,6 +12,7 @@ var pages = require('./routes/pages');
 var cards = require('./routes/cards');
 var login = require('./routes/login');
 var quit = require('./routes/quit');
+var config = require("./conf/config");
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'conf')));
 
 // Session | store a cookie exemple : res.cookie(name, value, { expire : new Date() + 3600, maxAge : 3600 } );
 app.use(session({ secret : 'bebert noob', resave : true, saveUninitialized : true }));
