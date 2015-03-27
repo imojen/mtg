@@ -9,8 +9,8 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 --
 -- Base de données :  `MTG`
 --
-CREATE DATABASE IF NOT EXISTS `MTG` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `MTG`;
+CREATE DATABASE IF NOT EXISTS `mtg` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `mtg`;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,6 @@ CREATE TABLE `mtg`.`mtgdeck` (
   `name` VARCHAR(60) NOT NULL DEFAULT 'my deck',
   `comment` VARCHAR(300) NULL,
   `created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated` TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
   `deleted` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`, `id_mtgusers`))
 ENGINE = InnoDB
