@@ -8,7 +8,7 @@
 			"analyzer" : {
 				"default" : {
 					"type" : "custom",
-					"tokenizer" : "standard",
+					"tokenizer" : "classic",
 					"filter" : ["lowercase", "en_synonyms_file", "en_lemmatization", "en_stopwords", "asciifolding", "en_elision"]
 				},
 				"exact" : {
@@ -50,8 +50,8 @@
 					"stopwords" : ["_english_"]
 				},
 				"en_lemmatization" : {
-					"type" : "snowball",
-					"name" : "english"
+					"type" : "classic",
+					"language" : "English"
 				},
 				"en_elision" : {
 					"type" : "elision",
