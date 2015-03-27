@@ -41,10 +41,28 @@ router.post('/search', function(req, res) {
 
 
 	// Elastic search
-	var qES = { fields : ["_id"], query: {bool: {must: [{query_string: {default_field: "mtgcard.name",query: str}}]}},size : 30};
+	var qES = { fields : ["_id"], query: {bool: {must: [{query_string: {default_field: "mtgcard.name",query: str}}]}},size : 30,
+			  "aggs": {
+				    "types": {
+				      "terms": {
+				        "field": "types"
+				      }
+				    },
+				    "supertypes": {
+				      "terms": {
+				        "field": "supertypes"
+				      }
+				    },
+				    "subtypes": {
+				      "terms": {
+				        "field": "subtypes"
+				      }
+				    }
+				  }};
 
-
+	
 	var qESstring = JSON.stringify(qES);
+//	console.log(qESstring);
 	//var qESstring = qES;
 
 	var headers = {
@@ -67,7 +85,7 @@ router.post('/search', function(req, res) {
 
 		response.on('data', function(datas) {
 			responseString += datas;
-			// console.log(datas); // elastic return
+//			 console.log(datas); // elastic return
 			var d = JSON.parse(datas);	
 			var hits = d.hits.hits;
 			max = d.hits.total;
@@ -89,8 +107,8 @@ router.post('/search', function(req, res) {
 				res.end();	
 				return;
 			}		
-			var q = "SELECT *,a.id AS 'idcard',a.name AS 'card', b.name AS 'edition'  FROM mtg.mtgcard a LEFT JOIN mtg.mtgedition b ON a.editionId = b.id WHERE a.id IN ("+ids.join(",")+") AND lower(a.name) LIKE ? AND a.multiverseid IS NOT NULL";
-			connection.query(q, '%'+nodeDatas.str+'%' ,
+			var q = "SELECT *,a.id AS 'idcard',a.name AS 'card', b.name AS 'edition'  FROM mtg.mtgcard a LEFT JOIN mtg.mtgedition b ON a.editionId = b.id WHERE a.id IN ("+ids.join(",")+") AND a.multiverseid IS NOT NULL ORDER BY FIELD(a.id,"+ids.join(",")+")";
+			connection.query(q,
 				function(err, rows, fields) {
 					if (err) console.log(err);
 					else {
