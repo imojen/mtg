@@ -44,13 +44,11 @@ controllers.libraryCtrl = function( $scope, $http ) {
 
 	$scope.cardSelect = function( id, multiversId ) {
 		$scope.cardSlected = id;
+		$scope.previewUrl = 'images/default.jpg';
+		$scope.linkToImg = '#';		
 		if( multiversId != null ) {
 			$scope.previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiversId+'&type=card';
 			$scope.linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiversId;
-		}
-		else {
-			$scope.previewUrl = 'images/default.jpg';	
-			$scope.linkToImg = '#';
 		}
 		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiversId+'.jpeg';
 	}
@@ -75,7 +73,7 @@ controllers.libraryCtrl = function( $scope, $http ) {
 			return;
 		$scope.timeOut = setTimeout(function() {
 			$scope.httpSearch();
-		},200);
+		},500);
 	}
 
 	$scope.httpSearch = function() {

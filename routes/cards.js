@@ -38,7 +38,7 @@ router.post('/search', function(req, res) {
 
 
 	// Elastic search
-	var qES = {query: {bool: {must: [{query_string: {default_field: "mtgcard.name",query: str}}]}},size : 50};
+	var qES = { fields : ["_id"], query: {bool: {must: [{query_string: {default_field: "mtgcard.name",query: str}}]}},size : 30};
 
 
 	var qESstring = JSON.stringify(qES);
@@ -64,6 +64,7 @@ router.post('/search', function(req, res) {
 
 		response.on('data', function(datas) {
 			responseString += datas;
+			// console.log(datas); // elastic return
 			var d = JSON.parse(datas);	
 			var hits = d.hits.hits;
 			max = d.hits.total;
