@@ -23,7 +23,7 @@
 			"filter" : {
 				"fr_stopwords" : {
 					"type" : "stop",
-					"stopwords" : ["_french_"]
+					"stopwords" : "_french_"
 				},
 				"fr_lemmatization" : {
 					"type" : "snowball",
@@ -47,7 +47,7 @@
 				},
 				"en_stopwords" : {
 					"type" : "stop",
-					"stopwords" : ["_english_"]
+					"stopwords" : "_english_"
 				},
 				"en_lemmatization" : {
 					"type" : "classic",
