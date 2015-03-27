@@ -1,11 +1,140 @@
 <div id="library"  ng-controller="libraryCtrl">
 
 
+	<div class="librarySearchWrapper">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Library</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<p class="navbar-text">Search : </p>
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Card name..." ng-model="stringSearch" ng-keyup="searchCard($event)">
+						</div>
+					</form>
+					<p class="navbar-text">{{total}} results for current search (max on screen : 50)</p>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Advanced search <span class="caret"></span></a></li>
+					</ul>					
+				</div>
+			</div>
+		</nav>
+
+
+		<div class="librarySearchresultsWrapper">
+			<table class="librarySearchresultsTable">
+				<tr>
+					<td>
+						<div class="tableResultsWrapper wrapperScroll">
+						    <table class="headers scrollItem" >
+						        <thead>
+						            <tr>
+										<th>Name <span class="caret"></span></th>
+										<th class="center">Mana Cost</th>
+										<th class="center">P/T</th>
+										<th class="center">Loyalty</th>
+										<th>Types</th>
+										<th>Edition</th>
+						            </tr>
+						        </thead>
+						    </table>						
+							<table id="tableResults" class="floatHead">
+								<tbody>
+									<tr ng-repeat="card in results" ng-class="{selected:cardSlected==card.id}" ng-click="cardSelect(card.id, card.mid)" >
+										<td ng-bind-html="decode( card.name );"></td>
+										<td class="center" ng-bind-html="getManaCost( card.mana );"></td>
+										<td class="center">{{card.pt}}</td>
+										<td class="center">{{card.loyalty}}</td>
+										<td>{{card.type}}</td>
+										<td ng-bind-html="decode( card.edition );"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</td>
+					<td class="previewTD">
+						<div class="imgPreviewWrapper">
+							<a href="{{linkToImg}}" target="_blank">
+								<img src="{{previewUrl}}" id="imgPreview"/>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">My deck</a>
+
+
+					
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<button type="button" class="btn btn-default navbar-btn">Open</button>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><button type="button" class="btn btn-default navbar-btn" ng-click="newDeck()">New deck</button></li>
+					</ul>
+				</div>
+
+				
+			</div>
+		</nav>
+
+		<div class="libraryDeckWrapper">
+			<div class="createDeckWrapper">
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+
+
+
+
+
+
+	<!--
 	<div class="page-header">
 		<h1>Library <small>manage your decks</small></h1>
 	</div>	
 
 	<div class="container-padding">
+		
+
+
+
+
+
+
+
+
+
+
 		<div class="row">
 
 
@@ -31,7 +160,7 @@
 							
 						</div>
 
-						<div class="resultsCount">{{total}} results for current search (max on screen : 20)</div>
+						<div class="resultsCount"></div>
 
 						<div class="tableResultsWrapper">
 							<table id="tableResults">
@@ -74,6 +203,10 @@
 			</div>
 
 		</div>
+		
+
+
 	</div>
+	-->
 
 </div>

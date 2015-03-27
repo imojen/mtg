@@ -88,3 +88,19 @@ CREATE TABLE `mtgusers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
+--
+-- Structure de la table `mtgdeck`
+--
+CREATE TABLE `mtg`.`mtgdeck` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_mtgusers` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(60) NOT NULL DEFAULT 'my deck',
+  `comment` VARCHAR(300) NULL,
+  `created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted` INT NULL DEFAULT 0,
+  PRIMARY KEY (`id`, `id_mtgusers`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;

@@ -314,39 +314,30 @@ input.sign-up-input-checkbox {
 	color: #fff;
 	overflow: auto;
 }
-#main-body div.page-header {
-	margin-top: 0px;
-}
-#main-body div.page-header h1 {
-	padding-left: 20px;
-}
-#main-body div.container-padding {
-	padding: 0 20px 0 20px;
-}
 
-#main-body div.mainColumn {
-	min-height: 500px;
-}
+/** Library **/
 
-#main-body div.searchBar {
+#main-body #library {
+	min-height: 670px;
 	width: 100%;
-	line-height: 50px;
 }
-#main-body div.searchBar div.searchModule {
-	display: inline-block;
-	width: 350px;
-	vertical-align: middle;
+#main-body #library .librarySearchWrapper {
+	width: 100%;
+	min-width: 670px;
+	min-height: 670px;
+	position :relative;
 }
-#main-body div.searchBar div.input-group {
-	width: 350px;
+#main-body nav.navbar {
+	margin-bottom: 0px;
+	border-radius: 0;
+	background: #2D384D;
+	border: 0 none;
+	color: #FFF;
 }
-#main-body div.searchBar a {
-	display: inline-block;
-	color: orange;
-	vertical-align: middle;
-	margin-left: 20px;
+#main-body nav.navbar p,
+#main-body nav.navbar a {
+	color: #fff;
 }
-
 #main-body .input-group-addon,
 #main-body .btn {
 	width: 60px;
@@ -354,54 +345,83 @@ input.sign-up-input-checkbox {
 	color: #fff;
 	border-color: #1c212a;
 }
+#main-body .btn-default {
+	text-shadow: 0 0 transparent;
+	width: inherit;
+	outline: 0 none;
+
+}
 #main-body input.form-control {
 	border-color: #1c212a;
 	background: #1c212a;	
 	color: #fff;
 }
-#main-body div.resultsCount {
-	margin: 5px 0;
-	text-align: center;
-	font-size: 12px;
-	color: #fff;
-	background: #0c0e11;
-	line-height: 25px;
-}
-
-#main-body div.tableResultsWrapper {
-	margin: 15px 0;
-}
-#main-body div.tableResultsWrapper table#tableResults {
+#main-body #library .librarySearchresultsWrapper,
+#main-body #library .libraryDeckWrapper {
+	height: 320px;
 	width: 100%;
-
+	position: relative;
 }
-#main-body div.tableResultsWrapper table#tableResults thead {
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable {
+	width: 100%;
+	height: 320px;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable td {
+	vertical-align: top;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable td.previewTD {
+	width:242px;
+	vertical-align: middle;
+	background: #fff;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.imgPreviewWrapper {
+	text-align: center;
+	vertical-align: middle;
+}
+#main-body #library .tableResultsWrapper {
+	height: 320px;
+	overflow-y: scroll;
+	position: relative;
+	width: 100%;
+}
+#main-body #library .tableResultsWrapper table {
+	width: 100%;
+	margin: 0;
+	table-layout: fixed;
+	border-collapse: collapse;	
+}
+#main-body #library .tableResultsWrapper  table.headers {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+#main-body #library table#tableResults {
+	width: 100%;
+	margin-top: 30px;
+}
+#main-body #library table.headers thead {
 	background: #0c0e11;
 }
-#main-body div.tableResultsWrapper table#tableResults thead th {
+#main-body #library table.headers thead th {
 	line-height: 30px;
 	font-size: 14px;
 	padding-left: 10px;
 }
-#main-body div.tableResultsWrapper table#tableResults tbody tr {
+#main-body #library table#tableResults tbody tr {
 	background: #1c212a;
 }
-#main-body div.tableResultsWrapper table#tableResults tbody tr:hover,
-#main-body div.tableResultsWrapper table#tableResults tbody tr.selected {
+#main-body #library table#tableResults tbody tr:hover,
+#main-body #library table#tableResults tbody tr.selected {
 	cursor: pointer;
-	background: orange;
+	background: #2D384D;
 }
-#main-body div.tableResultsWrapper table#tableResults tbody tr td {
+#main-body #library table#tableResults tbody tr td {
 	padding-left: 5px;
 	line-height: 28px;
 	font-size: 12px;
+	height: 28px;
 }
-#main-body div.imgPreviewWrapper {
-	padding: 3px;
-	background: #fff;
-	text-align: center;
-}
-
 
 
 
