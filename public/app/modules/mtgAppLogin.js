@@ -5,9 +5,8 @@ angular.module("mtgAppLogin", [] )
 		templateUrl : 'views/login.html',
 		scope : {
 			loginConnect : "&",
-			showAlert : "&",
 		},		
-		controller : function($scope, $http) {
+		controller : function($rootScope, notification, $scope, $http) {
 
 			$scope.loginInfos = [{ "login" : null, "pass" : null }];
 
@@ -24,11 +23,11 @@ angular.module("mtgAppLogin", [] )
 				// Tests de connexion
 
 				if( !$scope.loginInfos.login ) {
-					$scope.showAlert({ msg : "Wrong login or password"});
+					notification.showAlert("Wrong login or password");
 					return false;
 				}
 				if( !$scope.loginInfos.pass ) {
-					$scope.showAlert({ msg : "Wrong login or password"});
+					notification.showAlert("Wrong login or password");
 					return false;
 				}
 
@@ -59,7 +58,7 @@ angular.module("mtgAppLogin", [] )
 						$scope.loginConnect({login : response.login, pseudo : response.pseudo});
 					}
 					else {
-						$scope.showAlert({ msg : "Wrong login or password"});
+						notification.showAlert("Wrong login or password");
 						return false;
 					}
 						
@@ -74,7 +73,7 @@ angular.module("mtgAppLogin", [] )
 
 			// Login guest
 			$scope.loginGuest = function() {
-				$scope.showAlert({ msg : "Not developped yet..."});
+				notification.showAlert("Not developped yet...");
 				return false;
 			}
 
@@ -92,17 +91,17 @@ angular.module("mtgAppLogin", [] )
 			$scope.trySignUp = function() {
 				// Tests
 				if( !$scope.signUpInfos.login || !$scope.signUpInfos.mail || !$scope.signUpInfos.pass || !$scope.signUpInfos.pass2 ) {
-					$scope.showAlert({ msg : "You must fill all the fields in order to complete your registration."});
+					notification.showAlert("You must fill all the fields in order to complete your registration.");
 					return false;					
 				}
         		var regExpValidEmail = new RegExp("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$", "gi");
 				if ( !$scope.signUpInfos.mail.match(regExpValidEmail)) {
-					$scope.showAlert({ msg : "Please enter a valid mail adress."});
+					notification.showAlert("Please enter a valid mail adress.");
 					document.getElementById("sign-up-mail").focus();
 					return;
 				}				
 				if( $scope.signUpInfos.pass != $scope.signUpInfos.pass2 ) {
-					$scope.showAlert({ msg : "Password confirmation failed"});
+					notification.showAlert("Password confirmation failed");
 					document.getElementById("sign-up-pass2").focus();
 					return false;										
 				}
@@ -139,20 +138,17 @@ angular.module("mtgAppLogin", [] )
 						$scope.loginConnect();
 					}
 					else {
-						$scope.showAlert({ msg : response.errMsg });
+					 	notification.showAlert(response.errMsg);
 						return false;
 					}
 						
 				}).
 				error(function(response) {
 			        $scope.codeStatus = response || "Request failed";
-			        $scope.showAlert({ msg : $scope.codeStatus });
+  					notification.showAlert($scope.codeStatus);
 					return false;
 				});				
 			}
-
-
-
 		}
 	}
 });

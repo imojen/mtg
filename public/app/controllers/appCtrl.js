@@ -16,7 +16,7 @@ controllers.homeCtrl = function( $scope, $http ) {
 
 }
 
-controllers.libraryCtrl = function( $scope, $http ) {
+controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 	/*$scope.results = [
 		{ "id" : 18794, "mid" : 193452, "name" : "Emrakul, the Aeons Torn", "mana" : '15', "pt" : '15/15', "type": 'Legendary Creature - Eldrazi'},
@@ -41,6 +41,9 @@ controllers.libraryCtrl = function( $scope, $http ) {
 		}
 	});
 
+	$scope.showAlert = function(str) {
+		notification.showAlert(str);
+	};
 
 	$scope.cardSelect = function( id, multiversId ) {
 		$scope.cardSlected = id;
@@ -126,7 +129,7 @@ controllers.libraryCtrl = function( $scope, $http ) {
 	}
 	$scope.newDeckCreation = function() {
 		if( $scope.newDeck.deckname.length < 4 ) {
-			//$scope.showAlert({ msg : "Deck name must contain at least 4 letters."});
+			notification.showAlert("Deck name must contain at least 4 letters.");
 			return false;
 		}
 	}

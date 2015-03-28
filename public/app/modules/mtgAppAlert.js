@@ -7,8 +7,8 @@ angular.module("mtgAppAlert", [] )
 			alertMsg : "=alertMsg",
 			alertShow : "=alertShow",
 		},		
-		controller : function( $scope ) {
-
+		controller : function(notification, $scope ) {
+			$scope.notification = notification;
 			$scope.hideAlert = function() {
 				$scope.alertMsg = "";
 				$scope.alertShow = false;
