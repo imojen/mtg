@@ -91,44 +91,9 @@ router.post('/search', function(req, res) {
 		var responseString = '';
 
 		response.on('data', function(datas) {
-			try{
-				responseString += datas;
-//			 console.log(datas); // elastic return
-				var d = JSON.parse(datas);	
-				var hits = d.hits.hits;
-				var agg = d.aggregations;
-				max = d.hits.total;
-				for( var i in hits ){
-					ids.push(hits[i]["_id"]);
-				}
-				
-				var buckets = agg.subtypes.buckets;
-				for( var i in agg.subtypes.buckets ){
-					var valPush={ };
-					valPush.key=buckets[i]["key"];
-					valPush.count=buckets[i]["doc_count"];				
-					facetSubTypes.push(valPush);
-				}
-				
-				var buckets = agg.supertypes.buckets;
-				for( var i in agg.supertypes.buckets ){
-					var valPush={ };
-					valPush.key=buckets[i]["key"];
-					valPush.count=buckets[i]["doc_count"];				
-					facetSuperTypes.push(valPush);
-				}
-				
-				var buckets = agg.types.buckets;
-				for( var i in agg.types.buckets ){
-					var valPush={ };
-					valPush.key=buckets[i]["key"];
-					valPush.count=buckets[i]["doc_count"];				
-					facetTypes.push(valPush);
-				}
 			
-			}catch(e){
-				console.log(e);
-			}
+				responseString += datas;
+//			 console.log(datas); // elastic return		
 			
 		});
 
@@ -141,6 +106,40 @@ router.post('/search', function(req, res) {
 
 
 		response.on('end', function() {
+			
+			var d = JSON.parse(responseString);	
+			var hits = d.hits.hits;
+			var agg = d.aggregations;
+			max = d.hits.total;
+			for( var i in hits ){
+				ids.push(hits[i]["_id"]);
+			}
+			
+			var buckets = agg.subtypes.buckets;
+			for( var i in agg.subtypes.buckets ){
+				var valPush={ };
+				valPush.key=buckets[i]["key"];
+				valPush.count=buckets[i]["doc_count"];				
+				facetSubTypes.push(valPush);
+			}
+			
+			var buckets = agg.supertypes.buckets;
+			for( var i in agg.supertypes.buckets ){
+				var valPush={ };
+				valPush.key=buckets[i]["key"];
+				valPush.count=buckets[i]["doc_count"];				
+				facetSuperTypes.push(valPush);
+			}
+			
+			var buckets = agg.types.buckets;
+			for( var i in agg.types.buckets ){
+				var valPush={ };
+				valPush.key=buckets[i]["key"];
+				valPush.count=buckets[i]["doc_count"];				
+				facetTypes.push(valPush);
+			}
+			
+			
 			if( ids.length == 0 ) {
 				res.write('{"results" : [], "total": 0 }');
 				res.end();	
