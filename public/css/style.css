@@ -465,6 +465,9 @@ input.sign-up-input-checkbox {
 	text-align: center;
 	vertical-align: middle;
 }
+img#imgPreview {
+	max-height: 310px;
+}
 #main-body #library .tableResultsWrapper {
 	height: 320px;
 	overflow-y: scroll;
