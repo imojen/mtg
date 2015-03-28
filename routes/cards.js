@@ -45,6 +45,10 @@ router.post('/search', function(req, res) {
 
 	// Elastic search
 	var qES = { fields : ["_id"], query: {bool: {must: [{query_string: {default_field: "mtgcard.name",query: str}}]}},size : 30,
+			  "sort": [
+			           "_score",
+			           "mtgcard.name"
+			         ],
 			  "aggs": {
 				    "types": {
 				      "terms": {
@@ -76,7 +80,7 @@ router.post('/search', function(req, res) {
 	var options = {
 	  host: es.host,
 	  port: es.port,
-	  path: '/mtgcard/_search?search_type=dfs_query_then_fetch',
+	  path: '/mtgcard/_search?',
 	  method: 'POST',
 	  headers: headers
 	};
@@ -87,38 +91,43 @@ router.post('/search', function(req, res) {
 		var responseString = '';
 
 		response.on('data', function(datas) {
-			responseString += datas;
+			try{
+				responseString += datas;
 //			 console.log(datas); // elastic return
-			var d = JSON.parse(datas);	
-			var hits = d.hits.hits;
-			var agg = d.aggregations;
-			max = d.hits.total;
-			for( var i in hits ){
-				ids.push(hits[i]["_id"]);
-			}
+				var d = JSON.parse(datas);	
+				var hits = d.hits.hits;
+				var agg = d.aggregations;
+				max = d.hits.total;
+				for( var i in hits ){
+					ids.push(hits[i]["_id"]);
+				}
+				
+				var buckets = agg.subtypes.buckets;
+				for( var i in agg.subtypes.buckets ){
+					var valPush={ };
+					valPush.key=buckets[i]["key"];
+					valPush.count=buckets[i]["doc_count"];				
+					facetSubTypes.push(valPush);
+				}
+				
+				var buckets = agg.supertypes.buckets;
+				for( var i in agg.supertypes.buckets ){
+					var valPush={ };
+					valPush.key=buckets[i]["key"];
+					valPush.count=buckets[i]["doc_count"];				
+					facetSuperTypes.push(valPush);
+				}
+				
+				var buckets = agg.types.buckets;
+				for( var i in agg.types.buckets ){
+					var valPush={ };
+					valPush.key=buckets[i]["key"];
+					valPush.count=buckets[i]["doc_count"];				
+					facetTypes.push(valPush);
+				}
 			
-			var buckets = agg.subtypes.buckets;
-			for( var i in agg.subtypes.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetSubTypes.push(valPush);
-			}
-			
-			var buckets = agg.supertypes.buckets;
-			for( var i in agg.supertypes.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetSuperTypes.push(valPush);
-			}
-			
-			var buckets = agg.types.buckets;
-			for( var i in agg.types.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetTypes.push(valPush);
+			}catch(e){
+				console.log(e);
 			}
 			
 		});
