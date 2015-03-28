@@ -118,6 +118,7 @@ controllers.libraryCtrl = function( $scope, $http ) {
 		$scope.creatingNewDeck = true;
 		$scope.newDeck.deckname = '';
 		$scope.newDeck.comment = '';
+		setTimeout(function(){$("#deckName").focus();},50);
 	}
 	$scope.quitCreatingDeck = function() {
 		$scope.popup = false;
