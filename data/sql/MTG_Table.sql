@@ -124,7 +124,7 @@ COLLATE = utf8_general_ci;
 CREATE TABLE `mtg`.`mtgcardslegalities` (
   `id_cards` int(11) NOT NULL,
   `id_legalities` INT UNSIGNED NOT NULL,
-  CONSTRAINT `FK_mtgcard_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
+  CONSTRAINT `FK_mtgcardlegalitie_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
   CONSTRAINT `FK_mtglegalities_id` FOREIGN KEY (`id_legalities`) REFERENCES mtglegalities(id))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -145,7 +145,7 @@ COLLATE = utf8_general_ci;
 CREATE TABLE `mtg`.`mtgcardscolors` (
   `id_cards` int(11) NOT NULL,
   `id_colors` INT UNSIGNED NOT NULL,
-  CONSTRAINT `FK_mtgcard_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
+  CONSTRAINT `FK_mtgcardcolor_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
   CONSTRAINT `FK_mtgcolors_id` FOREIGN KEY (`id_colors`) REFERENCES mtgcolors(id))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
