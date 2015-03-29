@@ -22,8 +22,6 @@ module.exports = {
 		
 		sqlQuery : function(q, callback) {
 
-//	console.log(connection);
-	//console.log(q);
 		connection.query(q, function(err, rows, fields) {
 			if (err) {
 				console.log(err);
