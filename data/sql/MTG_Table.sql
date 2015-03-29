@@ -17,8 +17,32 @@ USE `mtg`;
 --
 -- Structure de la table `mtgcard`
 --
-
+DROP TABLE IF EXISTS `mtgcardslegalities`;
+DROP TABLE IF EXISTS `mtglegalities`;
 DROP TABLE IF EXISTS `mtgcard`;
+DROP TABLE IF EXISTS `mtgedition`;
+DROP TABLE IF EXISTS `mtgdeck`;
+DROP TABLE IF EXISTS `mtgusers`;
+
+--
+-- Structure de la table `mtgedition`
+--
+
+CREATE TABLE IF NOT EXISTS `mtgedition` (
+  `id` int(11) NOT NULL,
+  `name` varchar(500) DEFAULT NULL,
+  `code` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IX_mtgedition_CODE` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------
+
+
 CREATE TABLE IF NOT EXISTS `mtgcard` (
   `id` int(11) NOT NULL,
   `multiverseid` int(11) DEFAULT NULL,
@@ -34,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `mtgcard` (
   `supertypes` varchar(1000) DEFAULT NULL,
   `types` varchar(1000) DEFAULT NULL,
   `subtypes` varchar(1000) DEFAULT NULL,
-  `legalities` varchar(2000) DEFAULT NULL,
   `text` varchar(2000) DEFAULT NULL,
   `flavor` varchar(2000) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -42,28 +65,9 @@ CREATE TABLE IF NOT EXISTS `mtgcard` (
   KEY `IX_mtgcard_POWER` (`power`,`toughness`,`loyalty`),
   KEY `IX_mtgcard_MANACOST` (`cmc`,`manaCost`),
   KEY `IX_mtgcard_TYPE` (`type`,`types`(255),`subtypes`(255),`supertypes`(255)),
-  KEY `FK_mtgcard_EDITIONID` (`editionId`),
+  CONSTRAINT `FK_mtgcard_EDITIONID` FOREIGN KEY (`editionId`) REFERENCES mtgedition(id),
   KEY `IX_mtgcard_RARITY` (`rarity`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `mtgedition`
---
-
-DROP TABLE IF EXISTS `mtgedition`;
-CREATE TABLE IF NOT EXISTS `mtgedition` (
-  `id` int(11) NOT NULL,
-  `name` varchar(500) DEFAULT NULL,
-  `code` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IX_mtgedition_CODE` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 -- --------------------------------------------------------
 
@@ -71,7 +75,6 @@ CREATE TABLE IF NOT EXISTS `mtgedition` (
 -- Structure de la table `mtgusers`
 --
 
-DROP TABLE IF EXISTS `mtgusers`;
 CREATE TABLE `mtgusers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `login` varchar(45) DEFAULT NULL,
@@ -99,7 +102,32 @@ CREATE TABLE `mtg`.`mtgdeck` (
   `comment` VARCHAR(300) NULL,
   `created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` INT NULL DEFAULT 0,
-  PRIMARY KEY (`id`, `id_mtgusers`))
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_mtguser_ID` FOREIGN KEY (`id_mtgusers`) REFERENCES mtgusers(id))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
+--
+-- Structure de la table `mtglegalities`
+--
+CREATE TABLE `mtg`.`mtglegalities` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `format` VARCHAR(300) NULL,
+  `legality` VARCHAR(300) NULL,
+  PRIMARY KEY (`id`),
+  KEY `IX_mtglegalities_FORMAT` (`format`(255)))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE `mtg`.`mtgcardslegalities` (
+  `id_cards` int(11) NOT NULL,
+  `id_legalities` INT UNSIGNED NOT NULL,
+  CONSTRAINT `FK_mtgcard_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
+  CONSTRAINT `FK_mtglegalities_id` FOREIGN KEY (`id_legalities`) REFERENCES mtglegalities(id))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+commit;
