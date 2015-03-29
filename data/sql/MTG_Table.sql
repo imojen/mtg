@@ -17,12 +17,12 @@ USE `mtg`;
 --
 -- Structure de la table `mtgcard`
 --
+DROP TABLE IF EXISTS `mtgcardscolors`;
+DROP TABLE IF EXISTS `mtgcolors`;
 DROP TABLE IF EXISTS `mtgcardslegalities`;
 DROP TABLE IF EXISTS `mtglegalities`;
 DROP TABLE IF EXISTS `mtgcard`;
 DROP TABLE IF EXISTS `mtgedition`;
-DROP TABLE IF EXISTS `mtgdeck`;
-DROP TABLE IF EXISTS `mtgusers`;
 
 --
 -- Structure de la table `mtgedition`
@@ -126,6 +126,27 @@ CREATE TABLE `mtg`.`mtgcardslegalities` (
   `id_legalities` INT UNSIGNED NOT NULL,
   CONSTRAINT `FK_mtgcard_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
   CONSTRAINT `FK_mtglegalities_id` FOREIGN KEY (`id_legalities`) REFERENCES mtglegalities(id))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+--
+-- Structure de la table `mtgcolors`
+--
+CREATE TABLE `mtg`.`mtgcolors` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `color` VARCHAR(50) NULL,
+  PRIMARY KEY (`id`),
+  KEY `IX_mtgcolors_color` (`color`(50)))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE `mtg`.`mtgcardscolors` (
+  `id_cards` int(11) NOT NULL,
+  `id_colors` INT UNSIGNED NOT NULL,
+  CONSTRAINT `FK_mtgcard_ID` FOREIGN KEY (`id_cards`) REFERENCES mtgcard(id),
+  CONSTRAINT `FK_mtgcolors_id` FOREIGN KEY (`id_colors`) REFERENCES mtgcolors(id))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;

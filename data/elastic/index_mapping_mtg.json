@@ -21,6 +21,10 @@
 				"type" : "string",
 				"analyzer" : "whitespace"
 			},
+			"colors" : {
+				"type" : "string",
+				"analyzer" : "whitespace"
+			},
 			"text" : {
 				"type" : "string",
 				"analyzer" : "default"
