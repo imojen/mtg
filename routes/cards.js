@@ -35,6 +35,7 @@ router.post('/search', function(req, res) {
 	var facetTypes = new Array();
 	var facetSubTypes = new Array();
 	var facetSuperTypes = new Array();
+	var facetColors = new Array();
 	var max = 0;
 	
 	
@@ -64,7 +65,12 @@ router.post('/search', function(req, res) {
 				      "terms": {
 				        "field": "subtypes"
 				      }
-				    }
+				    },
+				    "colors": {
+					      "terms": {
+					        "field": "colors"
+					      }
+					}
 				  }};
 
 	
@@ -107,7 +113,7 @@ router.post('/search', function(req, res) {
 
 		response.on('end', function() {
 			
-			var d = JSON.parse(responseString);	
+			var d = JSON.parse(responseString);
 			var hits = d.hits.hits;
 			var agg = d.aggregations;
 			max = d.hits.total;
@@ -139,6 +145,14 @@ router.post('/search', function(req, res) {
 				facetTypes.push(valPush);
 			}
 			
+			var buckets = agg.colors.buckets;
+			for( var i in agg.colors.buckets ){
+				var valPush={ };
+				valPush.key=buckets[i]["key"];
+				valPush.count=buckets[i]["doc_count"];				
+				facetColors.push(valPush);
+			}
+			
 			
 			if( ids.length == 0 ) {
 				res.write('{"results" : [], "total": 0 }');
@@ -165,7 +179,7 @@ router.post('/search', function(req, res) {
 								str += ' "pt" : "'+pt+'", "type": "'+type+'", "loyalty" : "'+loyalty+'", "edition" : "'+encodeURIComponent(rows[i]['edition'])+'" }';
 								lines.push(str);
 							}
-							res.write('{"results" : ['+lines.join(",")+'], "total": '+rows.length+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +'},"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +'}');
+							res.write('{"results" : ['+lines.join(",")+'], "total": '+rows.length+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +',"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +',"colors":' + JSON.stringify(facetColors) +'}}');
 							res.end();
 						}					
 						else {
