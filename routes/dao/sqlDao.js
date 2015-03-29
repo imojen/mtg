@@ -25,16 +25,10 @@ module.exports = {
 //	console.log(connection);
 	//console.log(q);
 		connection.query(q, function(err, rows, fields) {
-			console.log("test1");
 			if (err) {
-				console.log("test2");
-				//console.log(q);
 				console.log(err);
 				return null;
 			} else {
-				console.log("test3");
-				//console.log(q);
-	//			console.log(rows);
 				callback(rows);
 			}
 		});
