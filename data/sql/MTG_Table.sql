@@ -112,7 +112,7 @@ COLLATE = utf8_general_ci;
 -- Structure de la table `mtglegalities`
 --
 CREATE TABLE `mtg`.`mtglegalities` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` INT UNSIGNED NOT NULL,
   `format` VARCHAR(300) NULL,
   `legality` VARCHAR(300) NULL,
   PRIMARY KEY (`id`),
@@ -134,7 +134,7 @@ COLLATE = utf8_general_ci;
 -- Structure de la table `mtgcolors`
 --
 CREATE TABLE `mtg`.`mtgcolors` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` INT UNSIGNED NOT NULL,
   `color` VARCHAR(50) NULL,
   PRIMARY KEY (`id`),
   KEY `IX_mtgcolors_color` (`color`(50)))
