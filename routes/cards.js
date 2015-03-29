@@ -1,24 +1,10 @@
-var mysql      = require('mysql');
 var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
 var router = express.Router();
 var config = require("../conf/config");
-db = config.database;
+var sqlDao = require("./dao/sqlDao");
 es = config.elastic;
-
-
-/** Mysql **/
-//TODO REMOVE LOCALHOST !!!
-var mysqlHost = db.host,
-    mysqlUser = db.user,
-    mysqlPass = db.password;
-var connection = mysql.createConnection({
-  host     : mysqlHost,
-  user     : mysqlUser,
-  password : mysqlPass
-}); 
-connection.connect();   
 
 
 /** Http **/
@@ -160,35 +146,29 @@ router.post('/search', function(req, res) {
 				return;
 			}		
 			var q = "SELECT *,a.id AS 'idcard',a.name AS 'card', b.name AS 'edition'  FROM mtg.mtgcard a LEFT JOIN mtg.mtgedition b ON a.editionId = b.id WHERE a.id IN ("+ids.join(",")+") AND a.multiverseid IS NOT NULL ORDER BY FIELD(a.id,"+ids.join(",")+")";
-			connection.query(q,
-				function(err, rows, fields) {
-					if (err) console.log(err);
-					else {
-						if( rows ) {
-							var lines = new Array();
-							for( var i = 0 ; i < rows.length; i++ ) {
+			sqlDao.sqlQuery(q, function (rows) {
+				if( rows ) {
+				var lines = new Array();
+				for( var i = 0 ; i < rows.length; i++ ) {
 
-								var type =  ( rows[i]['supertypes'] != null ? rows[i]['supertypes']+" " : "" );
-									type += ( rows[i]['types']      != null ? rows[i]['types']+" "      : "");
-									type += ( rows[i]['subtypes']   != null ? rows[i]['subtypes']       : "");
+					var type =  ( rows[i]['supertypes'] != null ? rows[i]['supertypes']+" " : "" );
+						type += ( rows[i]['types']      != null ? rows[i]['types']+" "      : "");
+						type += ( rows[i]['subtypes']   != null ? rows[i]['subtypes']       : "");
 
-								var pt = ( rows[i]['power'] != null && rows[i]['toughness'] != null ? rows[i]['power']+'/'+rows[i]['toughness'] : '' );
-								var loyalty = (rows[i]['loyalty'] != null ? rows[i]['loyalty'] : "" );
+					var pt = ( rows[i]['power'] != null && rows[i]['toughness'] != null ? rows[i]['power']+'/'+rows[i]['toughness'] : '' );
+					var loyalty = (rows[i]['loyalty'] != null ? rows[i]['loyalty'] : "" );
 
-								var str = '{ "id" : '+rows[i]['idcard']+', "mid" : '+rows[i]['multiverseid']+', "name" : "'+encodeURIComponent(rows[i]['card'])+'", "mana" : "'+rows[i]['manaCost']+'",';
-								str += ' "pt" : "'+pt+'", "type": "'+type+'", "loyalty" : "'+loyalty+'", "edition" : "'+encodeURIComponent(rows[i]['edition'])+'" }';
-								lines.push(str);
-							}
-							res.write('{"results" : ['+lines.join(",")+'], "total": '+rows.length+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +',"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +',"colors":' + JSON.stringify(facetColors) +'}}');
-							res.end();
-						}					
-						else {
-							res.write('{"results" : [], "total": '+rows.length+' }');
-							res.end();					
-						}
-					}
+					var str = '{ "id" : '+rows[i]['idcard']+', "mid" : '+rows[i]['multiverseid']+', "name" : "'+encodeURIComponent(rows[i]['card'])+'", "mana" : "'+rows[i]['manaCost']+'",';
+					str += ' "pt" : "'+pt+'", "type": "'+type+'", "loyalty" : "'+loyalty+'", "edition" : "'+encodeURIComponent(rows[i]['edition'])+'" }';
+					lines.push(str);
 				}
-			);
+				res.write('{"results" : ['+lines.join(",")+'], "total": '+rows.length+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +',"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +',"colors":' + JSON.stringify(facetColors) +'}}');
+				res.end();
+			}					
+			else {
+				res.write('{"results" : [], "total": '+rows.length+' }');
+				res.end();					
+			}});
 		});
 	});
 
