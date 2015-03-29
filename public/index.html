@@ -12,6 +12,7 @@
 		
 
 		<script src="lib/vendor/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 		<script src="lib/vendor/angular-sanitize.js"></script>
 		<script src="lib/vendor/require.min.js"></script>
 		<script src="lib/vendor/jquery-1.11.1.min.js"></script>
@@ -24,11 +25,13 @@
 		<script src="app/directives/appDirectives.js"></script>
 		<script src="app/controllers/appCtrl.js"></script>
 
+		<script src="app/services/notification.js"></script> 
+
 	</head>
 	<body ng-app="mtgApp">
 		<div id="htmlWrapper" ng-controller="mtgAppController">
 			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect(a,b)" show-alert="showAlert(msg)"></frame-login>
-			<frame-alert ng-show="alertShow" alert-show="alertShow" alert-msg="alertMsg"></frame-alert>
+			<frame-alert ng-show="notification.alertShow"></frame-alert>
 			<frame-home ng-show="isLogged" isLogged="isLogged" login-disconnect="loginDisconnect()"></frame-home>
 		</div>
 	</body>
