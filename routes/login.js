@@ -40,7 +40,7 @@ router.post('/', function(req, res) {
 	  	// Mise en session
 	  	req.session.isConnected = true;
 	  	req.session.login = login;
-	  	req.session.pseudo = rows[0].pseudo;
+	  	req.session.id_user = rows[0]['id'];
 	  	// Réponse
 		res.write('{"success" : true, "login" : "'+encodeURIComponent(login)+'", "pseudo" : "'+encodeURIComponent(rows[0].pseudo)+'" }');	  	
 		res.end();
@@ -79,9 +79,15 @@ router.post('/signup', function(req, res) {
 				res.end();
 			  } 
 			  else {
-			  	// Mise en session
+			  	
 			  	req.session.isConnected = true;
 			  	req.session.login = nodeDatas.login;
+			  	req.session.id_user = result.insertId;
+
+			  	connection.query("SELECT id FROM mtg.mtgusers ORDER BY id DESC LIMIT 1", function(err, result) {
+			  		req.session.id_user = rows[0]['id'];
+			  	});
+			  	
 			  	
 			  	// Réponse
 				res.write('{"success" : true, "successMsg" : "Account created !"}');	  	  	

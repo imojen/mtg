@@ -33,6 +33,18 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.stringSearch = "";
 	$scope.timeOut = null;
 
+
+	// Create deck
+	$scope.popup = false;
+	$scope.creatingNewDeck = false;
+	$scope.newDeck = { deckname : '', comment : ''};
+
+	// Deck
+	$scope.deck_set = false;
+	$scope.deck_id = null;
+	$scope.deck_name = null;
+	$scope.deck_comment = null;	
+
 	angular.element(document).ready(function () {
 		if( $(".wrapperScroll").length ) {
 			$(".wrapperScroll").on('scroll',function() {
@@ -111,9 +123,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		return decodeURIComponent(str);
 	}
 
-	$scope.popup = false;
-	$scope.creatingNewDeck = false;
-	$scope.newDeck = { deckname : '', comment : ''};
+
 	$scope.newDeck = function() {
 		if( $scope.popup || $scope.creatingNewDeck )
 			return;
@@ -129,10 +139,57 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	}
 	$scope.newDeckCreation = function() {
 		if( $scope.newDeck.deckname.length < 4 ) {
-			notification.showAlert("Deck name must contain at least 4 letters.");
+			notification.showAlert("Deck name must contain at least 4 characters.");
 			return false;
 		}
+		if( $scope.newDeck.deckname.length > 60 ) {
+			notification.showAlert("Deck name must contain maximum  60 characters.");
+			return false;
+		}
+		if( $scope.newDeck.comment.length > 300 ) {
+			notification.showAlert("Deck comment must contain maximum  300 characters.");
+			return false;
+		}
+		var method = 'POST';
+		var inserturl = './cards/createDeck';
+		var nodeDatas = {
+		      'deckName' : $scope.newDeck.deckname,
+		      'deckComment' : $scope.newDeck.comment,
+		    };
+
+		$http({
+		    method: method,
+		    url: inserturl,
+		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success) {
+				$scope.deck_set = true;
+				$scope.deck_id = response.idDeck;
+				$scope.deck_name = response.deckName;
+				$scope.deck_comment = response.comment;
+				$scope.quitCreatingDeck();	
+			}
+			else {
+				notification.showAlert(response.errMsg);
+				return false;
+			}			
+		}).
+		error(function(response) {
+	        $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
+			return false;
+		});	
+
 	}
+
+
+
+
+
+
+
 
 }
 

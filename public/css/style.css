@@ -42,7 +42,11 @@ a {
 .right {
 	text-align: right;
 }
-
+.navbar_comment {
+	font-size: 11px; 
+	color: #999;
+	font-style: italic;
+}
 
 
 

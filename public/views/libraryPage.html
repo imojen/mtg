@@ -83,16 +83,16 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">My deck</a>
-
-
-					
+					<a class="navbar-brand" href="#">My deck / </a>			
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<button type="button" ng-click="notification.showAlert('testing')" class="btn btn-default navbar-btn">Open</button>
+					<p class="navbar-text">{{deck_name}} <span class="navbar_comment">{{deck_comment}}</span></p>
+					
 
 					<ul class="nav navbar-nav navbar-right">
+						<li><button type="button" ng-click="notification.showAlert('testing')" class="btn btn-default navbar-btn">Open</button></li>
+						<li>&nbsp;</li>
 						<li><button type="button" class="btn btn-default navbar-btn" ng-click="newDeck()">New deck</button></li>
 					</ul>
 				</div>
@@ -103,7 +103,7 @@
 
 		<div class="libraryDeckWrapper">
 			<div class="createDeckWrapper">
-
+				{{deck_id}} - {{deck_name}} - {{deck_comment}}
 			</div>
 
 

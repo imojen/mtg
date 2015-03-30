@@ -14,7 +14,7 @@ router.post('/', function(req, res) {
 	res.end();
 });
 
-
+/** Search card **/
 router.post('/search', function(req, res) {
 	var nodeDatas = JSON.parse(req.body.nodeDatas);
 	var ids = new Array();
@@ -218,6 +218,67 @@ router.post('/search', function(req, res) {
 		/*res.write('{"resulsts" : [] }');
 		res.end();	 */
 });
+
+
+
+
+
+
+
+
+
+
+
+
+/** Create Deck **/
+router.post('/createDeck', function(req, res) {
+	var nodeDatas = JSON.parse(req.body.nodeDatas);
+	var name = nodeDatas.deckName;
+	var comment = nodeDatas.deckComment;
+
+	if( name.length < 4 || name.length > 60 ) {
+		res.write('{"success" : false, "errMsg" : "Invalid deck name length." }');	  	
+		res.end();
+	}
+	if( comment.length > 300 ) {
+		res.write('{"success" : false, "errMsg" : "Invalid deck comment length." }');	  	
+		res.end();
+	}
+
+	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND deleted = 0", [req.session.id_user], function(err, rows, fields) {
+		if( rows.length > 50 ) {
+			res.write('{"success" : false, "errMsg" : "You have already created 50 decks. WTF is wrong with you ?" }');	  	
+			res.end();	
+			return;		
+		}
+	});
+
+	connection.query("INSERT INTO mtg.mtgdeck SET ?", { 'id_mtgusers' : req.session.id_user, 'name' : name, 'comment' : comment}, function(err, result) {
+		if( err ) {
+			console.log(err);
+			res.write('{"success" : false, "errMsg" : "Unable to create deck..." }');	  	
+			res.end();			
+			return;
+		}
+		else {
+			var idDeck = result.insertId;
+			res.write('{"success" : true, "idDeck" : '+idDeck+', "deckName" : "'+name+'", "comment" : "'+comment+'" }');
+			res.end();		
+			return;
+		}
+	});
+
+
+
+});
+
+
+
+
+
+
+
+
 
 
 
