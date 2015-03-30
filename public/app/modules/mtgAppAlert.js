@@ -9,11 +9,6 @@ angular.module("mtgAppAlert", [] )
 		},		
 		controller : function(notification, $scope ) {
 			$scope.notification = notification;
-			$scope.hideAlert = function() {
-				$scope.alertMsg = "";
-				$scope.alertShow = false;
-			}
-
 		}
 	}
 });
