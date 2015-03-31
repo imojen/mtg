@@ -48,9 +48,33 @@ a {
 	font-style: italic;
 	line-height: 50px;
 }
+.navbar-separator {
+	border-right: 1px solid #666;
+	width:1px;
+	height: 50px;
+	margin-right: 15px;
+	padding-left: 15px;
+}
+.navbar-brand {
+	background: #0c0e11;
+	border: 1px solid #2D384D;
+	border-right: 0 none;
+}
+.navbar-text {
 
-
-
+}
+.navbar-text span.glyphicon {
+	color: orange;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+.navbar-text span.info {
+	color: #fff;
+	margin-right: 10px;
+	margin-left: 5px;
+	font-size: 14px;
+	cursor : pointer;
+}
 
 
 
@@ -113,6 +137,7 @@ a {
 #main-body .popup-wrapper {
 	min-width: 500px;
 	min-height: 300px;
+	max-width: 95%;
 	background: #0c0e11;
 	position: fixed !important;
 	position: absolute;
@@ -544,7 +569,11 @@ img#imgPreview {
 	vertical-align: middle;
 }
 
-
+#main-body #library .libraryDeckWrapper p.deck_disclaimer {
+	margin: 50px auto;
+	text-align: center;
+	color: #999;
+}
 
 
 

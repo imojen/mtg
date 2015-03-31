@@ -173,11 +173,11 @@ router.post('/search', function(req, res) {
 					str += ' "pt" : "'+pt+'", "type": "'+type+'", "loyalty" : "'+loyalty+'", "edition" : "'+encodeURIComponent(rows[i]['edition'])+'" }';
 					lines.push(str);
 				}
-				res.write('{"results" : ['+lines.join(",")+'], "total": '+rows.length+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +',"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +',"colors":' + JSON.stringify(facetColors) +'}}');
+				res.write('{"results" : ['+lines.join(",")+'], "total": '+max+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +',"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +',"colors":' + JSON.stringify(facetColors) +'}}');
 				res.end();
 			}					
 			else {
-				res.write('{"results" : [], "total": '+rows.length+' }');
+				res.write('{"results" : [], "total": '+max+' }');
 				res.end();					
 			}});
 		});
@@ -331,6 +331,43 @@ router.post('/deleteDeck',function( req,res) {
 	});
 });
 
+
+/** Edit deck **/
+router.post('/editDeck',function( req,res) {
+
+	try {
+		JSON.parse(req.body.nodeDatas);
+	}
+	catch (err) {
+		res.write('{"success" : false, "errMsg" : "Try again using less special chars..." }');	  	
+		res.end();	
+		return;			
+	}
+
+	var nodeDatas = JSON.parse(req.body.nodeDatas);
+	var id = nodeDatas.deckId;	
+	var name = nodeDatas.deckName;
+	var comment = nodeDatas.deckComment;
+
+	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND id = ? AND deleted = 0", [req.session.id_user, id], function(err, rows, fields) {
+		if( err || rows.length != 1 ) {
+			res.write('{"success" : false, "errMsg" : "An error has occurred." }');	
+			res.end();	
+			return;				
+		}
+		connection.query('UPDATE mtg.mtgdeck SET name = ?, comment = ? WHERE id = '+id,[name,comment], function (err, result) {
+			if( err ) {
+				res.write('{"success" : false, "errMsg" : "An error has occurred while updating your deck." }');	
+				console.log(err);
+				res.end();	
+				return;						
+			}
+			res.write('{"success" : true}');	
+			res.end();	
+			return;				
+		});
+	});
+});
 
 
 

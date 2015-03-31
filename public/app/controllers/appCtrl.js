@@ -34,10 +34,11 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.timeOut = null;
 
 
-	// Create / open deck
+	// Create / open / edit deck
 	$scope.popup = false;
 	$scope.creatingNewDeck = false;
 	$scope.openingDeck = false;
+	$scope.editDeck = false;
 	$scope.newDeck = { deckname : '', comment : ''};
 	$scope.decks = [];
 
@@ -45,7 +46,30 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.deck_set = false;
 	$scope.deck_id = null;
 	$scope.deck_name = "";
-	$scope.deck_comment = "";	
+	$scope.deck_comment = "";
+	$scope.edit_deck_name = "";
+	$scope.edit_deck_comment = "";
+
+
+	// Popup
+	$scope.closePopup = function() {
+		$scope.popup = false;
+		$scope.creatingNewDeck = false;
+		$scope.openingDeck = false;
+		$scope.editDeck = false;
+	}
+	$scope.$watch( "popup", function( bool ) {
+		if( bool ) 
+			setTimeout(function() { $scope.resizePopup(); },5);
+	});
+	$scope.resizePopup = function() {
+		var $box = $(".popup-wrapper:visible");
+		$box.css({
+			'margin-left' : - parseFloat($box.css('width')) / 2 +"px",
+			'margin-top' : - parseFloat($box.css('height')) / 2 +"px",
+		});		
+	}
+
 
 	angular.element(document).ready(function () {
 		if( $(".wrapperScroll").length ) {
@@ -53,6 +77,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 				$(".scrollItem").css('top',$(this).scrollTop());
 			});
 		}
+		$(".navbar-btn, .title").tooltip({placement:'top',container:'#library'});
 	});
 
 	$scope.showAlert = function(str) {
@@ -142,8 +167,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		setTimeout(function(){$("#deckName").focus();},50);
 	}
 	$scope.quitCreatingDeck = function() {
-		$scope.popup = false;
-		$scope.creatingNewDeck = false;
+		$scope.closePopup();
 	}
 	$scope.newDeckCreation = function() {
 		if( $scope.newDeck.deckname.length < 4 ) {
@@ -176,7 +200,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 				$scope.deck_id = response.idDeck;
 				$scope.deck_name = response.deckName;
 				$scope.deck_comment = response.comment;
-				$scope.quitCreatingDeck();	
+				$scope.closePopup();
 			}
 			else {
 				notification.showAlert(response.errMsg);
@@ -191,8 +215,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 	}
 	$scope.quitOpeningDeck = function() {
-		$scope.popup = false;
-		$scope.openingDeck = false;		
+		$scope.closePopup();	
 	}
 	$scope.openDeck = function() {
 		if( $scope.popup || $scope.openingDeck )
@@ -265,6 +288,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 			if(response.success) {
 				notification.showAlert("This deck has been removed from your library.");
 				$scope.unsetDeck();
+				$scope.closePopup();
 				return;
 			}
 			else {
@@ -280,6 +304,59 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	}
 
 
+	$scope.editThisDeck = function() {
+		if( $scope.popup || $scope.editDeck || !$scope.deck_set  )
+			return;
+		$scope.popup = true;
+		$scope.editDeck = true;
+		$scope.edit_deck_name = $scope.decode($scope.deck_name);
+		$scope.edit_deck_comment = $scope.decode($scope.deck_comment);
+	}
+
+	$scope.endEditingDeck = function() {
+		if( $scope.edit_deck_name.length < 4 ) {
+			notification.showAlert("Deck name must contain at least 4 characters.");
+			return false;
+		}
+		if( $scope.edit_deck_name.length > 60 ) {
+			notification.showAlert("Deck name must contain maximum  60 characters.");
+			return false;
+		}
+		if( $scope.edit_deck_comment.length > 300 ) {
+			notification.showAlert("Deck comment must contain maximum  300 characters.");
+			return false;
+		}
+		var method = 'POST';
+		var inserturl = './cards/editDeck';
+		var nodeDatas = {
+		      'deckName' : encodeURIComponent($scope.edit_deck_name),
+		      'deckComment' : encodeURIComponent($scope.edit_deck_comment),
+		      'deckId' : $scope.deck_id,
+		   };
+		$http({
+		    method: method,
+		    url: inserturl,
+		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success) {
+				$scope.deck_name = encodeURIComponent($scope.edit_deck_name);
+				$scope.deck_comment = encodeURIComponent($scope.edit_deck_comment);
+				$scope.closePopup();
+				return;
+			}
+			else {
+				notification.showAlert(response.errMsg);
+				return false;
+			}			
+		}).
+		error(function(response) {
+	        $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
+			return false;
+		});			
+	}
 
 
 

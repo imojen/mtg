@@ -83,17 +83,24 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">My deck / </a>			
+					<a class="navbar-brand" href="#">My deck</a>			
 				</div>
 
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<p class="navbar-text" ng-bind-html="decode(deck_name);"></p><span class="navbar_comment"  ng-bind-html="decode(deck_comment);"></span>
-					<ul class="nav navbar-nav navbar-right">
-						<li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="deleteDeck()">Delete this deck</button></li>
-						<li>&nbsp;</li>					
-						<li><button type="button" class="btn btn-default navbar-btn" ng-click="openDeck()">Open deck</button></li>
+				<div class="collapse navbar-collapse">
+
+					<p class="navbar-text" ng-bind-html="decodeDeckName(deck_name);"  ng-show="deck_set"></p>
+					
+					<ul class="nav navbar-nav navbar-right">		
 						<li>&nbsp;</li>
-						<li><button type="button" class="btn btn-default navbar-btn" ng-click="newDeck()">New deck</button></li>
+						<li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="editThisDeck()" title="Edit this deck"><span class="glyphicon glyphicon-pencil"></span></button></li>
+						<li>&nbsp;</li>
+						<li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="deleteDeck()" title="Delete this deck"><span class="glyphicon glyphicon-trash"></span></button></li>			
+						<li>&nbsp;</li>
+						<li class="navbar-separator" ng-show="deck_set" >&nbsp;</li>
+						<li>&nbsp;</li>
+						<li><button type="button" class="btn btn-default navbar-btn" ng-click="openDeck()" title="Open a deck"><span class="glyphicon glyphicon-folder-open"></span></button></li>
+						<li>&nbsp;</li>
+						<li><button type="button" class="btn btn-default navbar-btn" ng-click="newDeck()" title="Create a new deck"><span class="glyphicon glyphicon-asterisk"></span></button></li>
 					</ul>
 				</div>
 
@@ -101,9 +108,10 @@
 			</div>
 		</nav>
 
+
 		<div class="libraryDeckWrapper">
 			<div class="createDeckWrapper">
-				
+				<p ng-show="!deck_set" class="deck_disclaimer">Open or create a new deck</p>
 			</div>
 
 
@@ -119,6 +127,7 @@
 
 
 	<div class="popup-layer" ng-show="popup">
+
 		<div class="popup-wrapper" id="createDeckPopup" ng-show="creatingNewDeck">
 			<div class="popup-title">
 				<span class="title">New deck</span>
@@ -161,6 +170,36 @@
 			</div>
 
 		</div>	
+
+
+
+		
+		<div class="popup-wrapper" id="editDeckPopup" ng-show="editDeck">
+			<div class="popup-title">
+				<span class="title">Edit this deck</span>
+			</div>
+
+			<div class="popup-body">
+				<form id="formEditDeck" name="form_edit_deck" class="popup-form">
+					<p>Edit deck name :</p>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon  input-group-label">Deck name * </div>
+							<input class="form-control" type="text" ng-model="edit_deck_name">
+						</div>
+					</div>				
+					<p>Edit deck comment :</p>
+					<textarea class="form-control" rows="3"  ng-model="edit_deck_comment"></textarea>
+				</form>
+
+				<p class="right">
+					<button type="button" class="btn btn-default" ng-click="endEditingDeck()">Save</button>
+				</p>
+
+			</div>
+
+		</div>
+
 
 
 	</div>
