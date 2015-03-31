@@ -513,7 +513,7 @@ input.sign-up-input-checkbox {
 #main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable td.previewTD {
 	width:242px;
 	vertical-align: middle;
-	background: #fff;
+	background: #2D384D;
 	padding: 0;
 }
 #main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.imgPreviewWrapper {
@@ -523,6 +523,7 @@ input.sign-up-input-checkbox {
 img#imgPreview {
 	max-height: 310px;
 	margin-top: 5px;
+	border-radius: 12px;
 }
 #main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper {
 	height: 30px;
