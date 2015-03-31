@@ -84,15 +84,15 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		notification.showAlert(str);
 	};
 
-	$scope.cardSelect = function( id, multiversId ) {
+	$scope.cardSelect = function( id, multiverseId ) {
 		$scope.cardSlected = id;
 		$scope.previewUrl = 'images/default.jpg';
 		$scope.linkToImg = '#';		
-		if( multiversId != null ) {
-			$scope.previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiversId+'&type=card';
-			$scope.linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiversId;
+		if( multiverseId != null ) {
+			$scope.previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiverseId+'&type=card';
+			$scope.linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiverseId;
 		}
-		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiversId+'.jpeg';
+		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
 	}
 
 	$scope.getManaCost = function( str ) {
@@ -362,6 +362,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 
 	$scope.appendCardToDeck = function() {
+		if( $scope.multiverseid )
 		notification.showAlert("Not developped yet...");
 		return;
 	}

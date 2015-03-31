@@ -151,4 +151,21 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
+--
+-- Structure de la table `mtgcardsdeck`
+--
+
+CREATE TABLE `mtg`.`mtgcardsdeck` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `mtgcard_multiverseid` INT UNSIGNED NOT NULL,
+  `mtgdeck_id` INT UNSIGNED NOT NULL,
+  `quantity_deck` INT UNSIGNED NOT NULL DEFAULT 0,
+  `quantity_side` INT UNSIGNED NOT NULL DEFAULT 0,
+  `quantity_vault` INT UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
 commit;
