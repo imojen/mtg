@@ -498,15 +498,14 @@ input.sign-up-input-checkbox {
 	background: #1c212a;	
 	color: #fff;
 }
-#main-body #library .librarySearchresultsWrapper,
-#main-body #library .libraryDeckWrapper {
-	height: 320px;
+#main-body #library .librarySearchresultsWrapper {
+	height: 350px;
 	width: 100%;
 	position: relative;
 }
 #main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable {
 	width: 100%;
-	height: 320px;
+	height: 350px;
 }
 #main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable td {
 	vertical-align: top;
@@ -515,16 +514,51 @@ input.sign-up-input-checkbox {
 	width:242px;
 	vertical-align: middle;
 	background: #fff;
+	padding: 0;
 }
 #main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.imgPreviewWrapper {
 	text-align: center;
-	vertical-align: middle;
+	height: 320px;
 }
 img#imgPreview {
 	max-height: 310px;
+	margin-top: 5px;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper {
+	height: 30px;
+	width:242px;
+	background :red;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .buttton-transfert {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	width: 80px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	font-size: 14px;
+	cursor: pointer;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .toDeck {
+	font-weight: bold;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .toSlide {
+
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .toVault {
+
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .buttton-transfert:first-child {
+	width: 82px;
+}
+#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .buttton-transfert span {
+	padding-right: 5px;
 }
 #main-body #library .tableResultsWrapper {
-	height: 320px;
+	height: 350px;
 	overflow-y: scroll;
 	position: relative;
 	width: 100%;
@@ -569,14 +603,17 @@ img#imgPreview {
 	vertical-align: middle;
 }
 
+
+
+#main-body #library .libraryDeckWrapper {
+	width: 100%;
+	position: relative;
+}
 #main-body #library .libraryDeckWrapper p.deck_disclaimer {
 	margin: 50px auto;
 	text-align: center;
 	color: #999;
 }
-
-
-
 
 
 

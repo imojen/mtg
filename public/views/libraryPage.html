@@ -68,6 +68,15 @@
 								<img src="{{previewUrl}}" id="imgPreview"/>
 							</a>
 						</div>
+						<div class="transfertDivWrapper" ng-show="cardSlected && deck_set">
+							<div class="buttton-transfert toDeck btn-success title" title="Append this card to deck" ng-click="appendCardToDeck()">
+								<span class="glyphicon glyphicon-chevron-down"></span> Deck
+							</div><div class="buttton-transfert toSlide btn-warning title" title="Append this card to Side"  ng-click="appendCardToSlide()">
+								<span class="glyphicon glyphicon-chevron-down"></span> Side
+							</div><div class="buttton-transfert toVault btn-info title" title="Append this card to Vault"  ng-click="appendCardToVault()">
+								<span class="glyphicon glyphicon-chevron-down"></span> Vault
+							</div>													
+						</div>
 					</td>
 				</tr>
 			</table>

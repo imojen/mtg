@@ -361,6 +361,22 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 
 
+	$scope.appendCardToDeck = function() {
+		notification.showAlert("Not developped yet...");
+		return;
+	}
+	$scope.appendCardToSlide = function() {
+		notification.showAlert("Not developped yet...");
+		return;
+	}
+	$scope.appendCardToVault = function() {
+		notification.showAlert("Not developped yet...");
+		return;
+	}
+
+
+
+
 
 }
 
