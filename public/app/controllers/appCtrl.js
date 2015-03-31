@@ -34,16 +34,18 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.timeOut = null;
 
 
-	// Create deck
+	// Create / open deck
 	$scope.popup = false;
 	$scope.creatingNewDeck = false;
+	$scope.openingDeck = false;
 	$scope.newDeck = { deckname : '', comment : ''};
+	$scope.decks = [];
 
 	// Deck
 	$scope.deck_set = false;
 	$scope.deck_id = null;
-	$scope.deck_name = null;
-	$scope.deck_comment = null;	
+	$scope.deck_name = "";
+	$scope.deck_comment = "";	
 
 	angular.element(document).ready(function () {
 		if( $(".wrapperScroll").length ) {
@@ -122,6 +124,12 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.decode = function( str ) {
 		return decodeURIComponent(str);
 	}
+	$scope.decodeDeckName = function( str ) {
+		return '<span class="glyphicon glyphicon-book"></span> '+decodeURIComponent(str);
+	}
+	$scope.decodeDeckComment = function( str ) {
+		return '<span class="comment-text">'+decodeURIComponent(str)+'</span>';
+	}
 
 
 	$scope.newDeck = function() {
@@ -153,10 +161,9 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		var method = 'POST';
 		var inserturl = './cards/createDeck';
 		var nodeDatas = {
-		      'deckName' : $scope.newDeck.deckname,
-		      'deckComment' : $scope.newDeck.comment,
-		    };
-
+		      'deckName' : encodeURIComponent($scope.newDeck.deckname),
+		      'deckComment' : encodeURIComponent($scope.newDeck.comment),
+		   };
 		$http({
 		    method: method,
 		    url: inserturl,
@@ -183,7 +190,94 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		});	
 
 	}
-
+	$scope.quitOpeningDeck = function() {
+		$scope.popup = false;
+		$scope.openingDeck = false;		
+	}
+	$scope.openDeck = function() {
+		if( $scope.popup || $scope.openingDeck )
+			return;		
+		var method = 'POST';
+		var inserturl = './cards/openDeck';
+		$http({
+		    method: method,
+		    url: inserturl,
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success) {
+				if( response.nb == 0 ) {
+					notification.showAlert("You should create a deck at first !");
+					return;
+				}
+				$scope.decks = response.decks;
+				$scope.popup = true;
+				$scope.openingDeck = true;	
+				return;
+			}
+			else {
+				notification.showAlert(response.errMsg);
+				return false;
+			}			
+		}).
+		error(function(response) {
+	        $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
+			return false;
+		});	
+	}
+	$scope.setDeck = function( id_deck ) {
+		for( var i in $scope.decks ) {
+			if( $scope.decks[i]['id'] == id_deck ) {
+				$scope.deck_set = true;
+				$scope.deck_id = id_deck;
+				$scope.deck_name = $scope.decks[i]['name'];
+				$scope.deck_comment = $scope.decks[i]['comment'];	
+				$scope.quitOpeningDeck();			
+			}
+		}
+		if( !$scope.deck_set ) {
+			notification.showAlert("An error has occurred while opening this deck...");
+			return;
+		}
+	}
+	$scope.unsetDeck = function() {
+		$scope.deck_set = false;
+		$scope.deck_id = null;
+		$scope.deck_name = '';
+		$scope.deck_comment = '';		
+	}
+	$scope.deleteDeck = function() {
+		if( !confirm("Are you sure ?") )
+			return;
+		var method = 'POST';
+		var inserturl = './cards/deleteDeck';
+		var nodeDatas = {
+		      'deckId' : $scope.deck_id,
+		   };
+		$http({
+		    method: method,
+		    url: inserturl,
+		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success) {
+				notification.showAlert("This deck has been removed from your library.");
+				$scope.unsetDeck();
+				return;
+			}
+			else {
+				notification.showAlert(response.errMsg);
+				return false;
+			}			
+		}).
+		error(function(response) {
+	        $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
+			return false;
+		});			
+	}
 
 
 

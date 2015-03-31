@@ -46,6 +46,7 @@ a {
 	font-size: 11px; 
 	color: #999;
 	font-style: italic;
+	line-height: 50px;
 }
 
 
@@ -168,7 +169,32 @@ a {
 	margin-top: 10px;
 	background: #2D384D;
 }
-
+#main-body .popup-body ul.list-full {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+#main-body .popup-body ul.list-full li {
+	line-height: 28px;
+	height: 28px;
+	border-bottom: 1px solid #272E38;
+	color: #fff;
+	padding-left: 5px;
+}
+#main-body .popup-body ul.list-full li span.glyphicon {
+	color: orange;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+#main-body .popup-body ul.list-full li span.comment-text {
+	color: #999;
+	font-size: 11px;
+	margin-left: 5px;
+}
+#main-body .popup-body ul.list-full li:hover {
+	cursor: pointer;
+	background: #2D384D;
+}
 
 
 

@@ -16,6 +16,17 @@ router.post('/', function(req, res) {
 
 /** Search card **/
 router.post('/search', function(req, res) {
+
+	try {
+		JSON.parse(req.body.nodeDatas);
+	}
+	catch (err) {
+		res.write('{"success" : false, "errMsg" : "Try again using less special chars..." }');	  	
+		res.end();	
+		return;			
+	}
+	
+
 	var nodeDatas = JSON.parse(req.body.nodeDatas);
 	var ids = new Array();
 	var facetTypes = new Array();
@@ -232,6 +243,16 @@ router.post('/search', function(req, res) {
 
 /** Create Deck **/
 router.post('/createDeck', function(req, res) {
+	
+	try {
+		JSON.parse(req.body.nodeDatas);
+	}
+	catch (err) {
+		res.write('{"success" : false, "errMsg" : "Try again using less special chars..." }');	  	
+		res.end();	
+		return;			
+	}
+
 	var nodeDatas = JSON.parse(req.body.nodeDatas);
 	var name = nodeDatas.deckName;
 	var comment = nodeDatas.deckComment;
@@ -244,7 +265,7 @@ router.post('/createDeck', function(req, res) {
 		res.write('{"success" : false, "errMsg" : "Invalid deck comment length." }');	  	
 		res.end();
 	}
-
+	
 	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND deleted = 0", [req.session.id_user], function(err, rows, fields) {
 		if( rows.length > 50 ) {
 			res.write('{"success" : false, "errMsg" : "You have already created 50 decks. WTF is wrong with you ?" }');	  	
@@ -252,7 +273,7 @@ router.post('/createDeck', function(req, res) {
 			return;		
 		}
 	});
-
+	
 	connection.query("INSERT INTO mtg.mtgdeck SET ?", { 'id_mtgusers' : req.session.id_user, 'name' : name, 'comment' : comment}, function(err, result) {
 		if( err ) {
 			console.log(err);
@@ -267,11 +288,48 @@ router.post('/createDeck', function(req, res) {
 			return;
 		}
 	});
-
-
-
 });
 
+/** Open deck **/
+router.post('/openDeck',function( req, res ) {
+	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND deleted = 0", [req.session.id_user], function(err, rows, fields) {
+		if( err ) {
+			res.write('{"success" : false, "errMsg" : "An error has occurred." }');	
+			res.end();	
+			return;		
+		}
+		if( rows.length == 0 ) {
+			res.write('{"success" : true, "nb" : 0 }');	  	
+			res.end();	
+			return;		
+		}
+		var decks = new Array();
+		for( var i = 0; i < rows.length; i++ ) {
+			decks.push('{ "id" : '+rows[i]['id']+' , "name" : "'+encodeURIComponent(rows[i]['name'])+'", "comment" : "'+encodeURIComponent(rows[i]['comment'])+'" }');
+		}
+		res.write('{"success" : true, "nb" : '+rows.length+', "decks" : ['+decks.join(',')+'] }');	
+		res.end();  	
+		return;	
+	});	
+});
+
+/** Delete deck **/
+router.post('/deleteDeck',function( req,res) {
+	var nodeDatas = JSON.parse(req.body.nodeDatas);
+	var id = nodeDatas.deckId;	
+	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND id = ? AND deleted = 0", [req.session.id_user, id], function(err, rows, fields) {
+		if( err || rows.length != 1 ) {
+			res.write('{"success" : false, "errMsg" : "An error has occurred." }');	
+			res.end();	
+			return;				
+		}
+		connection.query('UPDATE mtg.mtgdeck SET deleted = 1 WHERE id = ? ',[id], function (err, result) {
+			res.write('{"success" : true}');	
+			res.end();	
+			return;				
+		});
+	});
+});
 
 
 
