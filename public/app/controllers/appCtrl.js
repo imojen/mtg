@@ -362,15 +362,23 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 
 	$scope.appendCardToDeck = function() {
-		if( $scope.multiverseid )
+		if( $scope.multiverseid == null || !$scope.deck_set )
+			return false;
+		
 		notification.showAlert("Not developped yet...");
 		return;
 	}
 	$scope.appendCardToSlide = function() {
+		if( $scope.multiverseid == null || !$scope.deck_set )
+			return false;	
+
 		notification.showAlert("Not developped yet...");
 		return;
 	}
 	$scope.appendCardToVault = function() {
+		if( $scope.multiverseid == null || !$scope.deck_set )
+			return false;
+
 		notification.showAlert("Not developped yet...");
 		return;
 	}
