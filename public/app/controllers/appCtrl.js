@@ -79,15 +79,6 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	}
 
 
-	angular.element(document).ready(function () {
-		if( $(".wrapperScroll").length ) {
-			$(".wrapperScroll").on('scroll',function() {
-				$(".scrollItem").css('top',$(this).scrollTop());
-			});
-		}
-		$(".navbar-btn, .title").tooltip({placement:'top',container:'#library'});
-	});
-
 	$scope.showAlert = function(str) {
 		notification.showAlert(str);
 	};
@@ -272,6 +263,11 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.setDeck = function( id_deck ) {
 		for( var i in $scope.decks ) {
 			if( $scope.decks[i]['id'] == id_deck ) {
+				$scope.deck_cardSlected = null;
+				$scope.deck_cardId = null;
+				$scope.deck_cardMultiverseId = null;
+				$scope.deck_previewUrl = 'images/default.jpg';
+				$scope.deck_linkToImg = '#';					
 				$scope.deck_set = true;
 				$scope.deck_id = id_deck;
 				$scope.deck_name = $scope.decks[i]['name'];
