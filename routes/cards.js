@@ -331,6 +331,46 @@ router.post('/deleteDeck',function( req,res) {
 	});
 });
 
+/** Obtenir un deck **/
+router.post('/getDeck',function( req,res) {
+	try {
+		JSON.parse(req.body.nodeDatas);
+	}
+	catch (err) {
+		res.write('{"success" : false, "errMsg" : "Try again using less special chars..." }');	  	
+		res.end();	
+		return;			
+	}	
+	var nodeDatas = JSON.parse(req.body.nodeDatas);
+	var id_deck = parseInt(nodeDatas.deckId,10);
+	// Return deck
+	var deck = new Array();
+	var query = "SELECT *,a.id AS 'idcard', a.name AS 'card', b.name AS 'edition'  FROM mtg.mtgcard a ";
+		query+=" LEFT JOIN mtg.mtgedition b ON a.editionId = b.id";
+		query+=" LEFT JOIN mtg.mtgcardsdeck d ON a.multiverseid = d.mtgcard_multiverseid";
+		query+=" WHERE d.mtgdeck_id  = "+id_deck+" ";
+	connection.query(query, function(err, rows, fields) {
+		for( var i in rows ) {
+			var type =  ( rows[i]['supertypes'] != null ? rows[i]['supertypes']+" " : "" );
+				type += ( rows[i]['types']      != null ? rows[i]['types']+" "      : "");
+				type += ( rows[i]['subtypes']   != null ? rows[i]['subtypes']       : "");
+
+			var pt = ( rows[i]['power'] != null && rows[i]['toughness'] != null ? rows[i]['power']+'/'+rows[i]['toughness'] : '' );
+			var loyalty = (rows[i]['loyalty'] != null ? rows[i]['loyalty'] : "" );
+
+			var str = '{ "id" : '+rows[i]['idcard']+', "mid" : '+rows[i]['multiverseid']+', "name" : "'+encodeURIComponent(rows[i]['card'])+'", "mana" : "'+rows[i]['manaCost']+'",';
+			str += ' "pt" : "'+pt+'", "type": "'+type+'", "loyalty" : "'+loyalty+'", "edition" : "'+encodeURIComponent(rows[i]['edition'])+'", ';
+			str += ' "quantity_deck" : '+rows[i]['quantity_deck']+', "quantity_side" : '+rows[i]['quantity_side']+', "quantity_vault" : '+rows[i]['quantity_vault']+' }';
+
+			deck.push(str);
+		}
+		res.write('{"success" : true, "currentDeck" : ['+deck.join(",")+'] }');	  	
+		res.end();	
+		return;	
+	});
+});
+
+
 
 /** Edit deck **/
 router.post('/editDeck',function( req,res) {
@@ -370,6 +410,74 @@ router.post('/editDeck',function( req,res) {
 });
 
 
+
+
+/** Add a card to deck **/
+router.post('/addCard',function( req,res) {
+
+	try {
+		JSON.parse(req.body.nodeDatas);
+	}
+	catch (err) {
+		res.write('{"success" : false, "errMsg" : "Try again using less special chars..." }');	  	
+		res.end();	
+		return;			
+	}
+
+	var nodeDatas = JSON.parse(req.body.nodeDatas);
+	var type = nodeDatas.typeAction;
+	var id_deck = parseInt(nodeDatas.deckId,10);	
+	var id_card = parseInt(nodeDatas.cardMultiverseId,10);
+	var where = nodeDatas.where;
+
+	if( where != "quantity_deck" && where != "quantity_side" && where != "quantity_vault") {
+		res.write('{"success" : false, "errMsg" : "An error has occured... # Where" }');	  	
+		res.end();	
+		return;			
+	}
+
+	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND id = ? AND deleted = 0", [req.session.id_user, id_deck], function(err, rows, fields) {
+		if( rows.length != 1 ) {
+			res.write('{"success" : false, "errMsg" : "An error has occured... # Owner" }');	  	
+			res.end();	
+			return;	
+		}
+		else {
+			connection.query("SELECT * FROM mtg.mtgcardsdeck WHERE mtgdeck_id = ? AND mtgcard_multiverseid = ? ", [id_deck, id_card], function(err, rows, fields) {
+				if( err ) {
+					console.log(err);
+				}
+				if( rows.length > 0 ) {
+					connection.query('UPDATE mtg.mtgcardsdeck SET '+where+' = ( '+where+' + 1 ) WHERE mtgdeck_id = ? AND mtgcard_multiverseid = ? ', [id_deck, id_card], function (err, result) {
+						if( err ) {
+							res.write('{"success" : false, "errMsg" : "An error has occured... # Update" }');	  	
+							res.end();	
+							return;							
+						}
+						res.write('{"success" : true }');	  	
+						res.end();	
+						return;						
+					});
+				}
+				else {
+					var insert = { 'mtgdeck_id' : id_deck, 'mtgcard_multiverseid' : id_card };
+					insert[where] = 1;					
+					connection.query("INSERT INTO mtg.mtgcardsdeck SET ?", insert, function(err, result) {
+						if( err ) {
+							console.log(err);
+							res.write('{"success" : false, "errMsg" : "An error has occured... # Insert" }');	  	
+							res.end();	
+							return;							
+						}	
+						res.write('{"success" : true }');	  	
+						res.end();	
+						return;	
+					});			
+				}
+			});	
+		}
+	});
+});
 
 
 

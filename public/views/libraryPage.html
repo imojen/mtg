@@ -31,8 +31,8 @@
 		</nav>
 
 
-		<div class="librarySearchresultsWrapper">
-			<table class="librarySearchresultsTable">
+		<div class="cardListWrapper">
+			<table class="cardListTableWrapperTable">
 				<tr>
 					<td>
 						<div class="tableResultsWrapper wrapperScroll">
@@ -48,7 +48,7 @@
 						            </tr>
 						        </thead>
 						    </table>						
-							<table id="tableResults" class="floatHead">
+							<table class="listResults floatHead">
 								<tbody>
 									<tr ng-repeat="card in results" ng-class="{selected:cardSlected==card.id}" ng-click="cardSelect(card.id, card.mid)" >
 										<td ng-bind-html="decode( card.name );"></td>
@@ -65,15 +65,15 @@
 					<td class="previewTD">
 						<div class="imgPreviewWrapper">
 							<a href="{{linkToImg}}" target="_blank">
-								<img src="{{previewUrl}}" id="imgPreview"/>
+								<img src="{{previewUrl}}" class="imgPreview"/>
 							</a>
 						</div>
 						<div class="transfertDivWrapper" ng-show="cardSlected && deck_set">
-							<div class="buttton-transfert toDeck btn-success title" title="Append this card to deck" ng-click="appendCardToDeck()">
+							<div class="buttton-transfert toDeck btn-success title" title="Append this card to deck" ng-click="appendCardTo('deck')">
 								<span class="glyphicon glyphicon-chevron-down"></span> Deck
-							</div><div class="buttton-transfert toSlide btn-warning title" title="Append this card to Side"  ng-click="appendCardToSlide()">
+							</div><div class="buttton-transfert toSlide btn-warning title" title="Append this card to Side"  ng-click="appendCardTo('sideboard')">
 								<span class="glyphicon glyphicon-chevron-down"></span> Side
-							</div><div class="buttton-transfert toVault btn-info title" title="Append this card to Vault"  ng-click="appendCardToVault()">
+							</div><div class="buttton-transfert toVault btn-info title" title="Append this card to Vault"  ng-click="appendCardTo('vault')">
 								<span class="glyphicon glyphicon-chevron-down"></span> Vault
 							</div>													
 						</div>
@@ -105,7 +105,7 @@
 						<li>&nbsp;</li>
 						<li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="deleteDeck()" title="Delete this deck"><span class="glyphicon glyphicon-trash"></span></button></li>			
 						<li>&nbsp;</li>
-						<li class="navbar-separator" ng-show="deck_set" >&nbsp;</li>
+						<li class="separator" ng-show="deck_set" ><span class="navbar-separator"/></span></li>
 						<li>&nbsp;</li>
 						<li><button type="button" class="btn btn-default navbar-btn" ng-click="openDeck()" title="Open a deck"><span class="glyphicon glyphicon-folder-open"></span></button></li>
 						<li>&nbsp;</li>
@@ -118,12 +118,54 @@
 		</nav>
 
 
-		<div class="libraryDeckWrapper">
+		<div class="cardListWrapper">
 			<div class="createDeckWrapper">
 				<p ng-show="!deck_set" class="deck_disclaimer">Open or create a new deck</p>
 			</div>
 
-
+			<table ng-show="deck_set" class="cardListTableWrapperTable">
+				<tr>
+					<td>
+						<div class="tableResultsWrapper wrapperScroll">
+						    <table class="headers scrollItem" >
+						        <thead>
+						            <tr>
+										<th>Name <span class="caret"></span></th>
+										<th class="center">Quantity</th>
+										<th class="center">Sideboard</th>
+										<th class="center">Mana Cost</th>
+										<th class="center">P/T</th>
+										<th class="center">Loyalty</th>
+										<th>Types</th>
+										<th>Edition</th>
+						            </tr>
+						        </thead>
+						    </table>						
+							<table class="listResults floatHead">
+								<tbody>
+									<tr ng-repeat="card in currentDeck" ng-class="{selected:deck_cardSlected==card.id}" ng-click="deck_cardSelect(card.id, card.mid)" >
+										<td ng-bind-html="decode( card.name );"></td>
+										<td class="center">{{card.quantity_deck}}</td>
+										<td class="center">{{card.quantity_side}}</td>
+										<td class="center" ng-bind-html="getManaCost( card.mana );"></td>
+										<td class="center">{{card.pt}}</td>
+										<td class="center">{{card.loyalty}}</td>
+										<td>{{card.type}}</td>
+										<td ng-bind-html="decode( card.edition );"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</td>
+					<td class="previewTD">
+						<div class="imgPreviewWrapper">
+							<a href="{{deck_linkToImg}}" target="_blank">
+								<img src="{{deck_previewUrl}}" class="imgPreview"/>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 
 

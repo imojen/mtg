@@ -48,12 +48,17 @@ a {
 	font-style: italic;
 	line-height: 50px;
 }
-.navbar-separator {
+.nav>li.separator {
+	padding-top: 10px;
+}
+span.navbar-separator {
 	border-right: 1px solid #666;
 	width:1px;
-	height: 50px;
+	height: 30px;
+	list-style: 30px;
 	margin-right: 15px;
 	padding-left: 15px;
+	display: inline-block;
 }
 .navbar-brand {
 	background: #0c0e11;
@@ -498,41 +503,41 @@ input.sign-up-input-checkbox {
 	background: #1c212a;	
 	color: #fff;
 }
-#main-body #library .librarySearchresultsWrapper {
-	height: 350px;
+#main-body #library .cardListWrapper {
+	max-height: 350px;
 	width: 100%;
 	position: relative;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable {
 	width: 100%;
 	height: 350px;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable td {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable td {
 	vertical-align: top;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable td.previewTD {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable td.previewTD {
 	width:242px;
 	vertical-align: middle;
 	background: #2D384D;
 	padding: 0;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.imgPreviewWrapper {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.imgPreviewWrapper {
 	text-align: center;
 	height: 320px;
 }
-img#imgPreview {
+img.imgPreview {
 	max-height: 310px;
 	margin-top: 5px;
 	border-radius: 12px;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper {
 	height: 30px;
 	width:242px;
 	background :red;
 	white-space: nowrap;
 	overflow: hidden;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .buttton-transfert {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper .buttton-transfert {
 	display: inline-block;
 	height: 30px;
 	line-height: 30px;
@@ -543,19 +548,19 @@ img#imgPreview {
 	font-size: 14px;
 	cursor: pointer;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .toDeck {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper .toDeck {
 	font-weight: bold;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .toSlide {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper .toSlide {
 
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .toVault {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper .toVault {
 
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .buttton-transfert:first-child {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper .buttton-transfert:first-child {
 	width: 82px;
 }
-#main-body #library .librarySearchresultsWrapper table.librarySearchresultsTable div.transfertDivWrapper .buttton-transfert span {
+#main-body #library .cardListWrapper table.cardListTableWrapperTable div.transfertDivWrapper .buttton-transfert span {
 	padding-right: 5px;
 }
 #main-body #library .tableResultsWrapper {
@@ -576,7 +581,7 @@ img#imgPreview {
 	left: 0;
 	z-index: 10;
 }
-#main-body #library table#tableResults {
+#main-body #library table.listResults {
 	width: 100%;
 	margin-top: 30px;
 }
@@ -588,15 +593,15 @@ img#imgPreview {
 	font-size: 14px;
 	padding-left: 10px;
 }
-#main-body #library table#tableResults tbody tr {
+#main-body #library table.listResults tbody tr {
 	background: #1c212a;
 }
-#main-body #library table#tableResults tbody tr:hover,
-#main-body #library table#tableResults tbody tr.selected {
+#main-body #library table.listResults tbody tr:hover,
+#main-body #library table.listResults tbody tr.selected {
 	cursor: pointer;
 	background: #2D384D;
 }
-#main-body #library table#tableResults tbody tr td {
+#main-body #library table.listResults tbody tr td {
 	padding-left: 5px;
 	line-height: 28px;
 	font-size: 12px;
@@ -605,12 +610,7 @@ img#imgPreview {
 }
 
 
-
-#main-body #library .libraryDeckWrapper {
-	width: 100%;
-	position: relative;
-}
-#main-body #library .libraryDeckWrapper p.deck_disclaimer {
+#main-body #library .cardListWrapper p.deck_disclaimer {
 	margin: 50px auto;
 	text-align: center;
 	color: #999;

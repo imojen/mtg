@@ -45,11 +45,19 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	// Deck
 	$scope.deck_set = false;
 	$scope.deck_id = null;
+	$scope.currentDeck = [];
 	$scope.deck_name = "";
 	$scope.deck_comment = "";
 	$scope.edit_deck_name = "";
 	$scope.edit_deck_comment = "";
 
+
+	// Card deck
+	$scope.deck_cardSlected = null;
+	$scope.deck_cardId = null;
+	$scope.deck_cardMultiverseId = null;
+	$scope.deck_previewUrl = 'images/default.jpg';
+	$scope.deck_linkToImg = '#';	
 
 	// Popup
 	$scope.closePopup = function() {
@@ -86,11 +94,23 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 	$scope.cardSelect = function( id, multiverseId ) {
 		$scope.cardSlected = id;
+		$scope.cardMultiverseId = multiverseId;
 		$scope.previewUrl = 'images/default.jpg';
 		$scope.linkToImg = '#';		
 		if( multiverseId != null ) {
 			$scope.previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiverseId+'&type=card';
 			$scope.linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiverseId;
+		}
+		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
+	}
+	$scope.deck_cardSelect = function( id, multiverseId ) {
+		$scope.deck_cardSlected = id;
+		$scope.deck_cardMultiverseId = multiverseId;
+		$scope.deck_previewUrl = 'images/default.jpg';
+		$scope.deck_linkToImg = '#';		
+		if( multiverseId != null ) {
+			$scope.deck_previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiverseId+'&type=card';
+			$scope.deck_linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiverseId;
 		}
 		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
 	}
@@ -256,7 +276,8 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 				$scope.deck_id = id_deck;
 				$scope.deck_name = $scope.decks[i]['name'];
 				$scope.deck_comment = $scope.decks[i]['comment'];	
-				$scope.quitOpeningDeck();			
+				$scope.quitOpeningDeck();
+				$scope.getCurrentDeck();
 			}
 		}
 		if( !$scope.deck_set ) {
@@ -361,29 +382,74 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 
 
-	$scope.appendCardToDeck = function() {
-		if( $scope.multiverseid == null || !$scope.deck_set )
+	$scope.appendCardTo = function(where) {
+		if( $scope.cardMultiverseId == null || !$scope.deck_set ) 
 			return false;
 		
-		notification.showAlert("Not developped yet...");
-		return;
-	}
-	$scope.appendCardToSlide = function() {
-		if( $scope.multiverseid == null || !$scope.deck_set )
-			return false;	
-
-		notification.showAlert("Not developped yet...");
-		return;
-	}
-	$scope.appendCardToVault = function() {
-		if( $scope.multiverseid == null || !$scope.deck_set )
+		if( where == "deck" ) var whereField = 'quantity_deck';
+		else if( where == "sideboard" ) var whereField = 'quantity_side';
+		else if( where == "vault" ) var whereField = 'quantity_vault';
+		
+		var method = 'POST';
+		var inserturl = './cards/addCard';
+		var nodeDatas = {
+				'typeAction' : 'add',
+				'where' : whereField,
+				'deckId' : $scope.deck_id,
+				'cardMultiverseId' : $scope.cardMultiverseId,
+		   };
+		$http({
+		    method: method,
+		    url: inserturl,
+		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success) {
+				$scope.getCurrentDeck();
+				return;
+			}
+			else {
+				notification.showAlert(response.errMsg);
+				return false;
+			}			
+		}).
+		error(function(response) {
+	        $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
 			return false;
-
-		notification.showAlert("Not developped yet...");
-		return;
+		});					
 	}
 
 
+	$scope.getCurrentDeck = function() {
+		var method = 'POST';
+		var inserturl = './cards/getDeck';
+		var nodeDatas = {
+		      'deckId' : $scope.deck_id,
+		   };
+		$http({
+		    method: method,
+		    url: inserturl,
+		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(response) {
+			if(response.success) {
+				$scope.currentDeck = response.currentDeck;
+				return;
+			}
+			else {
+				notification.showAlert(response.errMsg);
+				return false;
+			}			
+		}).
+		error(function(response) {
+		    $scope.codeStatus = response || "Request failed";
+			alert($scope.codeStatus);
+			return false;
+		});			
+	}
 
 
 
