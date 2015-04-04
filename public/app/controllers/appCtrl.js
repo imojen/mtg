@@ -34,76 +34,38 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.timeOut = null;
 
 
-	// Create / open / edit deck
+	// Create deck
 	$scope.popup = false;
 	$scope.creatingNewDeck = false;
-	$scope.openingDeck = false;
-	$scope.editDeck = false;
 	$scope.newDeck = { deckname : '', comment : ''};
-	$scope.decks = [];
 
 	// Deck
 	$scope.deck_set = false;
 	$scope.deck_id = null;
-	$scope.currentDeck = [];
-	$scope.deck_name = "";
-	$scope.deck_comment = "";
-	$scope.edit_deck_name = "";
-	$scope.edit_deck_comment = "";
+	$scope.deck_name = null;
+	$scope.deck_comment = null;	
 
-
-	// Card deck
-	$scope.deck_cardSlected = null;
-	$scope.deck_cardId = null;
-	$scope.deck_cardMultiverseId = null;
-	$scope.deck_previewUrl = 'images/default.jpg';
-	$scope.deck_linkToImg = '#';	
-
-	// Popup
-	$scope.closePopup = function() {
-		$scope.popup = false;
-		$scope.creatingNewDeck = false;
-		$scope.openingDeck = false;
-		$scope.editDeck = false;
-	}
-	$scope.$watch( "popup", function( bool ) {
-		if( bool ) 
-			setTimeout(function() { $scope.resizePopup(); },5);
+	angular.element(document).ready(function () {
+		if( $(".wrapperScroll").length ) {
+			$(".wrapperScroll").on('scroll',function() {
+				$(".scrollItem").css('top',$(this).scrollTop());
+			});
+		}
 	});
-	$scope.resizePopup = function() {
-		var $box = $(".popup-wrapper:visible");
-		$box.css({
-			'margin-left' : - parseFloat($box.css('width')) / 2 +"px",
-			'margin-top' : - parseFloat($box.css('height')) / 2 +"px",
-		});		
-	}
-
 
 	$scope.showAlert = function(str) {
 		notification.showAlert(str);
 	};
 
-	$scope.cardSelect = function( id, multiverseId ) {
+	$scope.cardSelect = function( id, multiversId ) {
 		$scope.cardSlected = id;
-		$scope.cardMultiverseId = multiverseId;
 		$scope.previewUrl = 'images/default.jpg';
 		$scope.linkToImg = '#';		
-		if( multiverseId != null ) {
-			$scope.previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiverseId+'&type=card';
-			$scope.linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiverseId;
+		if( multiversId != null ) {
+			$scope.previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiversId+'&type=card';
+			$scope.linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiversId;
 		}
-		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
-	}
-	$scope.deck_cardSelect = function( id, multiverseId ) {
-		$scope.deck_cardSlected = id;
-		$scope.deck_cardMultiverseId = multiverseId;
-		$scope.deck_previewUrl = 'images/default.jpg';
-		$scope.deck_linkToImg = '#';		
-		if( multiverseId != null ) {
-			$scope.deck_previewUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiverseId+'&type=card';
-			$scope.deck_linkToImg = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid='+multiverseId;
-		}
-		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
+		//$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiversId+'.jpeg';
 	}
 
 	$scope.getManaCost = function( str ) {
@@ -160,12 +122,6 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 	$scope.decode = function( str ) {
 		return decodeURIComponent(str);
 	}
-	$scope.decodeDeckName = function( str ) {
-		return '<span class="glyphicon glyphicon-book"></span> '+decodeURIComponent(str);
-	}
-	$scope.decodeDeckComment = function( str ) {
-		return '<span class="comment-text">'+decodeURIComponent(str)+'</span>';
-	}
 
 
 	$scope.newDeck = function() {
@@ -178,7 +134,8 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		setTimeout(function(){$("#deckName").focus();},50);
 	}
 	$scope.quitCreatingDeck = function() {
-		$scope.closePopup();
+		$scope.popup = false;
+		$scope.creatingNewDeck = false;
 	}
 	$scope.newDeckCreation = function() {
 		if( $scope.newDeck.deckname.length < 4 ) {
@@ -196,9 +153,10 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		var method = 'POST';
 		var inserturl = './cards/createDeck';
 		var nodeDatas = {
-		      'deckName' : encodeURIComponent($scope.newDeck.deckname),
-		      'deckComment' : encodeURIComponent($scope.newDeck.comment),
-		   };
+		      'deckName' : $scope.newDeck.deckname,
+		      'deckComment' : $scope.newDeck.comment,
+		    };
+
 		$http({
 		    method: method,
 		    url: inserturl,
@@ -211,7 +169,7 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 				$scope.deck_id = response.idDeck;
 				$scope.deck_name = response.deckName;
 				$scope.deck_comment = response.comment;
-				$scope.closePopup();
+				$scope.quitCreatingDeck();	
 			}
 			else {
 				notification.showAlert(response.errMsg);
@@ -225,227 +183,11 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
 		});	
 
 	}
-	$scope.quitOpeningDeck = function() {
-		$scope.closePopup();	
-	}
-	$scope.openDeck = function() {
-		if( $scope.popup || $scope.openingDeck )
-			return;		
-		var method = 'POST';
-		var inserturl = './cards/openDeck';
-		$http({
-		    method: method,
-		    url: inserturl,
-		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		}).
-		success(function(response) {
-			if(response.success) {
-				if( response.nb == 0 ) {
-					notification.showAlert("You should create a deck at first !");
-					return;
-				}
-				$scope.decks = response.decks;
-				$scope.popup = true;
-				$scope.openingDeck = true;	
-				return;
-			}
-			else {
-				notification.showAlert(response.errMsg);
-				return false;
-			}			
-		}).
-		error(function(response) {
-	        $scope.codeStatus = response || "Request failed";
-			alert($scope.codeStatus);
-			return false;
-		});	
-	}
-	$scope.setDeck = function( id_deck ) {
-		for( var i in $scope.decks ) {
-			if( $scope.decks[i]['id'] == id_deck ) {
-				$scope.deck_cardSlected = null;
-				$scope.deck_cardId = null;
-				$scope.deck_cardMultiverseId = null;
-				$scope.deck_previewUrl = 'images/default.jpg';
-				$scope.deck_linkToImg = '#';					
-				$scope.deck_set = true;
-				$scope.deck_id = id_deck;
-				$scope.deck_name = $scope.decks[i]['name'];
-				$scope.deck_comment = $scope.decks[i]['comment'];	
-				$scope.quitOpeningDeck();
-				$scope.getCurrentDeck();
-			}
-		}
-		if( !$scope.deck_set ) {
-			notification.showAlert("An error has occurred while opening this deck...");
-			return;
-		}
-	}
-	$scope.unsetDeck = function() {
-		$scope.deck_set = false;
-		$scope.deck_id = null;
-		$scope.deck_name = '';
-		$scope.deck_comment = '';		
-	}
-	$scope.deleteDeck = function() {
-		if( !confirm("Are you sure ?") )
-			return;
-		var method = 'POST';
-		var inserturl = './cards/deleteDeck';
-		var nodeDatas = {
-		      'deckId' : $scope.deck_id,
-		   };
-		$http({
-		    method: method,
-		    url: inserturl,
-		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
-		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		}).
-		success(function(response) {
-			if(response.success) {
-				notification.showAlert("This deck has been removed from your library.");
-				$scope.unsetDeck();
-				$scope.closePopup();
-				return;
-			}
-			else {
-				notification.showAlert(response.errMsg);
-				return false;
-			}			
-		}).
-		error(function(response) {
-	        $scope.codeStatus = response || "Request failed";
-			alert($scope.codeStatus);
-			return false;
-		});			
-	}
-
-
-	$scope.editThisDeck = function() {
-		if( $scope.popup || $scope.editDeck || !$scope.deck_set  )
-			return;
-		$scope.popup = true;
-		$scope.editDeck = true;
-		$scope.edit_deck_name = $scope.decode($scope.deck_name);
-		$scope.edit_deck_comment = $scope.decode($scope.deck_comment);
-	}
-
-	$scope.endEditingDeck = function() {
-		if( $scope.edit_deck_name.length < 4 ) {
-			notification.showAlert("Deck name must contain at least 4 characters.");
-			return false;
-		}
-		if( $scope.edit_deck_name.length > 60 ) {
-			notification.showAlert("Deck name must contain maximum  60 characters.");
-			return false;
-		}
-		if( $scope.edit_deck_comment.length > 300 ) {
-			notification.showAlert("Deck comment must contain maximum  300 characters.");
-			return false;
-		}
-		var method = 'POST';
-		var inserturl = './cards/editDeck';
-		var nodeDatas = {
-		      'deckName' : encodeURIComponent($scope.edit_deck_name),
-		      'deckComment' : encodeURIComponent($scope.edit_deck_comment),
-		      'deckId' : $scope.deck_id,
-		   };
-		$http({
-		    method: method,
-		    url: inserturl,
-		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
-		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		}).
-		success(function(response) {
-			if(response.success) {
-				$scope.deck_name = encodeURIComponent($scope.edit_deck_name);
-				$scope.deck_comment = encodeURIComponent($scope.edit_deck_comment);
-				$scope.closePopup();
-				return;
-			}
-			else {
-				notification.showAlert(response.errMsg);
-				return false;
-			}			
-		}).
-		error(function(response) {
-	        $scope.codeStatus = response || "Request failed";
-			alert($scope.codeStatus);
-			return false;
-		});			
-	}
 
 
 
 
-	$scope.appendCardTo = function(where) {
-		if( $scope.cardMultiverseId == null || !$scope.deck_set ) 
-			return false;
-		
-		if( where == "deck" ) var whereField = 'quantity_deck';
-		else if( where == "sideboard" ) var whereField = 'quantity_side';
-		else if( where == "vault" ) var whereField = 'quantity_vault';
-		
-		var method = 'POST';
-		var inserturl = './cards/addCard';
-		var nodeDatas = {
-				'typeAction' : 'add',
-				'where' : whereField,
-				'deckId' : $scope.deck_id,
-				'cardMultiverseId' : $scope.cardMultiverseId,
-		   };
-		$http({
-		    method: method,
-		    url: inserturl,
-		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
-		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		}).
-		success(function(response) {
-			if(response.success) {
-				$scope.getCurrentDeck();
-				return;
-			}
-			else {
-				notification.showAlert(response.errMsg);
-				return false;
-			}			
-		}).
-		error(function(response) {
-	        $scope.codeStatus = response || "Request failed";
-			alert($scope.codeStatus);
-			return false;
-		});					
-	}
 
-
-	$scope.getCurrentDeck = function() {
-		var method = 'POST';
-		var inserturl = './cards/getDeck';
-		var nodeDatas = {
-		      'deckId' : $scope.deck_id,
-		   };
-		$http({
-		    method: method,
-		    url: inserturl,
-		    data:  'nodeDatas='+JSON.stringify(nodeDatas),
-		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		}).
-		success(function(response) {
-			if(response.success) {
-				$scope.currentDeck = response.currentDeck;
-				return;
-			}
-			else {
-				notification.showAlert(response.errMsg);
-				return false;
-			}			
-		}).
-		error(function(response) {
-		    $scope.codeStatus = response || "Request failed";
-			alert($scope.codeStatus);
-			return false;
-		});			
-	}
 
 
 
