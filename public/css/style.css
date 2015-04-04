@@ -80,22 +80,8 @@ span.navbar-separator {
 	font-size: 14px;
 	cursor : pointer;
 }
-.navbar-default .navbar-nav>.open>a, 
-.navbar-default .navbar-nav>.open>a:focus, 
-.navbar-default .navbar-nav>.open>a:hover {
-	background : #1c212a;	
-}
-.navbar-nav>li>.dropdown-menu,
-.navbar-nav>li>.dropdown-menu li {
-	background: #1c212a;
-}
-.navbar-nav>li>.dropdown-menu li * {
-	color: #fff;
-}
-.navbar-nav>li>.dropdown-menu li img {
-	background: #fff;
-}
-/** 1c212a **/
+
+
 
 
 /** MODAL BOX **/
