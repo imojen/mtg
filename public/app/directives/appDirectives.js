@@ -54,8 +54,10 @@ directives.frameHomePage = function() {
 		restrict : "E",
 		scope : { page : '&' },
 		templateUrl : 'views/homePage.html',
+    controller : 'homeCtrl'
 	}
 }
+
 directives.frameLibraryPage = function() {
 	return {
 		restrict : "E",

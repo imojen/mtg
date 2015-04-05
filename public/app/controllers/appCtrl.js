@@ -11,11 +11,6 @@ controllers.topMenuCtrl = function( $scope, $http ) {
 
 }
 
-controllers.homeCtrl = function( $scope, $http ) {
-
-
-}
-
 controllers.libraryCtrl = function( $scope, $http, notification ) {
 
 	/*$scope.results = [
