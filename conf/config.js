@@ -1,11 +1,11 @@
 module.exports = {
   database:{
-    host: "localhost",
+    host: "192.168.0.22",
     user: "mtg",
     password: "lolilol"
   },
   elastic:{
-    host: "localhost",
+    host: "192.168.0.22",
     port: "9200"
   }
 }

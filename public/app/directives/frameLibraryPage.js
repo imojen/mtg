@@ -9,13 +9,14 @@ angular.module('mtgApp').directive('frameLibraryPage', function() {
       angular.element(document).ready(function () {
         if( $(".wrapperScroll").length ) {
           $(".wrapperScroll").on('scroll',function() {
-            $(".scrollItem").css('top',$(this).scrollTop());
+            $(this).find(".scrollItem").css('top',$(this).scrollTop());
           });
         }
         $(".navbar-btn, .title").tooltip({placement:'top',container:'#library'});
+        $("span.selectable").tooltip({placement:'bottom',container:'#library'});
 
         fixLibrarySize();
-        $(window).on('resize',function() {
+        $(window,document).on('resize',function() {
           fixLibrarySize();
         });
 
@@ -25,11 +26,12 @@ angular.module('mtgApp').directive('frameLibraryPage', function() {
           h = parseFloat(b.css('height'));
           val = parseInt((h-100)/2);
 
-        console.log("bH : "+h+", val :"+val);
-
         if( val < 350 )
           val = 350;
         $(".cardListWrapper, .cardListTableWrapperTable, .tableResultsWrapper").css('height', val+"px" );
+
+        var tdH = parseFloat($(".tableResultsWrapper").css('height'));
+        $(".imgPreviewWrapper:first").css('height', val-30+"px");
       }
     }
   }
