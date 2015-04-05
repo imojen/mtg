@@ -1,16 +1,5 @@
 var controllers = {};
 
-
-controllers.topMenuCtrl = function( $scope, $http ) {
-
-  $scope.topMenuAction = function( page ) {
-    if( page == $scope.page )
-      return;
-    $scope.page = page;
-  }
-
-}
-
 controllers.libraryCtrl = function( $scope, $http, notification ) {
 
   /*$scope.results = [
