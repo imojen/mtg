@@ -48,16 +48,6 @@ directives.frameHome = function() {
 	}
 };
 
-
-directives.frameHomePage = function() {
-	return {
-		restrict : "E",
-		scope : { page : '&' },
-		templateUrl : 'views/homePage.html',
-    controller : 'homeCtrl'
-	}
-}
-
 directives.frameLibraryPage = function() {
 	return {
 		restrict : "E",
