@@ -71,8 +71,15 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     }
     //$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
   }
+  $scope.unsetCardSelect = function() {
+    $scope.cardSlected = null;
+    $scope.cardMultiverseId = null;
+    $scope.previewUrl = 'images/default.jpg';
+    $scope.linkToImg = '#';
+  }
   $scope.deck_cardSelect = function( id, multiverseId ) {
     $scope.deck_cardSlected = id;
+    $scope.deck_cardId = id;
     $scope.deck_cardMultiverseId = multiverseId;
     $scope.deck_previewUrl = 'images/default.jpg';
     $scope.deck_linkToImg = '#';
@@ -82,7 +89,13 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     }
     //$scope.previewUrl = 'http://api.mtgdb.info/content/card_images/'+multiverseId+'.jpeg';
   }
-
+  $scope.deck_unsetCardSelect = function() {
+    $scope.deck_cardSlected = null;
+    $scope.deck_cardId = null;
+    $scope.deck_cardMultiverseId = null;
+    $scope.deck_previewUrl = 'images/default.jpg';
+    $scope.deck_linkToImg = '#';
+  }
   $scope.getManaCost = function( str ) {
     str = str.replace(/}{/gi," ");
     str = str.replace(/{/gi,"");
@@ -102,6 +115,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     if( $scope.stringSearch.length < 2 )
       return;
     $scope.timeOut = setTimeout(function() {
+      $scope.unsetCardSelect();
       $scope.httpSearch();
     },500);
   }
@@ -240,11 +254,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
   $scope.setDeck = function( id_deck ) {
     for( var i in $scope.decks ) {
       if( $scope.decks[i]['id'] == id_deck ) {
-        $scope.deck_cardSlected = null;
-        $scope.deck_cardId = null;
-        $scope.deck_cardMultiverseId = null;
-        $scope.deck_previewUrl = 'images/default.jpg';
-        $scope.deck_linkToImg = '#';
+        $scope.deck_unsetCardSelect();
         $scope.deck_set = true;
         $scope.deck_id = id_deck;
         $scope.deck_name = $scope.decks[i]['name'];

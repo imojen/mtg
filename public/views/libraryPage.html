@@ -22,21 +22,40 @@
           <!--<p class="navbar-text">{{total}} results for current search (max on screen : 30)</p>-->
 
           <ul class="nav navbar-nav">
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu filters" role="menu">
+
+                <li role="presentation" class="dropdown-header">Filter by card type : </li>
+
                 <li>
-                  <img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
-                  test
+                  <span class="selectable card-type-icon type_instant" title="Instant"></span>
+                  <span class="selectable card-type-icon type_sorcery" title="Sorcery"></span>
+                  <span class="selectable card-type-icon type_enchantment" title="Enchantment"></span>
+                  <span class="selectable card-type-icon type_land" title="Land"></span>
+                  <span class="selectable card-type-icon type_creature" title="Creature"></span>
+                  <span class="selectable card-type-icon type_artifact" title="Artifact"></span>
+                  <span class="selectable card-type-icon type_planeswalker" title="Planeswalker"></span>
                 </li>
+
+
               </ul>
             </li>
+
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Color <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu filters" role="menu">
+
+                <li role="presentation" class="dropdown-header">Filter by card color : </li>
                 <li>
-                  <img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
-                  test
+                  <span class="selectable card-color-icon color_white" title="White"></span>
+                  <span class="selectable card-color-icon color_blue" title="Blue"></span>
+                  <span class="selectable card-color-icon color_red" title="Red"></span>
+                  <span class="selectable card-color-icon color_green" title="Green"></span>
+                  <span class="selectable card-color-icon color_black" title="Black"></span>
+                  <span class="selectable card-color-icon color_grey" title="Colorless"></span>               
                 </li>
               </ul>
             </li>
