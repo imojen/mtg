@@ -1,42 +1,51 @@
 <!doctype html>
 <html lang="en" >
-	<head>
-		<title>MTG</title>
-		<meta charset="UTF-8"/>
+  <head>
+    <title>MTG</title>
+    <meta charset="UTF-8"/>
 
-		<link rel="stylesheet" href="css/reset.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:300' />	
-		
-
-		<script src="lib/vendor/angular.min.js"></script>
-		<script src="lib/vendor/angular-sanitize.js"></script>
-		<script src="lib/vendor/require.min.js"></script>
-		<script src="lib/vendor/jquery-1.11.1.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:300' />
 
 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="lib/vendor/angular.min.js"></script>
+    <script src="lib/vendor/angular-sanitize.js"></script>
+    <script src="lib/vendor/require.min.js"></script>
+    <script src="lib/vendor/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 
-		<script src="app/mtgApp.js"></script>
-		<script src="app/modules/mtgAppLogin.js"></script>
-		<script src="app/modules/mtgAppAlert.js"></script>
-		<script src="app/directives/appDirectives.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- Module -->
+    <script src="app/mtgApp.js"></script>
+    <script src="app/modules/mtgAppLogin.js"></script>
+    <script src="app/modules/mtgAppAlert.js"></script>
+
+    <!-- Directives -->
     <script src="app/directives/frameHomePage.js"></script>
-		<script src="app/controllers/appCtrl.js"></script>
+    <script src="app/directives/frameHome.js"></script>
+    <script src="app/directives/frameArenaPage.js"></script>
+    <script src="app/directives/frameCommunityPage.js"></script>
+    <script src="app/directives/frameLibraryPage.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/controllers/libraryCtrl.js"></script>
     <script src="app/controllers/homeCtrl.js"></script>
     <script src="app/controllers/topMenuCtrl.js"></script>
 
-		<script src="app/services/notification.js"></script>
+   <!-- Sevices -->
+    <script src="app/services/notification.js"></script>
 
-	</head>
-	<body ng-app="mtgApp">
-		<div id="htmlWrapper" ng-controller="mtgAppController">
-			<frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect(a,b)" show-alert="showAlert(msg)"></frame-login>
-			<frame-alert ng-show="notification.alertShow"></frame-alert>
-			<frame-home ng-show="isLogged" isLogged="isLogged" login-disconnect="loginDisconnect()"></frame-home>
-		</div>
-	</body>
+  </head>
+  <body ng-app="mtgApp">
+    <div id="htmlWrapper" ng-controller="mtgAppController">
+      <frame-login ng-show="!isLogged" isLogged="isLogged" login-connect="loginConnect(a,b)" show-alert="showAlert(msg)"></frame-login>
+      <frame-alert ng-show="notification.alertShow"></frame-alert>
+      <frame-home ng-show="isLogged" isLogged="isLogged" login-disconnect="loginDisconnect()"></frame-home>
+    </div>
+  </body>
 </html>

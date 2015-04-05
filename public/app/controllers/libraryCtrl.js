@@ -1,11 +1,4 @@
-var controllers = {};
-
-controllers.libraryCtrl = function( $scope, $http, notification ) {
-
-  /*$scope.results = [
-    { "id" : 18794, "mid" : 193452, "name" : "Emrakul, the Aeons Torn", "mana" : '15', "pt" : '15/15', "type": 'Legendary Creature - Eldrazi'},
-    { "id" : 18793, "mid" : 193485, "name" : "Emrakul's Hatcher", "mana" : '4 R', "pt" : '3/3', "type" : 'Creature - Eldrazi, Drone'},
-  ];*/
+angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, notification ) {
   $scope.results = [];
   $scope.total = 0;
 
@@ -430,8 +423,4 @@ controllers.libraryCtrl = function( $scope, $http, notification ) {
       return false;
     });
   }
-}
-
-
-
-mtgApp.controller( controllers );
+});

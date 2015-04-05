@@ -1,281 +1,195 @@
 <div id="library"  ng-controller="libraryCtrl">
+  <div class="librarySearchWrapper">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Library</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <p class="navbar-text">Search : </p>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Card name..." ng-model="stringSearch" ng-keyup="searchCard($event)">
+            </div>
+          </form>
+          <!--<p class="navbar-text">{{total}} results for current search (max on screen : 30)</p>-->
+
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
+                  test
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Color <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
+                  test
+                </li>
+              </ul>
+            </li>
+          </ul>
 
 
-	<div class="librarySearchWrapper">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Library</a>
-				</div>
-
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<p class="navbar-text">Search : </p>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Card name..." ng-model="stringSearch" ng-keyup="searchCard($event)">
-						</div>
-					</form>
-					<!--<p class="navbar-text">{{total}} results for current search (max on screen : 30)</p>-->
-
-					<ul class="nav navbar-nav">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
-									test
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Color <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
-									test
-								</li>
-							</ul>
-						</li>						
-					</ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Advanced search <span class="caret"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
 
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Advanced search <span class="caret"></span></a></li>
-					</ul>					
-				</div>
-			</div>
-		</nav>
+    <div class="cardListWrapper">
+      <table class="cardListTableWrapperTable">
+        <tr>
+          <td>
+            <div class="tableResultsWrapper wrapperScroll">
+              <table class="headers scrollItem" >
+                <thead>
+                  <tr>
+                    <th>Name <span class="caret"></span></th>
+                    <th class="center">Mana Cost</th>
+                    <th class="center">P/T</th>
+                    <th class="center">Loyalty</th>
+                    <th>Types</th>
+                    <th>Edition</th>
+                  </tr>
+                </thead>
+              </table>
+              <table class="listResults floatHead">
+                <tbody>
+                  <tr ng-repeat="card in results" ng-class="{selected:cardSlected==card.id}" ng-click="cardSelect(card.id, card.mid)" >
+                    <td ng-bind-html="decode( card.name );"></td>
+                    <td class="center" ng-bind-html="getManaCost( card.mana );"></td>
+                    <td class="center">{{card.pt}}</td>
+                    <td class="center">{{card.loyalty}}</td>
+                    <td>{{card.type}}</td>
+                    <td ng-bind-html="decode( card.edition );"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+          <td class="previewTD">
+            <div class="imgPreviewWrapper">
+              <a href="{{linkToImg}}" target="_blank">
+                <img src="{{previewUrl}}" class="imgPreview"/>
+              </a>
+            </div>
+            <div class="transfertDivWrapper" ng-show="cardSlected && deck_set">
+              <div class="buttton-transfert toDeck btn-success title" title="Append this card to deck" ng-click="appendCardTo('deck')">
+                <span class="glyphicon glyphicon-chevron-down"></span> Deck
+              </div><div class="buttton-transfert toSlide btn-warning title" title="Append this card to Side"  ng-click="appendCardTo('sideboard')">
+                <span class="glyphicon glyphicon-chevron-down"></span> Side
+              </div><div class="buttton-transfert toVault btn-info title" title="Append this card to Vault"  ng-click="appendCardTo('vault')">
+                <span class="glyphicon glyphicon-chevron-down"></span> Vault
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
 
-		<div class="cardListWrapper">
-			<table class="cardListTableWrapperTable">
-				<tr>
-					<td>
-						<div class="tableResultsWrapper wrapperScroll">
-						    <table class="headers scrollItem" >
-						        <thead>
-						            <tr>
-										<th>Name <span class="caret"></span></th>
-										<th class="center">Mana Cost</th>
-										<th class="center">P/T</th>
-										<th class="center">Loyalty</th>
-										<th>Types</th>
-										<th>Edition</th>
-						            </tr>
-						        </thead>
-						    </table>						
-							<table class="listResults floatHead">
-								<tbody>
-									<tr ng-repeat="card in results" ng-class="{selected:cardSlected==card.id}" ng-click="cardSelect(card.id, card.mid)" >
-										<td ng-bind-html="decode( card.name );"></td>
-										<td class="center" ng-bind-html="getManaCost( card.mana );"></td>
-										<td class="center">{{card.pt}}</td>
-										<td class="center">{{card.loyalty}}</td>
-										<td>{{card.type}}</td>
-										<td ng-bind-html="decode( card.edition );"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</td>
-					<td class="previewTD">
-						<div class="imgPreviewWrapper">
-							<a href="{{linkToImg}}" target="_blank">
-								<img src="{{previewUrl}}" class="imgPreview"/>
-							</a>
-						</div>
-						<div class="transfertDivWrapper" ng-show="cardSlected && deck_set">
-							<div class="buttton-transfert toDeck btn-success title" title="Append this card to deck" ng-click="appendCardTo('deck')">
-								<span class="glyphicon glyphicon-chevron-down"></span> Deck
-							</div><div class="buttton-transfert toSlide btn-warning title" title="Append this card to Side"  ng-click="appendCardTo('sideboard')">
-								<span class="glyphicon glyphicon-chevron-down"></span> Side
-							</div><div class="buttton-transfert toVault btn-info title" title="Append this card to Vault"  ng-click="appendCardTo('vault')">
-								<span class="glyphicon glyphicon-chevron-down"></span> Vault
-							</div>													
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">My deck</a>
+        </div>
 
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">My deck</a>			
-				</div>
+        <div class="collapse navbar-collapse">
 
-				<div class="collapse navbar-collapse">
+          <p class="navbar-text" ng-bind-html="decodeDeckName(deck_name);"  ng-show="deck_set"></p>
 
-					<p class="navbar-text" ng-bind-html="decodeDeckName(deck_name);"  ng-show="deck_set"></p>
-					
-					<ul class="nav navbar-nav navbar-right">		
-						<li>&nbsp;</li>
-						<li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="editThisDeck()" title="Edit this deck"><span class="glyphicon glyphicon-pencil"></span></button></li>
-						<li>&nbsp;</li>
-						<li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="deleteDeck()" title="Delete this deck"><span class="glyphicon glyphicon-trash"></span></button></li>			
-						<li>&nbsp;</li>
-						<li class="separator" ng-show="deck_set" ><span class="navbar-separator"/></span></li>
-						<li>&nbsp;</li>
-						<li><button type="button" class="btn btn-default navbar-btn" ng-click="openDeck()" title="Open a deck"><span class="glyphicon glyphicon-folder-open"></span></button></li>
-						<li>&nbsp;</li>
-						<li><button type="button" class="btn btn-default navbar-btn" ng-click="newDeck()" title="Create a new deck"><span class="glyphicon glyphicon-asterisk"></span></button></li>
-					</ul>
-				</div>
-
-				
-			</div>
-		</nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li>&nbsp;</li>
+            <li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="editThisDeck()" title="Edit this deck"><span class="glyphicon glyphicon-pencil"></span></button></li>
+            <li>&nbsp;</li>
+            <li><button type="button" class="btn btn-default navbar-btn" ng-show="deck_set" ng-click="deleteDeck()" title="Delete this deck"><span class="glyphicon glyphicon-trash"></span></button></li>
+            <li>&nbsp;</li>
+            <li class="separator" ng-show="deck_set" ><span class="navbar-separator"/></span></li>
+            <li>&nbsp;</li>
+            <li><button type="button" class="btn btn-default navbar-btn" ng-click="openDeck()" title="Open a deck"><span class="glyphicon glyphicon-folder-open"></span></button></li>
+            <li>&nbsp;</li>
+            <li><button type="button" class="btn btn-default navbar-btn" ng-click="newDeck()" title="Create a new deck"><span class="glyphicon glyphicon-asterisk"></span></button></li>
+          </ul>
+        </div>
 
 
-		<div class="cardListWrapper">
-			<div class="createDeckWrapper">
-				<p ng-show="!deck_set" class="deck_disclaimer"><br/><br/><br/><br/>Open or create a new deck</p>
-			</div>
-
-			<table ng-show="deck_set" class="cardListTableWrapperTable">
-				<tr>
-					<td>
-						<div class="tableResultsWrapper wrapperScroll">
-						    <table class="headers scrollItem" >
-						        <thead>
-						            <tr>
-										<th>Name <span class="caret"></span></th>
-										<th class="center">Quantity</th>
-										<th class="center">Sideboard</th>
-										<th class="center">Mana Cost</th>
-										<th class="center">P/T</th>
-										<th class="center">Loyalty</th>
-										<th>Types</th>
-										<th>Edition</th>
-						            </tr>
-						        </thead>
-						    </table>						
-							<table class="listResults floatHead">
-								<tbody>
-									<tr ng-repeat="card in currentDeck" ng-class="{selected:deck_cardSlected==card.id}" ng-click="deck_cardSelect(card.id, card.mid)" >
-										<td ng-bind-html="decode( card.name );"></td>
-										<td class="center">{{card.quantity_deck}}</td>
-										<td class="center">{{card.quantity_side}}</td>
-										<td class="center" ng-bind-html="getManaCost( card.mana );"></td>
-										<td class="center">{{card.pt}}</td>
-										<td class="center">{{card.loyalty}}</td>
-										<td>{{card.type}}</td>
-										<td ng-bind-html="decode( card.edition );"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</td>
-					<td class="previewTD">
-						<div class="imgPreviewWrapper">
-							<a href="{{deck_linkToImg}}" target="_blank">
-								<img src="{{deck_previewUrl}}" class="imgPreview"/>
-							</a>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
+      </div>
+    </nav>
 
 
-	</div>
+    <div class="cardListWrapper">
+      <div class="createDeckWrapper">
+        <p ng-show="!deck_set" class="deck_disclaimer"><br/><br/><br/><br/>Open or create a new deck</p>
+      </div>
+
+      <table ng-show="deck_set" class="cardListTableWrapperTable">
+        <tr>
+          <td>
+            <div class="tableResultsWrapper wrapperScroll">
+              <table class="headers scrollItem" >
+                <thead>
+                  <tr>
+                    <th>Name <span class="caret"></span></th>
+                    <th class="center">Quantity</th>
+                    <th class="center">Sideboard</th>
+                    <th class="center">Mana Cost</th>
+                    <th class="center">P/T</th>
+                    <th class="center">Loyalty</th>
+                    <th>Types</th>
+                    <th>Edition</th>
+                  </tr>
+                </thead>
+              </table>
+              <table class="listResults floatHead">
+                <tbody>
+                  <tr ng-repeat="card in currentDeck" ng-class="{selected:deck_cardSlected==card.id}" ng-click="deck_cardSelect(card.id, card.mid)" >
+                    <td ng-bind-html="decode( card.name );"></td>
+                    <td class="center">{{card.quantity_deck}}</td>
+                    <td class="center">{{card.quantity_side}}</td>
+                    <td class="center" ng-bind-html="getManaCost( card.mana );"></td>
+                    <td class="center">{{card.pt}}</td>
+                    <td class="center">{{card.loyalty}}</td>
+                    <td>{{card.type}}</td>
+                    <td ng-bind-html="decode( card.edition );"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+          <td class="previewTD">
+            <div class="imgPreviewWrapper">
+              <a href="{{deck_linkToImg}}" target="_blank">
+                <img src="{{deck_previewUrl}}" class="imgPreview"/>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
 
-
-
-
-
-
-	<div class="popup-layer" ng-show="popup">
-
-		<div class="popup-wrapper" id="createDeckPopup" ng-show="creatingNewDeck">
-			<div class="popup-title">
-				<span class="title">New deck</span>
-				<span class="glyphicon glyphicon-remove" ng-click="quitCreatingDeck()"></span>
-			</div>
-
-			<div class="popup-body">
-				<p>Fill the following fields in order to create a new deck.</p>
-
-				<form id="formCreateDeck" name="form_create_deck" class="popup-form">
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon  input-group-label">Deck name * </div>
-							<input class="form-control" type="text" id="deckName" ng-model="newDeck.deckname">
-						</div>
-					</div>				
-					<p>A comment about that deck :</p>
-					<textarea class="form-control" rows="3"  ng-model="newDeck.comment"></textarea>
-				</form>
-
-				<p class="right">
-					<button type="button" class="btn btn-default" ng-click="newDeckCreation()">Create</button>
-				</p>
-
-			</div>
-
-		</div>	
-
-
-		<div class="popup-wrapper" id="openDeckPopup" ng-show="openingDeck">
-			<div class="popup-title">
-				<span class="title">Open deck</span>
-				<span class="glyphicon glyphicon-remove" ng-click="quitOpeningDeck()"></span>
-			</div>
-
-			<div class="popup-body">
-				<ul class="list-full">
-					<li ng-repeat="deck in decks" ng-click="setDeck( deck.id );" ng-bind-html="decodeDeckName( deck.name ) + decodeDeckComment( deck.comment );"></li>
-				</ul>
-			</div>
-
-		</div>	
-
-
-
-		
-		<div class="popup-wrapper" id="editDeckPopup" ng-show="editDeck">
-			<div class="popup-title">
-				<span class="title">Edit this deck</span>
-			</div>
-
-			<div class="popup-body">
-				<form id="formEditDeck" name="form_edit_deck" class="popup-form">
-					<p>Edit deck name :</p>
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon  input-group-label">Deck name * </div>
-							<input class="form-control" type="text" ng-model="edit_deck_name">
-						</div>
-					</div>				
-					<p>Edit deck comment :</p>
-					<textarea class="form-control" rows="3"  ng-model="edit_deck_comment"></textarea>
-				</form>
-
-				<p class="right">
-					<button type="button" class="btn btn-default" ng-click="endEditingDeck()">Save</button>
-				</p>
-
-			</div>
-
-		</div>
-
-
-
-	</div>
+  </div>
 
 
 
@@ -283,13 +197,76 @@
 
 
 
+  <div class="popup-layer" ng-show="popup">
+
+    <div class="popup-wrapper" id="createDeckPopup" ng-show="creatingNewDeck">
+      <div class="popup-title">
+        <span class="title">New deck</span>
+        <span class="glyphicon glyphicon-remove" ng-click="quitCreatingDeck()"></span>
+      </div>
+
+      <div class="popup-body">
+        <p>Fill the following fields in order to create a new deck.</p>
+
+        <form id="formCreateDeck" name="form_create_deck" class="popup-form">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon  input-group-label">Deck name * </div>
+              <input class="form-control" type="text" id="deckName" ng-model="newDeck.deckname">
+            </div>
+          </div>
+          <p>A comment about that deck :</p>
+          <textarea class="form-control" rows="3"  ng-model="newDeck.comment"></textarea>
+        </form>
+
+        <p class="right">
+          <button type="button" class="btn btn-default" ng-click="newDeckCreation()">Create</button>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="popup-wrapper" id="openDeckPopup" ng-show="openingDeck">
+      <div class="popup-title">
+        <span class="title">Open deck</span>
+        <span class="glyphicon glyphicon-remove" ng-click="quitOpeningDeck()"></span>
+      </div>
+
+      <div class="popup-body">
+        <ul class="list-full">
+          <li ng-repeat="deck in decks" ng-click="setDeck( deck.id );" ng-bind-html="decodeDeckName( deck.name ) + decodeDeckComment( deck.comment );"></li>
+        </ul>
+      </div>
+
+    </div>
 
 
 
 
+    <div class="popup-wrapper" id="editDeckPopup" ng-show="editDeck">
+      <div class="popup-title">
+        <span class="title">Edit this deck</span>
+      </div>
+
+      <div class="popup-body">
+        <form id="formEditDeck" name="form_edit_deck" class="popup-form">
+          <p>Edit deck name :</p>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon  input-group-label">Deck name * </div>
+              <input class="form-control" type="text" ng-model="edit_deck_name">
+            </div>
+          </div>
+          <p>Edit deck comment :</p>
+          <textarea class="form-control" rows="3"  ng-model="edit_deck_comment"></textarea>
+        </form>
+
+        <p class="right">
+          <button type="button" class="btn btn-default" ng-click="endEditingDeck()">Save</button>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-
-
