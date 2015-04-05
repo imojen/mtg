@@ -18,34 +18,55 @@
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Card name..." ng-model="stringSearch" ng-keyup="searchCard($event)">
             </div>
-          </form>
-          <!--<p class="navbar-text">{{total}} results for current search (max on screen : 30)</p>-->
-
+          </form>          
+          <form novalidate class="simple-form" role="advancedSearch">
           <ul class="nav navbar-nav">
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu filters" role="menu">
+
+                <li role="presentation" class="dropdown-header">Filter by card type : </li>
+
                 <li>
-                  <img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
-                  test
+                  <span class="selectable card-type-icon type_instant" title="Instant" ng-value="{{types.Instant}}" ng-model="types.Instant" ng-click="clickAdvancedTypes('Instant')"></span>
+                  <span class="selectable card-type-icon type_sorcery" title="Sorcery" ng-value="{{types.Sorcery}}" ng-model="types.Sorcery" ng-click="clickAdvancedTypes('Sorcery')"></span>
+                  <span class="selectable card-type-icon type_enchantment" title="Enchantment" ng-value="{{types.Enchantment}}" ng-model="types.Enchantment" ng-click="clickAdvancedTypes('Enchantment')"></span>
+                  <span class="selectable card-type-icon type_land" title="Land" ng-value="{{types.Land}}" ng-model="types.Land" ng-click="clickAdvancedTypes('Land')"></span>
+                  <span class="selectable card-type-icon type_creature" title="Creature" ng-value="{{types.Creature}}" ng-model="types.Creature" ng-click="clickAdvancedTypes('Creature')"></span>
+                  <span class="selectable card-type-icon type_artifact" title="Artifact" ng-value="{{types.Artifact}}" ng-model="types.Artifact" ng-click="clickAdvancedTypes('Artifact')"></span>
+                  <span class="selectable card-type-icon type_planeswalker" title="Planeswalker" ng-value="{{types.Planeswalker}}" ng-model="types.Planeswalker" ng-click="clickAdvancedTypes('Planeswalker')"></span>
                 </li>
+
+
               </ul>
             </li>
+
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Color <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu filters" role="menu">
+
+                <li role="presentation" class="dropdown-header">Filter by card color : </li>
                 <li>
-                  <img style="width:20px;" src="http://hydra-media.cursecdn.com/mtgsalvation.gamepedia.com/thumb/6/69/FUT_Creature_symbol.png/100px-FUT_Creature_symbol.png?version=16da253e7a56cc938d59dda1c8fd4bca" />
-                  test
+                  <span class="selectable card-color-icon color_white" title="White" ng-value="{{colors.White}}" ng-model="colors.White" ng-click="clickAdvancedColor('White')"></span>
+                  <span class="selectable card-color-icon color_blue" title="Blue" ng-value="{{colors.Blue}}" ng-model="colors.Blue" ng-click="clickAdvancedColor('Blue')"></span>
+                  <span class="selectable card-color-icon color_red" title="Red" ng-value="{{colors.Red}}" ng-model="colors.Red" ng-click="clickAdvancedColor('Red')"></span>
+                  <span class="selectable card-color-icon color_green" title="Green" ng-value="{{colors.Green}}" ng-model="colors.Green" ng-click="clickAdvancedColor('Green')"></span>
+                  <span class="selectable card-color-icon color_black" title="Black" ng-value="{{colors.Black}}" ng-model="colors.Black" ng-click="clickAdvancedColor('Black')"></span>
+                  <span class="selectable card-color-icon color_grey" title="Colorless" ng-value="{{colors.Colorless}}" ng-model="colors.Colorless" ng-click="clickAdvancedColor('Colorless')"></span>               
                 </li>
               </ul>
             </li>
           </ul>
+          </form>
+	          
+          <!--<p class="navbar-text">{{total}} results for current search (max on screen : 30)</p>-->
 
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Advanced search <span class="caret"></span></a></li>
-          </ul>
+<!--           <ul class="nav navbar-nav navbar-right"> -->
+<!--             <li><a href="#">Advanced search <span class="caret"></span></a></li> -->
+<!--           </ul> -->
         </div>
       </div>
     </nav>

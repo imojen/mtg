@@ -39,7 +39,24 @@ router.post('/search', function(req, res) {
 	var str = nodeDatas.str;
 	str = str.toLowerCase();
 	str += "*";
-
+	
+	var types = nodeDatas.types;
+	var typesReq =new Array();
+	for (var key in types) {
+		if (types[key]) {
+			typesReq.push(key);
+		}
+	}
+	
+	var colors = nodeDatas.colors;
+	var colorsReq = new Array();
+	for (var key in colors) {
+		if (colors[key]) {
+			colorsReq.push(key);
+		}
+	}
+	
+	
 
 	// Elastic search
 	var qES = { fields : ["_id"], query: {bool: {must: [{query_string: {default_field: "mtgcard.name",query: str}}]}},size : 30,
@@ -69,10 +86,27 @@ router.post('/search', function(req, res) {
 					      }
 					}
 				  }};
-
+	
+	var jsonType = '';
+	if(typesReq.length > 0){
+		jsonType = {query_string:{default_field:"mtgcard.types",query: typesReq.join(' ')}};
+//		console.log(qES);
+//		console.log(qES.query);
+		qES.query.bool.must.push(jsonType);
+	}
+	
+	var jsonColor = '';
+	if(colorsReq.length > 0){
+		jsonColor = {query_string:{default_field:"mtgcard.colors",query: typesReq.join(' ')}};
+//		console.log(qES);
+//		console.log(qES.query);
+		qES.query.bool.must.push(jsonColor);
+	}
 	
 	var qESstring = JSON.stringify(qES);
-//	console.log(qESstring);
+
+
+	console.log(qESstring);
 	//var qESstring = qES;
 
 	//Probleme d'encoding on envoi pas le content-lenght
