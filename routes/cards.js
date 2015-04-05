@@ -75,9 +75,9 @@ router.post('/search', function(req, res) {
 //	console.log(qESstring);
 	//var qESstring = qES;
 
+	//Probleme d'encoding on envoi pas le content-lenght
 	var headers = {
-	  'Content-Type': 'application/json',
-	  'Content-Length': qESstring.length
+	  'Content-Type': 'application/json; charset=UTF-8'
 	};
 //TODO REMOVE LOCALHOST !!!
 	var options = {
@@ -109,6 +109,8 @@ router.post('/search', function(req, res) {
 
 
 		response.on('end', function() {
+			
+			try {
 			
 			var d = JSON.parse(responseString);
 			var hits = d.hits.hits;
@@ -180,6 +182,10 @@ router.post('/search', function(req, res) {
 				res.write('{"results" : [], "total": '+max+' }');
 				res.end();					
 			}});
+		} catch (e) {
+			res.write('{"results" : [], "total": '+0+' }');
+			res.end();
+		}
 		});
 	});
 
