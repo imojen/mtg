@@ -95,6 +95,20 @@ span.navbar-separator {
 .navbar-nav>li>.dropdown-menu li img {
 	background: #fff;
 }
+.navbar-nav>li>.dropdown-menu li.dropdown-header {
+	font-size: 13px;
+	color: #ccc;
+}
+.navbar-nav>li>.filters, .navbar-nav>li>.filters li {
+	min-width: 250px;
+}
+.navbar-nav>li>.filters li {
+	line-height: 40px;
+	text-align: center;
+}
+.navbar-nav>li>.filters li span {
+	margin-right: 5px;
+}
 /** 1c212a **/
 
 
@@ -539,6 +553,7 @@ input.sign-up-input-checkbox {
 }
 img.imgPreview {
 	max-height: 310px;
+	max-width: 238px;
 	margin-top: 5px;
 	border-radius: 12px;
 }
@@ -886,4 +901,67 @@ img.imgPreview {
 	border-radius: 0 3em 3em 0 !important;
 	width: 7px;
 	background-position: -8.5em -6em;
+}
+
+
+
+
+
+
+
+
+
+
+
+/** Cards type icons **/
+span.card-type-icon {
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	border-radius: 8px;
+	background-color: #fff;
+	background-size: 80% 80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 1px solid transparent;
+}
+span.type_instant {	background-image: url(../images/instant.png); }
+span.type_sorcery {	background-image: url(../images/sorcery.png); }
+span.type_enchantment {	background-image: url(../images/enchantment.png); }
+span.type_land {	background-image: url(../images/land.png); }
+span.type_creature {	background-image: url(../images/creature.png); }
+span.type_artifact {	background-image: url(../images/artifact.png); }
+span.type_planeswalker { background-image: url(../images/planeswalker.png); }
+
+span.card-type-icon:hover,
+span.selected-card-type {
+	cursor: pointer;
+	border: 1px solid white;
+	background-color: orange;
+}
+
+/** Cards color icons **/
+span.card-color-icon {
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	border: 1px solid transparent;
+	background-image: url('../images/symbols.png');
+	background-size: 300px 210px ;
+	background-repeat: no-repeat;
+	background-position: top left;
+	text-indent: -9999px;
+}
+span.color_white { background-position: -121px -61px; }
+span.color_blue { background-position: -151px -61px; }
+span.color_red { background-position: -211px -61px; }
+span.color_green { background-position: -241px -61px; }
+span.color_black { background-position: -181px -61px; }
+span.color_grey { background-position: -31px -61px; }
+
+span.card-color-icon:hover,
+span.selected-card-color {
+	cursor: pointer;
+	box-shadow: 0 0 3px 3px orange;
 }
