@@ -29,7 +29,7 @@
                 <li role="presentation" class="dropdown-header">Filter by card type : </li>
 
                 <li>
-                  <span class="selectable card-type-icon type_instant" title="Instant" ng-value="{{types.Instant}}" ng-model="types.Instant" ng-click="clickAdvancedTypes('Instant')"></span>
+                  <span class="selectable card-type-icon type_instant" title="Instant" ng-class="{true: 'span.selected-card-type', false: 'card-type-icon'}[{{types.Instant}} == true]" ng-value="{{types.Instant}}" ng-model="types.Instant" ng-click="clickAdvancedTypes('Instant')"></span>
                   <span class="selectable card-type-icon type_sorcery" title="Sorcery" ng-value="{{types.Sorcery}}" ng-model="types.Sorcery" ng-click="clickAdvancedTypes('Sorcery')"></span>
                   <span class="selectable card-type-icon type_enchantment" title="Enchantment" ng-value="{{types.Enchantment}}" ng-model="types.Enchantment" ng-click="clickAdvancedTypes('Enchantment')"></span>
                   <span class="selectable card-type-icon type_land" title="Land" ng-value="{{types.Land}}" ng-model="types.Land" ng-click="clickAdvancedTypes('Land')"></span>

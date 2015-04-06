@@ -90,16 +90,12 @@ router.post('/search', function(req, res) {
 	var jsonType = '';
 	if(typesReq.length > 0){
 		jsonType = {query_string:{default_field:"mtgcard.types",query: typesReq.join(' ')}};
-//		console.log(qES);
-//		console.log(qES.query);
 		qES.query.bool.must.push(jsonType);
 	}
 	
 	var jsonColor = '';
 	if(colorsReq.length > 0){
-		jsonColor = {query_string:{default_field:"mtgcard.colors",query: typesReq.join(' ')}};
-//		console.log(qES);
-//		console.log(qES.query);
+		jsonColor = {query_string:{default_field:"mtgcard.colors",query: colorsReq.join(' ')}};
 		qES.query.bool.must.push(jsonColor);
 	}
 	

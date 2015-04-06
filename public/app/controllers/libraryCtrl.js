@@ -119,7 +119,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     $scope.searchCard(model);
   }
 
-  $scope.clickAdvancedColors = function( model ) {
+  $scope.clickAdvancedColor = function( model ) {
 	if($scope.colors[model]){
 		$scope.colors[model]=false;
 	} else {
