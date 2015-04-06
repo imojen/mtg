@@ -1,6 +1,9 @@
 angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, notification ) {
   $scope.results = [];
   $scope.total = 0;
+  $scope.typesFacet = 0;
+  $scope.subtypesFacet = 0;
+  $scope.colorsFacet = 0;
 
   $scope.cardSlected = null;
   $scope.cardId = null;
@@ -11,6 +14,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
   $scope.timeOut = null;
   $scope.types = {"Sorcery":false, "Instant":false, "Artifact":false, "Creature":false, "Enchantment":false, "Land":false, "Planeswalker":false};
   $scope.colors = {"White":false, "Blue":false, "Red":false, "Green":false, "Black":false, "Colorless":false};
+  $scope.subtypes = {};
 
 
   // Create / open / edit deck
@@ -118,6 +122,15 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
 	}
     $scope.searchCard(model);
   }
+  
+  $scope.clickAdvancedSubtypes = function( model ) {
+  	if($scope.subtypes[model]){
+  		$scope.subtypes[model]=false;
+  	} else {
+  		$scope.subtypes[model]=true;
+  	}
+      $scope.searchCard(model);
+    }
 
   $scope.clickAdvancedColor = function( model ) {
 	if($scope.colors[model]){
@@ -148,7 +161,8 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     var nodeDatas = {
           'str' : $scope.stringSearch,
           'types' : $scope.types,
-          'colors' : $scope.colors
+          'colors' : $scope.colors,
+          'subtypes' : $scope.subtypes
         };
 
     $http({
@@ -159,8 +173,10 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     }).
     success(function(response) {
       $scope.results =  response.results;
+      $scope.typesFacet = response.types;
+      $scope.subtypesFacet = response.subtypes;
+      $scope.colorsFacet = response.colors;
       $scope.total = response.total;
-
     }).
     error(function(response) {
           $scope.codeStatus = response || "Request failed";

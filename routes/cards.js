@@ -29,10 +29,10 @@ router.post('/search', function(req, res) {
 
 	var nodeDatas = JSON.parse(req.body.nodeDatas);
 	var ids = new Array();
-	var facetTypes = new Array();
-	var facetSubTypes = new Array();
-	var facetSuperTypes = new Array();
-	var facetColors = new Array();
+	var facetTypes = {};
+	var facetSubTypes = {};
+	var facetSuperTypes = {};
+	var facetColors = {};
 	var max = 0;
 	
 	
@@ -53,6 +53,14 @@ router.post('/search', function(req, res) {
 	for (var key in colors) {
 		if (colors[key]) {
 			colorsReq.push(key);
+		}
+	}
+	
+	var subtypes = nodeDatas.subtypes;
+	var subtypesReq = new Array();
+	for (var key in subtypes) {
+		if (subtypes[key]) {
+			subtypesReq.push(key);
 		}
 	}
 	
@@ -99,6 +107,12 @@ router.post('/search', function(req, res) {
 		qES.query.bool.must.push(jsonColor);
 	}
 	
+	var jsonSubtypes = '';
+	if(subtypesReq.length > 0){
+		jsonSubtypes = {query_string:{default_field:"mtgcard.subtypes",query: subtypesReq.join(' ')}};
+		qES.query.bool.must.push(jsonSubtypes);
+	}
+	
 	var qESstring = JSON.stringify(qES);
 
 
@@ -113,7 +127,7 @@ router.post('/search', function(req, res) {
 	var options = {
 	  host: es.host,
 	  port: es.port,
-	  path: '/mtgcard/_search?',
+	  path: '/mtgcard/_search?search_type=dfs_query_then_fetch',
 	  method: 'POST',
 	  headers: headers
 	};
@@ -152,36 +166,23 @@ router.post('/search', function(req, res) {
 			
 			var buckets = agg.subtypes.buckets;
 			for( var i in agg.subtypes.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetSubTypes.push(valPush);
+				facetSubTypes[buckets[i]["key"]]=buckets[i]["doc_count"];
 			}
 			
 			var buckets = agg.supertypes.buckets;
 			for( var i in agg.supertypes.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetSuperTypes.push(valPush);
+				facetSuperTypes[buckets[i]["key"]]=buckets[i]["doc_count"];
 			}
 			
 			var buckets = agg.types.buckets;
 			for( var i in agg.types.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetTypes.push(valPush);
+				facetTypes[buckets[i]["key"]]=buckets[i]["doc_count"];
 			}
 			
 			var buckets = agg.colors.buckets;
 			for( var i in agg.colors.buckets ){
-				var valPush={ };
-				valPush.key=buckets[i]["key"];
-				valPush.count=buckets[i]["doc_count"];				
-				facetColors.push(valPush);
-			}
-			
+				facetColors[buckets[i]["key"]]=buckets[i]["doc_count"];
+			}			
 			
 			if( ids.length == 0 ) {
 				res.write('{"results" : [], "total": 0 }');
@@ -205,11 +206,11 @@ router.post('/search', function(req, res) {
 					str += ' "pt" : "'+pt+'", "type": "'+type+'", "loyalty" : "'+loyalty+'", "edition" : "'+encodeURIComponent(rows[i]['edition'])+'" }';
 					lines.push(str);
 				}
-				res.write('{"results" : ['+lines.join(",")+'], "total": '+max+', "facet":{"subtypes": ' + JSON.stringify(facetSubTypes) +',"supertypes":' + JSON.stringify(facetSuperTypes) +',"types":' + JSON.stringify(facetTypes) +',"colors":' + JSON.stringify(facetColors) +'}}');
+				res.write('{"results" : ['+lines.join(",")+'], "total": '+max+', "subtypes":' + JSON.stringify(facetSubTypes) +', "supertypes":' + JSON.stringify(facetSuperTypes) +', "types":' + JSON.stringify(facetTypes) +', "colors":' + JSON.stringify(facetColors) +'}');
 				res.end();
 			}					
 			else {
-				res.write('{"results" : [], "total": '+max+' }');
+				res.write('{"results" : [], "total": '+0+' }');
 				res.end();					
 			}});
 		} catch (e) {
