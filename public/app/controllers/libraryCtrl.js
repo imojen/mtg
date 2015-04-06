@@ -175,6 +175,15 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
       $scope.results =  response.results;
       $scope.typesFacet = response.types;
       $scope.subtypesFacet = response.subtypes;
+      if(!$scope.subtypesFacet){
+      	$scope.subtypesFacet = {};
+      }
+      //On ajoute les subtypes actif qui ne serait pas visible dans la nouvelle requetes
+    	for (var subActif in $scope.subtypes) {
+    		if (!$scope.subtypesFacet[subActif]) {
+    			$scope.subtypesFacet[subActif]=0;
+    		}
+    	}
       $scope.colorsFacet = response.colors;
       $scope.total = response.total;
     }).
