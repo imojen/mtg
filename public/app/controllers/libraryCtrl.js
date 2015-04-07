@@ -144,8 +144,11 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
   $scope.searchCard = function( event ) {
     clearTimeout($scope.timeOut);
     $scope.results = [];
-    if( $scope.stringSearch.length < 2 )
+    if( $scope.stringSearch.length < 2 ) {
+      $scope.typesFacet = [];
+      $scope.subtypesFacet = [];   
       return;
+    }
     $scope.timeOut = setTimeout(function() {
       $scope.unsetCardSelect();
       $scope.httpSearch();
@@ -179,7 +182,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
       	$scope.subtypesFacet = {};
       }
       //On ajoute les subtypes actif qui ne serait pas visible dans la nouvelle requetes
-      console.log($scope.subtypes);
+      //console.log($scope.subtypes);
     	for (var subActif in $scope.subtypes) {
     		if($scope.subtypes[subActif]){
 	    		if (!$scope.subtypesFacet[subActif]) {
