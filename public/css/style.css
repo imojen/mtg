@@ -272,7 +272,9 @@ span.navbar-separator {
 
 
 
-
+.red {
+	background-color: red !important;
+}
 
 
 

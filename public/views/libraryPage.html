@@ -28,32 +28,32 @@
 
                 <li role="presentation" class="dropdown-header">Filter by card type : </li>
 
-                <li>
-                  <span class="selectable card-type-icon type_instant" title="Instant" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Instant]" ng-value="{{types.Instant}}" ng-model="types.Instant" ng-click="clickAdvancedTypes('Instant')"></span>
+                <li ng-click="clickAdvancedTypes('Instant')">
+                  <span class="selectable card-type-icon type_instant" title="Instant" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Instant]" ng-value="{{types.Instant}}" ng-model="types.Instant"></span>
                   <span>  {{typesFacet.instant}} Instant</span>
                 </li>
-                <li>
-                  <span class="selectable card-type-icon type_sorcery" title="Sorcery" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Sorcery]" ng-value="{{types.Sorcery}}" ng-model="types.Sorcery" ng-click="clickAdvancedTypes('Sorcery')"></span>
+                <li ng-click="clickAdvancedTypes('Sorcery')">
+                  <span class="selectable card-type-icon type_sorcery" title="Sorcery" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Sorcery]" ng-value="{{types.Sorcery}}" ng-model="types.Sorcery" ></span>
                   <span>  {{typesFacet.sorcery}} Sorcery</span>
                 </li>
-                <li>
-                  <span class="selectable card-type-icon type_enchantment" title="Enchantment" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Enchantment]" ng-value="{{types.Enchantment}}" ng-model="types.Enchantment" ng-click="clickAdvancedTypes('Enchantment')"></span>
+                <li ng-click="clickAdvancedTypes('Enchantment')">
+                  <span class="selectable card-type-icon type_enchantment" title="Enchantment" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Enchantment]" ng-value="{{types.Enchantment}}" ng-model="types.Enchantment" ></span>
                   <span>  {{typesFacet.enchantment}} Enchantment</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-type-icon type_land" title="Land" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Land]" ng-value="{{types.Land}}" ng-model="types.Land" ng-click="clickAdvancedTypes('Land')"></span>
+                <li  ng-click="clickAdvancedTypes('Land')">                  
+                  <span class="selectable card-type-icon type_land" title="Land" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Land]" ng-value="{{types.Land}}" ng-model="types.Land"></span>
                   <span>  {{typesFacet.land}} Land</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-type-icon type_creature" title="Creature" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Creature]" ng-value="{{types.Creature}}" ng-model="types.Creature" ng-click="clickAdvancedTypes('Creature')"></span>
+                <li ng-click="clickAdvancedTypes('Creature')">                  
+                  <span class="selectable card-type-icon type_creature" title="Creature" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Creature]" ng-value="{{types.Creature}}" ng-model="types.Creature" ></span>
                   <span>  {{typesFacet.creature}} Creature</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-type-icon type_artifact" title="Artifact" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Artifact]" ng-value="{{types.Artifact}}" ng-model="types.Artifact" ng-click="clickAdvancedTypes('Artifact')"></span>
+                <li ng-click="clickAdvancedTypes('Artifact')">                  
+                  <span class="selectable card-type-icon type_artifact" title="Artifact" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Artifact]" ng-value="{{types.Artifact}}" ng-model="types.Artifact" ></span>
                   <span>  {{typesFacet.artifact}} Artifact</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-type-icon type_planeswalker" title="Planeswalker" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Planeswalker]" ng-value="{{types.Planeswalker}}" ng-model="types.Planeswalker" ng-click="clickAdvancedTypes('Planeswalker')"></span>
+                <li ng-click="clickAdvancedTypes('Planeswalker')">                  
+                  <span class="selectable card-type-icon type_planeswalker" title="Planeswalker" ng-class="{true: 'card-type-icon selected-card-type', false: 'card-type-icon'}[types.Planeswalker]" ng-value="{{types.Planeswalker}}" ng-model="types.Planeswalker" ></span>
                   <span>  {{typesFacet.planeswalker}} Planeswalker</span>
                 </li>
 
@@ -67,28 +67,28 @@
               <ul class="dropdown-menu filters" role="menu">
 
                 <li role="presentation" class="dropdown-header">Filter by card color : </li>
-                <li>
-                  <span class="selectable card-color-icon color_white" title="White" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.White]" ng-value="{{colors.White}}" ng-model="colors.White" ng-click="clickAdvancedColor('White')"></span>
+                <li ng-click="clickAdvancedColor('White')">
+                  <span class="selectable card-color-icon color_white" title="White" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.White]" ng-value="{{colors.White}}" ng-model="colors.White"></span>
                   <span>{{colorsFacet.white}} White</span>
                 </li>
-                <li>
-                  <span class="selectable card-color-icon color_blue" title="Blue" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Blue]" ng-value="{{colors.Blue}}" ng-model="colors.Blue" ng-click="clickAdvancedColor('Blue')"></span>
+                <li ng-click="clickAdvancedColor('Blue')">
+                  <span class="selectable card-color-icon color_blue" title="Blue" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Blue]" ng-value="{{colors.Blue}}" ng-model="colors.Blue"></span>
                   <span>{{colorsFacet.blue}} Blue</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-color-icon color_red" title="Red" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Red]" ng-value="{{colors.Red}}" ng-model="colors.Red" ng-click="clickAdvancedColor('Red')"></span>
+                <li ng-click="clickAdvancedColor('Red')">                  
+                  <span class="selectable card-color-icon color_red" title="Red" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Red]" ng-value="{{colors.Red}}" ng-model="colors.Red"></span>
                   <span>{{colorsFacet.red}} Red</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-color-icon color_green" title="Green" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Green]" ng-value="{{colors.Green}}" ng-model="colors.Green" ng-click="clickAdvancedColor('Green')"></span>
+                <li ng-click="clickAdvancedColor('Green')">                  
+                  <span class="selectable card-color-icon color_green" title="Green" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Green]" ng-value="{{colors.Green}}" ng-model="colors.Green"></span>
                   <span>{{colorsFacet.green}} Green</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-color-icon color_black" title="Black" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Black]" ng-value="{{colors.Black}}" ng-model="colors.Black" ng-click="clickAdvancedColor('Black')"></span>
+                <li ng-click="clickAdvancedColor('Black')">                  
+                  <span class="selectable card-color-icon color_black" title="Black" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Black]" ng-value="{{colors.Black}}" ng-model="colors.Black"></span>
                   <span>{{colorsFacet.black}} Black</span>
                 </li>
-                <li>                  
-                  <span class="selectable card-color-icon color_grey" title="Colorless" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Colorless]" ng-value="{{colors.Colorless}}" ng-model="colors.Colorless" ng-click="clickAdvancedColor('Colorless')"></span>
+                <li ng-click="clickAdvancedColor('Colorless')">                  
+                  <span class="selectable card-color-icon color_grey" title="Colorless" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Colorless]" ng-value="{{colors.Colorless}}" ng-model="colors.Colorless"></span>
                   <span>{{colorsFacet.colorless}} Colorless</span>               
                 </li>
               </ul>
@@ -98,8 +98,8 @@
               <ul class="dropdown-menu filters" role="menu">
 
                 <li role="presentation" class="dropdown-header">Filter by card subtype : </li>
-                <li ng-repeat="(key, value) in subtypesFacet">
-                	<span class="selectable"  ng-click="clickAdvancedSubtypes(key)" >
+                <li ng-repeat="(key, value) in subtypesFacet" ng-click="clickAdvancedSubtypes(key)" ng-class="{true: 'red', false: 'selectable'}[subtypes[key]]">
+                	<span class="selectable">
                 		<span class="selectable">{{value}}</span>
                 		<span class="selectable">{{key}}</span>
                 	</span>

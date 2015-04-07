@@ -129,6 +129,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
   	} else {
   		$scope.subtypes[model]=true;
   	}
+  		console.log($scope.subtypes);
       $scope.searchCard(model);
     }
 
