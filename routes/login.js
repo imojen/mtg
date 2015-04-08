@@ -84,13 +84,8 @@ router.post('/signup', function(req, res) {
 			  	req.session.login = nodeDatas.login;
 			  	req.session.id_user = result.insertId;
 
-			  	connection.query("SELECT id FROM mtg.mtgusers ORDER BY id DESC LIMIT 1", function(err, result) {
-			  		req.session.id_user = rows[0]['id'];
-			  	});
-			  	
-			  	
 			  	// Réponse
-				res.write('{"success" : true, "successMsg" : "Account created !"}');	  	  	
+				res.write('{"success" : true, "successMsg" : "Account created !", "user" : '+req.session.id_user+'}');	  	  	
 				res.end();
 			  }			
 		});
@@ -105,7 +100,7 @@ router.post('/signup', function(req, res) {
 // isConnected ?
 router.post('/isConnected', function(req,res) {
 	if( req.session && req.session.isConnected && req.session.isConnected === true ) {
-		res.write('{"success" : true }');	  	  	
+		res.write('{"success" : true, "user" : '+req.session.id_user+' }');	  	  	
 		res.end();
 	}
 	else {

@@ -25,7 +25,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -84,7 +84,17 @@ module.exports = app;
 
 
 app.set('port', 1337);
+
 var debug = require('debug')('mtg');
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
+});
+
+
+
+/** Sockets **/
+var io = require('socket.io').listen(server);
+var events_socket = require('./sockets/events.js');
+io.on('connection', function (socket) {
+    events_socket.events(socket);
 });

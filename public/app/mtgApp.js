@@ -1,7 +1,7 @@
 var mtgApp = angular.module('mtgApp', [ "ngRoute", "ngSanitize", "mtgAppLogin", "mtgAppAlert" ]);
 
 // Main Controller
-mtgApp.controller("mtgAppController", ["$scope", "$http", "$rootScope", "notification", function($scope, $http, $rootScope, notification) {
+mtgApp.controller("mtgAppController", ["$scope", "$http", "$rootScope", "notification", "socket", function($scope, $http, $rootScope, notification, socket) {
 
 	/** Is connected user ? **/
 	$scope.isConnecteduser = function() {
@@ -44,5 +44,9 @@ mtgApp.controller("mtgAppController", ["$scope", "$http", "$rootScope", "notific
 
 	/* Alert */
 	$scope.notification = notification;
+
+	/** Socket **/
+	// Test
+	socket.emit('salut',{},function(){});
 
 }]);
