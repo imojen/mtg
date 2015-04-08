@@ -22,6 +22,39 @@
           <form novalidate class="simple-form" role="advancedSearch">
           <ul class="nav navbar-nav">
 
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Color <span class="caret"></span></a>
+              <ul class="dropdown-menu filters" role="menu">
+
+                <li role="presentation" class="dropdown-header">Filter by card color : </li>
+                <li ng-click="clickAdvancedColor('White')">
+                  <span class="selectable card-color-icon color_white" title="White" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.White]" ng-value="{{colors.White}}" ng-model="colors.White"></span>
+                  <span>{{colorsFacet.white}} White</span>
+                </li>
+                <li ng-click="clickAdvancedColor('Blue')">
+                  <span class="selectable card-color-icon color_blue" title="Blue" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Blue]" ng-value="{{colors.Blue}}" ng-model="colors.Blue"></span>
+                  <span>{{colorsFacet.blue}} Blue</span>
+                </li>
+                <li ng-click="clickAdvancedColor('Red')">                  
+                  <span class="selectable card-color-icon color_red" title="Red" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Red]" ng-value="{{colors.Red}}" ng-model="colors.Red"></span>
+                  <span>{{colorsFacet.red}} Red</span>
+                </li>
+                <li ng-click="clickAdvancedColor('Green')">                  
+                  <span class="selectable card-color-icon color_green" title="Green" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Green]" ng-value="{{colors.Green}}" ng-model="colors.Green"></span>
+                  <span>{{colorsFacet.green}} Green</span>
+                </li>
+                <li ng-click="clickAdvancedColor('Black')">                  
+                  <span class="selectable card-color-icon color_black" title="Black" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Black]" ng-value="{{colors.Black}}" ng-model="colors.Black"></span>
+                  <span>{{colorsFacet.black}} Black</span>
+                </li>
+                <li ng-click="clickAdvancedColor('Colorless')">                  
+                  <span class="selectable card-color-icon color_grey" title="Colorless" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Colorless]" ng-value="{{colors.Colorless}}" ng-model="colors.Colorless"></span>
+                  <span>{{colorsFacet.colorless}} Colorless</span>               
+                </li>
+              </ul>
+            </li>
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type <span class="caret"></span></a>
               <ul class="dropdown-menu filters" role="menu">
@@ -62,37 +95,8 @@
             </li>
 
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Color <span class="caret"></span></a>
-              <ul class="dropdown-menu filters" role="menu">
 
-                <li role="presentation" class="dropdown-header">Filter by card color : </li>
-                <li ng-click="clickAdvancedColor('White')">
-                  <span class="selectable card-color-icon color_white" title="White" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.White]" ng-value="{{colors.White}}" ng-model="colors.White"></span>
-                  <span>{{colorsFacet.white}} White</span>
-                </li>
-                <li ng-click="clickAdvancedColor('Blue')">
-                  <span class="selectable card-color-icon color_blue" title="Blue" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Blue]" ng-value="{{colors.Blue}}" ng-model="colors.Blue"></span>
-                  <span>{{colorsFacet.blue}} Blue</span>
-                </li>
-                <li ng-click="clickAdvancedColor('Red')">                  
-                  <span class="selectable card-color-icon color_red" title="Red" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Red]" ng-value="{{colors.Red}}" ng-model="colors.Red"></span>
-                  <span>{{colorsFacet.red}} Red</span>
-                </li>
-                <li ng-click="clickAdvancedColor('Green')">                  
-                  <span class="selectable card-color-icon color_green" title="Green" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Green]" ng-value="{{colors.Green}}" ng-model="colors.Green"></span>
-                  <span>{{colorsFacet.green}} Green</span>
-                </li>
-                <li ng-click="clickAdvancedColor('Black')">                  
-                  <span class="selectable card-color-icon color_black" title="Black" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Black]" ng-value="{{colors.Black}}" ng-model="colors.Black"></span>
-                  <span>{{colorsFacet.black}} Black</span>
-                </li>
-                <li ng-click="clickAdvancedColor('Colorless')">                  
-                  <span class="selectable card-color-icon color_grey" title="Colorless" ng-class="{true: 'card-color-icon selected-card-color', false: 'card-color-icon'}[colors.Colorless]" ng-value="{{colors.Colorless}}" ng-model="colors.Colorless"></span>
-                  <span>{{colorsFacet.colorless}} Colorless</span>               
-                </li>
-              </ul>
-            </li>
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Subtype <span class="caret"></span></a>
               <ul class="dropdown-menu filters" role="menu">
@@ -227,6 +231,7 @@
                     <th class="center">Loyalty</th>
                     <th>Types</th>
                     <th>Edition</th>
+                    <th style="width:30px"></th>
                   </tr>
                 </thead>
               </table>
@@ -234,13 +239,24 @@
                 <tbody>
                   <tr ng-repeat="card in currentDeck" ng-class="{selected:deck_cardSlected==card.id}" ng-click="deck_cardSelect(card.id, card.mid)" >
                     <td ng-bind-html="decode( card.name );"></td>
-                    <td class="center">{{card.quantity_deck}}</td>
-                    <td class="center">{{card.quantity_side}}</td>
+                    <td class="center">
+                    	<span class="glyphicon glyphicon-minus-sign modify_quantity" ng-show="deck_cardSlected == card.id" ng-click="changeCardQuantity('deck','minus'); $event.stopPropagation();"></span>
+                    	{{card.quantity_deck}}
+                    	<span class="glyphicon glyphicon-plus-sign modify_quantity"  ng-show="deck_cardSlected == card.id" ng-click="changeCardQuantity('deck','add'); $event.stopPropagation();"></span>
+                    </td>
+                    <td class="center">
+                    	<span class="glyphicon glyphicon-minus-sign modify_quantity" ng-show="deck_cardSlected == card.id" ng-click="changeCardQuantity('sideboard','minus'); $event.stopPropagation();"></span>
+                    	{{card.quantity_side}}
+                    	<span class="glyphicon glyphicon-plus-sign modify_quantity"  ng-show="deck_cardSlected == card.id" ng-click="changeCardQuantity('sideboard','add'); $event.stopPropagation();"></span>
+                    </td>
                     <td class="center" ng-bind-html="getManaCost( card.mana );"></td>
                     <td class="center">{{card.pt}}</td>
                     <td class="center">{{card.loyalty}}</td>
                     <td>{{card.type}}</td>
                     <td ng-bind-html="decode( card.edition );"></td>
+                    <td style="width:30px">
+                    	<span class="glyphicon glyphicon-trash modify_quantity delete title" ng-show="deck_cardSlected == card.id" ng-click="changeCardQuantity('deck','delete'); $event.stopPropagation();" title="Remove this card from deck"></span>
+                    </td>
                   </tr>
                 </tbody>
               </table>

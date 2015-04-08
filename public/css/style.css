@@ -653,7 +653,22 @@ img.imgPreview {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
+#main-body #library table.listResults span.modify_quantity {
+	margin: 0 5px;
+}
+#main-body #library table.listResults span.modify_quantity:hover {
+	cursor: pointer;
+	color: orange;
+	font-size: 110%;
+}
+#main-body #library table.listResults span.delete {
+	color: #fff;
+}
+#main-body #library table.listResults span.delete:hover {
+	cursor: pointer;
+	color: orange;
+	font-size: 110%;
+}
 
 #main-body #library .cardListWrapper p.deck_disclaimer {
 	text-align: center;

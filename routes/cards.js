@@ -472,6 +472,11 @@ router.post('/addCard',function( req,res) {
 		res.end();	
 		return;			
 	}
+	if( type != "add" && type != "minus" && type != "delete" ) {
+		res.write('{"success" : false, "errMsg" : "An error has occured... # Type" }');	  	
+		res.end();	
+		return;			
+	}	
 
 	connection.query("SELECT * FROM mtg.mtgdeck WHERE id_mtgusers = ? AND id = ? AND deleted = 0", [req.session.id_user, id_deck], function(err, rows, fields) {
 		if( rows.length != 1 ) {
@@ -485,31 +490,66 @@ router.post('/addCard',function( req,res) {
 					console.log(err);
 				}
 				if( rows.length > 0 ) {
-					connection.query('UPDATE mtg.mtgcardsdeck SET '+where+' = ( '+where+' + 1 ) WHERE mtgdeck_id = ? AND mtgcard_multiverseid = ? ', [id_deck, id_card], function (err, result) {
-						if( err ) {
-							res.write('{"success" : false, "errMsg" : "An error has occured... # Update" }');	  	
+					if( type == "add" ) {
+						connection.query('UPDATE mtg.mtgcardsdeck SET '+where+' = ( '+where+' + 1 ) WHERE mtgdeck_id = ? AND mtgcard_multiverseid = ? ', [id_deck, id_card], function (err, result) {
+							if( err ) {
+								res.write('{"success" : false, "errMsg" : "An error has occured... # Update" }');	  	
+								res.end();	
+								return;							
+							}
+							res.write('{"success" : true }');	  	
 							res.end();	
-							return;							
+							return;						
+						});
+					}
+					if( type == "minus" ) {
+						if( ( where == "quantity_deck" && rows[0]["quantity_deck"]  > 0 ) || ( where == "quantity_side" && rows[0]["quantity_side"]  > 0 )  ) {
+							connection.query('UPDATE mtg.mtgcardsdeck SET '+where+' = ( '+where+' - 1 ) WHERE mtgdeck_id = ? AND mtgcard_multiverseid = ? ', [id_deck, id_card], function (err, result) {
+								if( err ) {
+									res.write('{"success" : false, "errMsg" : "An error has occured... # Update" }');	  	
+									res.end();	
+									return;							
+								}
+								res.write('{"success" : true }');	  	
+								res.end();	
+								return;						
+							});	
 						}
-						res.write('{"success" : true }');	  	
-						res.end();	
-						return;						
-					});
+					}
+					if( type == "delete") {
+						connection.query('DELETE FROM mtg.mtgcardsdeck WHERE mtgdeck_id = ? AND mtgcard_multiverseid = ? ', [id_deck, id_card], function (err, result) {
+							if( err ) {
+								res.write('{"success" : false, "errMsg" : "An error has occured... # Update" }');	  	
+								res.end();	
+								return;							
+							}
+							res.write('{"success" : true }');	  	
+							res.end();	
+							return;						
+						});							
+					}
 				}
 				else {
-					var insert = { 'mtgdeck_id' : id_deck, 'mtgcard_multiverseid' : id_card };
-					insert[where] = 1;					
-					connection.query("INSERT INTO mtg.mtgcardsdeck SET ?", insert, function(err, result) {
-						if( err ) {
-							console.log(err);
-							res.write('{"success" : false, "errMsg" : "An error has occured... # Insert" }');	  	
+					if( type == "add" ) {
+						var insert = { 'mtgdeck_id' : id_deck, 'mtgcard_multiverseid' : id_card };
+						insert[where] = 1;					
+						connection.query("INSERT INTO mtg.mtgcardsdeck SET ?", insert, function(err, result) {
+							if( err ) {
+								console.log(err);
+								res.write('{"success" : false, "errMsg" : "An error has occured... # Insert" }');	  	
+								res.end();	
+								return;							
+							}	
+							res.write('{"success" : true }');	  	
 							res.end();	
-							return;							
-						}	
+							return;	
+						});		
+					}
+					else {
 						res.write('{"success" : true }');	  	
 						res.end();	
-						return;	
-					});			
+						return;							
+					}	
 				}
 			});	
 		}

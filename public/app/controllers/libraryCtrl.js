@@ -473,6 +473,7 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
     success(function(response) {
       if(response.success) {
         $scope.currentDeck = response.currentDeck;
+        setTimeout(function() { $(".title").tooltip({placement:'top',container:'#library'}); },50);
         return;
       }
       else {
@@ -486,4 +487,50 @@ angular.module('mtgApp').controller('libraryCtrl', function( $scope, $http, noti
       return false;
     });
   }
+
+
+  $scope.changeCardQuantity = function( where, type ) {
+    if( $scope.deck_cardMultiverseId == null || !$scope.deck_set )
+      return false;
+
+    if( where == "deck" ) var whereField = 'quantity_deck';
+    else if( where == "sideboard" ) var whereField = 'quantity_side';
+    else if( where == "vault" ) var whereField = 'quantity_vault';
+    else return false;
+
+    if( type != "add" && type != "minus" && type != "delete")
+      return false;
+
+    var method = 'POST';
+    var inserturl = './cards/addCard';
+    var nodeDatas = {
+        'typeAction' : type,
+        'where' : whereField,
+        'deckId' : $scope.deck_id,
+        'cardMultiverseId' : $scope.deck_cardMultiverseId
+       };
+    $http({
+        method: method,
+        url: inserturl,
+        data:  'nodeDatas='+JSON.stringify(nodeDatas),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).
+    success(function(response) {
+      if(response.success) {
+        $scope.getCurrentDeck();
+        return;
+      }
+      else {
+        notification.showAlert(response.errMsg);
+        return false;
+      }
+    }).
+    error(function(response) {
+          $scope.codeStatus = response || "Request failed";
+      alert($scope.codeStatus);
+      return false;
+    });     
+  }
+
+
 });
