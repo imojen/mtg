@@ -93,8 +93,10 @@ var server = app.listen(app.get('port'), function() {
 
 
 /** Sockets **/
+process.env['nb_co'] = 0;
 var io = require('socket.io').listen(server);
 var events_socket = require('./sockets/events.js');
 io.on('connection', function (socket) {
     events_socket.events(socket);
 });
+
