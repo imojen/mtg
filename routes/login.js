@@ -42,7 +42,7 @@ router.post('/', function(req, res) {
 	  	req.session.login = login;
 	  	req.session.id_user = rows[0]['id'];
 	  	// Réponse
-		res.write('{"success" : true, "login" : "'+encodeURIComponent(login)+'", "pseudo" : "'+encodeURIComponent(rows[0].pseudo)+'" }');	  	
+		res.write('{"success" : true, "login" : "'+encodeURIComponent(login)+'", "pseudo" : "'+encodeURIComponent(rows[0].pseudo)+'", "user" : '+req.session.id_user+' }');	  	
 		res.end();
 	  }
 	});
@@ -100,7 +100,7 @@ router.post('/signup', function(req, res) {
 // isConnected ?
 router.post('/isConnected', function(req,res) {
 	if( req.session && req.session.isConnected && req.session.isConnected === true ) {
-		res.write('{"success" : true, "user" : '+req.session.id_user+' }');	  	  	
+		res.write('{"success" : true, "login" : "'+encodeURIComponent(req.session.login)+'", "pseudo" : "'+encodeURIComponent(req.session.pseudo)+'", "user" : '+req.session.id_user+' }');	  	  	
 		res.end();
 	}
 	else {

@@ -3,9 +3,7 @@ angular.module("mtgAppLogin", [] )
 	return {
 		restrict : "E",
 		templateUrl : 'views/login.html',
-		scope : {
-			loginConnect : "&",
-		},		
+		scope : {},		
 		controller : function($rootScope, notification, $scope, $http) {
 
 			$scope.loginInfos = [{ "login" : null, "pass" : null }];
@@ -38,7 +36,6 @@ angular.module("mtgAppLogin", [] )
 
 			$scope.httpLogin = function() {
 				var method = 'POST';
-				//TODO REMOVE LOCALHOST !!!
 				var inserturl = './login';
 				var nodeDatas = {
 				      'login' : $scope.loginInfos.login,
@@ -55,7 +52,7 @@ angular.module("mtgAppLogin", [] )
 					if(response.success) {
 						$scope.loginInfos.login = "";
 						$scope.loginInfos.pass = "";
-						$scope.loginConnect({login : response.login, pseudo : response.pseudo});
+						$rootScope.loginConnect( response.login, response.pseudo, response.user );
 					}
 					else {
 						notification.showAlert("Wrong login or password");

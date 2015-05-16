@@ -1,11 +1,14 @@
 <div id="wrapperApp"  ng-controller="topMenuCtrl">
   <nav id="top-menu">
     <ul>
-      <li class="login-welcome">Welcome, {{login}}</li>
+      <li class="login-welcome">Welcome, {{me.login}}</li>
       <li class="action" ng-click="topMenuAction( 'home' )" ng-class="{'active': page == 'home' }">Home</li>
       <li class="action" ng-click="topMenuAction( 'library' )" ng-class="{'active': page == 'library' }">Library</li>
       <li class="action" ng-click="topMenuAction( 'arena' )" ng-class="{'active': page == 'arena' }">Arena</li>
       <li class="action" ng-click="topMenuAction( 'community' )" ng-class="{'active': page == 'community' }">Community</li>
+      <li class="action right">
+        {{ $root.nb_user_connected }} users online
+      </li>
       <li class="action right">
         <span class="glyphicon glyphicon-user"></span> Profile
         <ul class="sub-menu">

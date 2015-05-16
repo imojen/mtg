@@ -17,6 +17,8 @@ var config = require("./conf/config");
 var app = express();
 
 
+/** Variables globales **/
+global.users = {};
 
 
 // view engine setup
@@ -92,11 +94,14 @@ var server = app.listen(app.get('port'), function() {
 
 
 
+
+
+
 /** Sockets **/
-process.env['nb_co'] = 0;
 var io = require('socket.io').listen(server);
 var events_socket = require('./sockets/events.js');
 io.on('connection', function (socket) {
-    events_socket.events(socket);
+    var current_user = {};
+    events_socket.events(socket, current_user);
 });
 
